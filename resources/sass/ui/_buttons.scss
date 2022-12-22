@@ -1,0 +1,28 @@
+.btn {
+    @include font-regular();
+    padding: 0px $space-8;
+    font-size: 0.95rem;
+    height: 50px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: all 0.3s;
+    &.btn-primary {
+        background-color: $deep-blue;
+        color: #FFF;
+        &:hover {
+            background-color: $deep-blue-hover;
+        }
+    }
+    &.btn-secondary {
+        background-color: $cloud-blue;
+        color: $deep-blue;
+        &:hover {
+            background-color: $deep-blue;
+            color: #FFF;
+        }
+        &:active {
+            background-color: $deep-blue;
+        }
+    }
+}

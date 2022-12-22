@@ -1,0 +1,35 @@
+.navbar {
+    padding: $space-6 3rem;
+    .navbar-brand {
+        width: 13rem;
+        margin-right: 2.5rem;
+        img {
+            width: 100%;
+        }
+    }
+    .navbar-collapse {
+        .navbar-nav {
+            .nav-link {
+                padding: $space-2 $space-4;
+                color: $dark;
+                font-size: 0.95rem;
+                margin-right: $space-2;
+                transition: all 0.3s;
+                &:hover {
+                    color: $deep-blue;
+                }
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    .auth-buttons {
+        .btn-secondary {
+            margin-right: $space-6;
+        }
+        .btn-primary {
+            min-width: 8rem;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Variables
+@import 'variables';
+
+// Fonts
+@import 'fonts';
+
+@import './ui/index';
+@import './components/index';
+
+body {
+    @include font-regular();
+}
