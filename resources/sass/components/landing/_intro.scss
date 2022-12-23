@@ -1,0 +1,82 @@
+.intro-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 230px 0px 100px 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    .intro-content {
+        width: 55%;
+        h1 {
+            font-size: 3rem;
+            max-width: 600px;
+        }
+        h3 {
+            @include font-light();
+            font-size: 1rem;
+            color: $gray;
+            margin-top: $space-8;
+            margin-bottom: $space-8;
+        }
+        form {
+            @include box-shadow-drop();
+            display: flex;
+            width: 100%;
+            padding: $space-4 $space-8;
+            border: 1px solid $bright-gray;
+            border-radius: $border-radius-sm;
+            background-color: #FFF;
+            .form-group {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                padding-left: $space-6;
+                padding-right: $space-6;
+                i {
+                    color: $dark-gray;
+                    font-size: 1.2rem;
+                }
+                input {
+                    border: none;
+                    padding: $space-4 0;
+                    color: $gray;
+                    &:focus {
+                        box-shadow: none;
+                        outline: none;
+                    }
+                }
+                &:first-of-type {
+                    padding-left: 0;
+                    border-right: 1px solid $bright-gray;
+                }
+            }
+            .btn-primary {
+                min-width: 10rem;
+                height: 60px;
+                &:hover {
+                    background-color: #fff;
+                    box-shadow: 0px 0px 0px 1px $deep-blue;
+                    color: $deep-blue;
+                }
+            }
+        }
+        .suggested-searches {
+            margin-top: $space-6;
+            .title {
+                font-size: 0.9rem;
+                color: $dark;
+                margin-right: $space-2;
+            }
+            .keyword {
+                font-size: 0.9rem;
+                color: $dark-gray;
+                margin-right: $space-2;
+                cursor: pointer;
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
