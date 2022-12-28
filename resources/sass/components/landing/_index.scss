@@ -1,15 +1,19 @@
 @import "./intro";
 @import "./popular_job_categories";
 @import "./featured_jobs";
+@import "./top_companies";
 
 .landing-section {
     margin-bottom: $space-8 * 4;
     .section-title {
         margin-bottom: $space-4;
-        @include font-semibold();
+        font-size: 1.9rem;
+        @include font-medium();
     }
-    .section-sub-title {
+    .section-subtitle {
         @include font-light();
+        font-size: 1rem;
         margin-bottom: 0;
+        color: $gray;
     }
 }

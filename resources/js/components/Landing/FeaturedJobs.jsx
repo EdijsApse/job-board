@@ -98,6 +98,7 @@ const FeaturedJobs = () => {
                     return <SingleFeaturedJob key={job.id} job={job} />;
                 })}
             </ul>
+            <button className="btn btn-primary mt-6">Load more listing</button>
         </Wrapper>
     );
 };

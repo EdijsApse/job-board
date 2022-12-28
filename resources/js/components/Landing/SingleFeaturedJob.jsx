@@ -1,8 +1,9 @@
 import Badge from "../UI/Badge";
+import Card from "../UI/Card";
 
 const SingleFeaturedJob = ({ job }) => {
     return (
-        <li className="single-featured-job">
+        <Card className="single-featured-job" listTag={true}>
             <div className="job-header">
                 <div className="job-image">
                     <img src={job.image} alt={`${job.title} image`} />
@@ -11,11 +12,11 @@ const SingleFeaturedJob = ({ job }) => {
                     <h5>{job.title}</h5>
                     <div className="job-details">
                         <div className="single-detail">
-                            <i class="fa-solid fa-briefcase"></i>
+                            <i className="fa-solid fa-briefcase"></i>
                             <span>{job.category}</span>
                         </div>
                         <div className="single-detail">
-                            <i class="fa-solid fa-location-crosshairs"></i>
+                            <i className="fa-solid fa-location-crosshairs"></i>
                             <span>{job.location}</span>
                         </div>
                     </div>
@@ -26,9 +27,9 @@ const SingleFeaturedJob = ({ job }) => {
                 {job.is_urgent && <Badge className="orange">Urgent</Badge>}
             </div>
             <span className="btn-icon">
-                <i class="fa-regular fa-bookmark"></i>
+                <i className="fa-regular fa-bookmark"></i>
             </span>
-        </li>
+        </Card>
     );
 };
 

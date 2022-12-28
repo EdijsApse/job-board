@@ -1,0 +1,10 @@
+.custom-card {
+    display: block;
+    padding: $space-8;
+    border-radius: $border-radius-sm;
+    border: 1px solid $bright-gray;
+    transition: box-shadow 0.3s;
+    &:hover {
+        @include light-shadow();
+    }
+}

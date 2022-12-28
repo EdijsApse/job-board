@@ -8,14 +8,7 @@
         .single-featured-job {
             position: relative;
             margin-bottom: $space-6;
-            padding: $space-6;
-            border: 1px solid $bright-gray;
-            border-radius: $border-radius-sm;
             text-align: left;
-            transition: all 0.3s;
-            &:hover {
-                @include light-shadow();
-            }
             .job-header {
                 display: flex;
                 .job-image {

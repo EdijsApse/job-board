@@ -1,0 +1,63 @@
+.top-companies {
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .right-col {
+            a {
+                position: relative;
+                color: $deep-blue;
+                text-decoration: none;
+                font-size: 1rem;
+                &::after {
+                    position: absolute;
+                    display: block;
+                    content: "";
+                    bottom: -3px;
+                    left: 0;
+                    width: 0px;
+                    height: 1px;
+                    background-color: $deep-blue;
+                    transition: all 0.3s;
+                }
+                &:hover {
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .top-companies-carousel {
+        margin-top: $space-8 * 2;
+        .single-top-company {
+            width: 315px;
+            text-align: center;
+            margin-left: 8px;
+            margin-right: 8px;
+            .company-logo {
+                @include circle(90px);
+                margin-left: auto;
+                margin-right: auto;
+                img {
+                    width: 100%;
+                }
+            }
+            h5 {
+                font-size: 1.2rem;
+                margin-top: $space-4;
+                margin-bottom: $space-4;
+            }
+            p {
+                margin-bottom: $space-6;
+                color: $dark-gray;
+                i {
+                    margin-right: $space-2;
+                }
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}

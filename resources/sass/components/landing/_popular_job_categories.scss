@@ -6,15 +6,9 @@
         grid-column-gap: $space-6;
         margin-top: $space-6 * 2;
         .single-popular-category {
-            padding: $space-8 $space-4;
-            border: 1px solid $bright-gray;
-            border-radius: $border-radius-sm;
+            padding: $space-8 + $space-4 $space-4;
             margin-bottom: $space-6;
             cursor: pointer;
-            transition: all 0.3s;
-            &:hover {
-                @include light-shadow();
-            }
             .category-icon {
                 @include circle(70px);
                 display: flex;
