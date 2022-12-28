@@ -1,0 +1,63 @@
+.pricing-plans {
+    text-align: center;
+    .plans-list {
+        margin-top: $space-8;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: auto;
+        grid-column-gap: $space-6;
+        .single-plan {
+            padding: $space-8 + $space-2;
+            text-align: left;
+            height: auto;
+            transition: all 0.3s;
+            &:hover {
+                border-color: $deep-blue;
+                .btn {
+                    background-color: $deep-blue;
+                    color: #fff;
+                }
+            }
+            &.recommended {
+                border-color: $deep-blue;
+                @include light-shadow();
+            }
+            .pricing-plan-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: $space-2;
+                h5 {
+                    font-size: 1.2rem;
+                    color: $deep-blue;
+                    margin-bottom: 0;
+                }
+            }
+            .price {
+                @include font-semibold();
+                font-size: 2rem;
+                margin-bottom: $space-6;
+            }
+            ul {
+                margin-top: $space-8 + $space-2;
+                margin-bottom: $space-8 + $space-4;
+                li {
+                    margin-bottom: $space-6;
+                    @include font-light();
+                    font-size: 0.9rem;
+                    color: $dark-gray;
+                    i {
+                        margin-right: $space-2;
+                    }
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .btn {
+                width: 100%;
+                @include font-semibold();
+            }
+        }
+    }
+}

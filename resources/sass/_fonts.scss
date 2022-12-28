@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap");
 
 @mixin primary-font {
     font-family: "Jost", sans-serif;
@@ -22,13 +22,4 @@
 @mixin font-semibold {
     @include primary-font();
     font-weight: 600;
-}
-
-@mixin font-bold {
-    @include primary-font();
-    font-weight: 700;
-}
-
-@mixin font-bold {
-    @include primary-font();
 }
