@@ -1,0 +1,12 @@
+.badge {
+    padding: 5px $space-6;
+    background-color: $darker-cloud-blue;
+    color: $deep-blue;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    @include font-regular();
+    &.orange {
+        color: $orange;
+        background-color: $bright-orange;
+    }
+}

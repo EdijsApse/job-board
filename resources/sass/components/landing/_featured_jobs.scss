@@ -1,0 +1,84 @@
+.featured-jobs {
+    text-align: center;
+    ul {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-column-gap: $space-6;
+        margin-top: $space-6 * 2;
+        .single-featured-job {
+            position: relative;
+            margin-bottom: $space-6;
+            padding: $space-6;
+            border: 1px solid $bright-gray;
+            border-radius: $border-radius-sm;
+            text-align: left;
+            transition: all 0.3s;
+            &:hover {
+                @include light-shadow();
+            }
+            .job-header {
+                display: flex;
+                .job-image {
+                    @include circle(50px);
+                    margin-right: $space-4;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .job-info {
+                    h5 {
+                        font-size: 1.1rem;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                        &:hover {
+                            color: $deep-blue;
+                        }
+                    }
+                    .job-details {
+                        display: flex;
+                        flex-wrap: wrap;
+                        .single-detail {
+                            @include font-light();
+                            margin-right: $space-6;
+                            color: $dark-gray;
+                            i {
+                                margin-right: $space-2;
+                                font-size: 0.9rem;
+                            }
+                            span {
+                                font-size: 0.8rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .job-badges {
+                margin-top: $space-4;
+                .badge {
+                    margin-right: $space-4;
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+                }
+            }
+            .btn-icon {
+                @include circle(30px);
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                right: 10px;
+                top: 10px;
+                background-color: #FFF;
+                cursor: pointer;
+                transition: all 0.3s;
+                i {
+                    font-size: 0.9rem;
+                }
+                &:hover {
+                    background-color: $cloud-blue;
+                }
+            }
+        }
+    }
+}

@@ -1,2 +1,15 @@
 @import "./intro";
 @import "./popular_job_categories";
+@import "./featured_jobs";
+
+.landing-section {
+    margin-bottom: $space-8 * 4;
+    .section-title {
+        margin-bottom: $space-4;
+        @include font-semibold();
+    }
+    .section-sub-title {
+        @include font-light();
+        margin-bottom: 0;
+    }
+}

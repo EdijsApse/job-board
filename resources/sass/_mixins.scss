@@ -7,3 +7,7 @@
     height: $radius;
     border-radius: $radius;
 }
+
+@mixin light-shadow() {
+    box-shadow: 0 6px 15px 0 rgb(64 79 104 / 5%);
+}

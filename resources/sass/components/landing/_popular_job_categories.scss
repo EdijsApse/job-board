@@ -1,18 +1,9 @@
 .popular-job-categories {
     text-align: center;
-    h2 {
-        margin-bottom: $space-4;
-        @include font-semibold();
-    }
-    p {
-        @include font-light();
-        margin-bottom: 0;
-    }
     ul {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-column-gap: $space-6;
-        list-style: none;
         margin-top: $space-6 * 2;
         .single-popular-category {
             padding: $space-8 $space-4;
@@ -20,6 +11,10 @@
             border-radius: $border-radius-sm;
             margin-bottom: $space-6;
             cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                @include light-shadow();
+            }
             .category-icon {
                 @include circle(70px);
                 display: flex;

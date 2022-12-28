@@ -54,9 +54,9 @@ const tempList = [
 
 const PopularJobCategories = () => {
     return (
-        <Wrapper className="popular-job-categories">
-            <h2>Popular job categories</h2>
-            <p>2020 jobs live – 293 added today.</p>
+        <Wrapper className="landing-section popular-job-categories">
+            <h2 className="section-title">Popular job categories</h2>
+            <p className="section-subtitle">2020 jobs live – 293 added today.</p>
             <ul>
                 {tempList.map((category) => (
                     <SinglePopularCategory
