@@ -1,5 +1,5 @@
-const Wrapper = ({ children }) => {
-    return <section className="section-wrapper">{children}</section>;
+const Wrapper = ({ children, className }) => {
+    return <section className={`section-wrapper ${className || ''}`}>{children}</section>;
 };
 
 export default Wrapper;

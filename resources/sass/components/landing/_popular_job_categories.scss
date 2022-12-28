@@ -1,0 +1,53 @@
+.popular-job-categories {
+    text-align: center;
+    h2 {
+        margin-bottom: $space-4;
+        @include font-semibold();
+    }
+    p {
+        @include font-light();
+        margin-bottom: 0;
+    }
+    ul {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-column-gap: $space-6;
+        list-style: none;
+        margin-top: $space-6 * 2;
+        .single-popular-category {
+            padding: $space-8 $space-4;
+            border: 1px solid $bright-gray;
+            border-radius: $border-radius-sm;
+            margin-bottom: $space-6;
+            cursor: pointer;
+            .category-icon {
+                @include circle(70px);
+                display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: $space-4;
+                background-color: $bright-gray;
+                color: $deep-blue;
+                font-size: 2rem;
+                transition: all 0.3s;
+            }
+            h5 {
+                font-size: 1.1rem;
+                margin-bottom: $space-1;
+            }
+            p {
+                margin-bottom: 0;
+                font-size: 0.9rem;
+                color: $gray;
+            }
+            &:hover {
+                .category-icon {
+                    background-color: $deep-blue;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
