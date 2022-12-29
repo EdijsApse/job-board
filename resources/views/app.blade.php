@@ -9,6 +9,7 @@
         @vite(['resources/js/index.jsx', 'resources/sass/app.scss'])
     </head>
     <body>
+        <div id="modal-portal"></div>
         <div id="app"></div>
     </body>
 </html>

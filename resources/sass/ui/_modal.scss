@@ -1,0 +1,26 @@
+.modal {
+    background-color: rgba($dark, 0.8);
+    .modal-dialog {
+        max-width: 800px;
+        .modal-content {
+            padding: $space-8;
+            border: none;
+            .modal-body {
+                position: relative;
+                padding: 0;
+                .modal-close-button {
+                    position: absolute;
+                    color: $dark-gray;
+                    right: 0px;
+                    top: 0px;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+}

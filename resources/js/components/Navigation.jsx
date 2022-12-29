@@ -1,6 +1,6 @@
 import Logo from "./assets/logo.png";
 
-const Navigation = () => {
+const Navigation = ({showAuthModalHandler}) => {
     return (
         <div className="fixed-navigation">
             <nav className="navbar navbar-expand-lg">
@@ -27,7 +27,7 @@ const Navigation = () => {
                     </div>
                 </div>
                 <div className="auth-buttons">
-                    <button className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={showAuthModalHandler}>
                         Login / Register
                     </button>
                     <button className="btn btn-primary">Job Post</button>
