@@ -1,7 +1,6 @@
 import Wrapper from "../UI/Wrapper";
 import Carousel from "../UI/Carousel";
-import { useState } from "react";
-import logo from "./test-logo.png";
+import logo from "../assets/test-logo.png";
 import SingleTopCompany from "./SingleTopCompany";
 
 const tempCompanies = [

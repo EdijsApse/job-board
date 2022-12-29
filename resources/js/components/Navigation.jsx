@@ -1,4 +1,4 @@
-import Logo from "./logo.png";
+import Logo from "./assets/logo.png";
 
 const Navigation = () => {
     return (

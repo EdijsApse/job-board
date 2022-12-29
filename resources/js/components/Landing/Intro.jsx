@@ -1,5 +1,5 @@
 import Wrapper from "../UI/Wrapper";
-import bgImage from "./intro-bg.jpg";
+import bgImage from "../assets/intro-bg.jpg";
 
 const bgStyles = {
     backgroundImage: `url(${bgImage})`,

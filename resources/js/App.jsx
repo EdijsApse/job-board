@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import Navigation from "./components/Navigation/Navigation";
+import Footer from "./components/Footer";
+import Navigation from "./components/Navigation";
 import Landing from "./pages/Landing";
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
         <Fragment>
             <Navigation />
             <Landing />
+            <Footer />
         </Fragment>
     );
 };
