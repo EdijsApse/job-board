@@ -1,8 +1,17 @@
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 const Modal = ({ onClose, children }) => {
     const preventClose = (e) => {
         e.stopPropagation();
     };
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
+
     return createPortal(
         <div
             className="modal d-block"
