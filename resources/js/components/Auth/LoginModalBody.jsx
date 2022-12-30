@@ -1,9 +1,14 @@
 import { Fragment } from "react";
 
-const LoginModalBody = ({ onShowRegisterModal }) => {
+const LoginModalBody = ({ onShowRegisterModal, onShowForgotPasswordModal }) => {
     const onRegisterClickHandler = () => {
         onShowRegisterModal();
     }
+    
+    const onForgotPasswordClick = () => {
+        onShowForgotPasswordModal();
+    }
+
     return (
         <Fragment>
             <h2>Login to WeWork</h2>
@@ -37,7 +42,7 @@ const LoginModalBody = ({ onShowRegisterModal }) => {
                             Keep me signed in
                         </label>
                     </div>
-                    <a href="">Forgotten password ?</a>
+                    <span className="clickable" onClick={onForgotPasswordClick}>Forgotten password ?</span>
                 </div>
                 <button className="btn btn-primary">Login</button>
             </form>
