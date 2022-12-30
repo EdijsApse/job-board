@@ -1,70 +1,27 @@
+import { useState } from "react";
 import Modal from "../UI/Modal";
+import LoginModalBody from "./LoginModalBody";
+import RegisterModalBody from "./RegisterModalBody";
+
+const LOGIN_MODAL = 1;
+const REGISTER_MODAL = 2;
 
 const AuthModal = ({ onCloseModal }) => {
+    const [visibleModal, setVisibleModal] = useState(LOGIN_MODAL);
+
+    const showRegisterModal = () => {
+        setVisibleModal(REGISTER_MODAL);
+    }
+
+    const showLoginModal = () => {
+        setVisibleModal(LOGIN_MODAL);
+    }
+
     return (
         <Modal onClose={onCloseModal}>
             <div className="auth-modal-body">
-                <h2>Login to WeWork</h2>
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="Email"
-                            className="form-control"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="Password"
-                            className="form-control"
-                        />
-                    </div>
-                    <div className="forgot-password-container">
-                        <div className="form-check">
-                            <input
-                                id="remember"
-                                className="form-check-input"
-                                type="checkbox"
-                            />
-                            <label className="form-check-label" htmlFor="remember">
-                                Keep me signed in
-                            </label>
-                        </div>
-                        <a href="">Forgotten password ?</a>
-                    </div>
-                    <button className="btn btn-primary">Login</button>
-                </form>
-                <div className="alternative-auth-text">
-                    <span className="stripe"></span>
-                    <span className="text">Or</span>
-                    <span className="stripe"></span>
-                </div>
-                <div className="auth-btns">
-                    <button className="btn btn-transparent btn-fb">
-                        <i className="fa-brands fa-facebook-f"></i>
-                        <span>Facebook</span>
-                    </button>
-                    <button className="btn btn-transparent btn-google">
-                        <i className="fa-brands fa-google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button className="btn btn-transparent btn-linkedin">
-                        <i className="fa-brands fa-linkedin-in"></i>
-                        <span>Linkedin</span>
-                    </button>
-                    <button className="btn btn-transparent btn-twitter">
-                        <i className="fa-brands fa-twitter"></i>
-                        <span>Twitter</span>
-                    </button>
-                </div>
-                <p className="auth-footer-link">
-                    Don't you have an account? <a href="">Register</a>
-                </p>
+                {visibleModal === LOGIN_MODAL && <LoginModalBody onShowRegisterModal={showRegisterModal} />}
+                {visibleModal === REGISTER_MODAL && <RegisterModalBody onShowLoginModal={showLoginModal} />}
             </div>
         </Modal>
     );

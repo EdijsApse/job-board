@@ -5,10 +5,21 @@
     }
 
     form {
+        &.register-form {
+            .btn {
+                margin-top: $space-8;
+                margin-bottom: $space-6;
+            }
+        }
         .form-group {
             margin-bottom: $space-8;
             label {
                 margin-bottom: $space-2;
+                .asterisk {
+                    font-size: 0.95rem;
+                    margin-left: $space-1;
+                    color: $red;
+                }
             }
             input {
                 @include font-regular();
@@ -29,9 +40,6 @@
             justify-content: space-between;
             font-size: 0.9rem;
             margin-bottom: $space-4;
-            .form-check {
-                margin-bottom: 0;
-            }
             a {
                 color: $dark;
                 text-decoration: none;
@@ -40,6 +48,9 @@
                     color: $deep-blue;
                 }
             }
+        }
+        .form-check {
+            margin-bottom: 0;
             input {
                 margin-right: $space-2;
                 border-color: $dark;
@@ -84,7 +95,10 @@
         column-gap: $space-8;
         .btn {
             margin-bottom: $space-6;
+            font-size: 0.9rem;
+            height: 44px;
             i {
+                font-size: 1rem;
                 margin-right: $space-4;
             }
         }
@@ -126,10 +140,36 @@
         text-align: center;
         margin-bottom: 0;
         color: $gray;
-        a {
+        font-size: 0.9rem;
+        .link-text {
             @include font-semibold();
             color: $deep-blue;
             text-decoration: none;
+            cursor: pointer;
+            margin-left: $space-2;
+        }
+    }
+
+    .account-types {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: $space-8;
+        margin-bottom: $space-8;
+        .btn-acc-type {
+            border-color: $green;
+            background-color: $bright-green;
+            color: $green;
+            span {
+                margin-left: $space-4;
+            }
+            &.selected {
+                background-color: $green;
+                color: #fff;
+            }
+            &:hover {
+                background-color: $green;
+                color: #fff;
+            }
         }
     }
 }
