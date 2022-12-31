@@ -1,0 +1,187 @@
+.single-job-page {
+    .single-job-header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .apply-action {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .expiration-date {
+                text-align: right;
+                font-size: 0.9rem;
+                .danger {
+                    @include font-semibold();
+                    color: $red;
+                    margin-left: $space-2;
+                }
+            }
+            .actions {
+                display: flex;
+                .btn-primary {
+                    min-width: 200px;
+                    margin-right: $space-6;
+                }
+
+                .btn-secondary {
+                    padding-left: $space-6;
+                    padding-right: $space-6;
+                    i {
+                        position: relative;
+                        left: 1px;
+                    }
+                }
+            }
+        }
+        .single-job-card {
+            margin-bottom: 0;
+            .job-header {
+                .job-info {
+                    .job-details {
+                        .single-detail {
+                            margin-right: $space-8;
+                            i {
+                                font-size: 1rem;
+                            }
+                            span {
+                                font-size: 0.9rem;
+                            }
+                        }
+                    }
+                }
+                .job-image {
+                    @include circle(100px);
+                    border-radius: $border-radius-sm;
+                    background-color: $cloud-blue;
+                }
+            }
+            .job-badges {
+                margin-top: $space-2;
+                .badge {
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                }
+            }
+        }
+    }
+
+    .job-full-info {
+        padding-right: $space-2;
+        .job-photos-list {
+            display: grid;
+            grid-template-columns:  1fr 1fr 1fr 1fr;
+            grid-template-rows:  1fr;
+            column-gap: $space-6;
+            margin-top: $space-6;
+            .photo {
+                display: block;
+                margin-bottom: $space-6;
+                border-radius: $border-radius-sm;
+                height: 200px;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    .job-overview {
+        .single-detail {
+            display: flex;
+            margin-bottom: $space-8;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            .icon {
+                width: 30px;
+                text-align: center;
+                margin-right: $space-6;
+                i {
+                    font-size: 1.6rem;
+                    color: $deep-blue;
+                }
+            }
+            .info {
+                font-size: 0.9rem;
+                position: relative;
+                top: -1px;
+                h6 {
+                    margin-bottom: $space-2;
+                }
+                span {
+                    color: $gray;
+                }
+            }
+        }
+    }
+
+    .job-skills {
+        ul {
+            display: flex;
+            gap: $space-2;
+        }
+        li {
+            padding: $space-2 $space-4;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: $gray;
+        }
+    }
+
+    .job-employer {
+        .job-employer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: $space-6;
+            .image {
+                @include circle(80px);
+                border-radius: $border-radius-sm;
+                margin-right: $space-4;
+                background-color: $cloud-blue;
+                img {
+                    width: 100%;
+                }
+            }
+            .info {
+                h5 {
+                    font-size: 1.1rem;
+                    margin-bottom: $space-2;
+                }
+                a {
+                    text-decoration: none;
+                    color: $deep-blue;
+                    margin: 0;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+        .single-company-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: $space-6;
+            h6 {
+                margin: 0;
+                text-align: left;
+            }
+            p {
+                font-size: 0.9rem;
+                margin: 0;
+                text-align: right;
+                color: $gray;
+            }
+        }
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .related-jobs {
+        h4 {
+            font-size: 1.7rem;
+            margin-bottom: $space-8;
+        }
+    }
+}

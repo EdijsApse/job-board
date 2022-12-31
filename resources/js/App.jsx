@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import Landing from "./pages/Landing";
 import JobList from "./pages/Job/List";
+import JobView from "./pages/Job/View";
 
 const App = () => {
     const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
@@ -19,7 +20,8 @@ const App = () => {
             {isAuthModalVisible && <AuthModal onCloseModal={closeAuthModal} />}
             <Navigation showAuthModalHandler={openAuthModal} />
             {/* <Landing /> */}
-            <JobList />
+            {/* <JobList /> */}
+            <JobView />
             <Footer />
         </Fragment>
     );

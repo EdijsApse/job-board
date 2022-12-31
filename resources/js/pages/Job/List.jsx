@@ -99,7 +99,7 @@ const JobList = () => {
                 <h1>Jobs</h1>
                 <BreadCrumbs />
             </div>
-            <div className="container-fluid">
+            <main className="container-fluid">
                 <Wrapper>
                     <div className="row">
                         <div className="col-4">
@@ -129,7 +129,7 @@ const JobList = () => {
                         </div>
                     </div>
                 </Wrapper>
-            </div>
+            </main>
         </div>
     );
 };

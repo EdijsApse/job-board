@@ -11,7 +11,10 @@
 @import 'mixins';
 
 @import './ui/index';
+
 @import './components/index';
+
+@import './pages/index';
 
 body {
     @include font-regular();
@@ -26,4 +29,8 @@ ul {
 
 .mt-6 {
     margin-top: $space-6;
+}
+
+.bg-pale-gray {
+    background-color: $pale-blue;
 }
