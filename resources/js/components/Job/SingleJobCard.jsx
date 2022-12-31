@@ -1,11 +1,18 @@
 import Badge from "../UI/Badge";
 import Card from "../UI/Card";
 
-const SingleJobCard = ({ job, showSalary = false, squareImage = false }) => {
+const SingleJobCard = ({
+    job,
+    showSalary = false,
+    squareImage = false,
+    showFeaturedBadge = false,
+}) => {
     return (
         <Card className="single-job-card" listTag={true}>
             <div className="job-header">
-                <div className={`job-image ${squareImage ? 'square-image' : ''}`}>
+                <div
+                    className={`job-image ${squareImage ? "square-image" : ""}`}
+                >
                     <img src={job.image} alt={`${job.title} image`} />
                 </div>
                 <div className="job-info">
@@ -31,6 +38,9 @@ const SingleJobCard = ({ job, showSalary = false, squareImage = false }) => {
             <div className="job-badges">
                 <Badge>{job.employment}</Badge>
                 {job.is_urgent && <Badge className="orange">Urgent</Badge>}
+                {showFeaturedBadge && job.is_featured && (
+                    <Badge className="green">Featured</Badge>
+                )}
             </div>
             <span className="btn-icon">
                 <i className="fa-regular fa-bookmark"></i>

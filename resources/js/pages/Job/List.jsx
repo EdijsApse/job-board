@@ -15,6 +15,7 @@ const temp_jobs = [
         employment: "Full Time",
         is_urgent: true,
         image: logo,
+        is_featured: true
     },
     {
         id: 2,
@@ -24,6 +25,7 @@ const temp_jobs = [
         employment: "Full Time",
         is_urgent: true,
         image: logo,
+        is_featured: true
     },
     {
         id: 3,
@@ -118,6 +120,7 @@ const JobList = () => {
                                         key={job.id}
                                         job={job}
                                         showSalary={true}
+                                        showFeaturedBadge={true}
                                         squareImage={true}
                                     />
                                 ))}
