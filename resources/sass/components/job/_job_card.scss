@@ -1,0 +1,72 @@
+.single-job-card {
+    position: relative;
+    margin-bottom: $space-6;
+    text-align: left;
+    .job-header {
+        display: flex;
+        .job-image {
+            @include circle(50px);
+            &.square-image {
+                background-color: $bright-gray;
+                border-radius: $border-radius-sm;
+            }
+            margin-right: $space-4;
+            img {
+                width: 100%;
+            }
+        }
+        .job-info {
+            h5 {
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                &:hover {
+                    color: $deep-blue;
+                }
+            }
+            .job-details {
+                display: flex;
+                flex-wrap: wrap;
+                .single-detail {
+                    @include font-light();
+                    margin-right: $space-6;
+                    color: $dark-gray;
+                    i {
+                        margin-right: $space-2;
+                        font-size: 0.9rem;
+                    }
+                    span {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+    .job-badges {
+        margin-top: $space-4;
+        .badge {
+            margin-right: $space-4;
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+    .btn-icon {
+        @include circle(30px);
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 10px;
+        top: 10px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all 0.3s;
+        i {
+            font-size: 0.9rem;
+        }
+        &:hover {
+            background-color: $cloud-blue;
+        }
+    }
+}

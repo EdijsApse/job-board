@@ -1,8 +1,12 @@
-import Wrapper from "../UI/Wrapper";
-import SingleFeaturedJob from "../Job/SingleJobCard";
-import logo from "../assets/test-logo.png";
+import Wrapper from "../../components/UI/Wrapper";
+import logo from "../../components/assets/test-logo.png";
+import SingleFeaturedJob from "../../components/Job/SingleJobCard";
+import Filters from "../../components/Job/Filters";
+import Pagination from "../../components/UI/Pagination";
+import SortInputs from "../../components/Job/SortInputs";
+import BreadCrumbs from "../../components/UI/Breadcrumbs";
 
-const jobs = [
+const temp_jobs = [
     {
         id: 1,
         title: "Junior Graphic Designer (Web)",
@@ -86,21 +90,45 @@ const jobs = [
     },
 ];
 
-const FeaturedJobs = () => {
+const JobList = () => {
     return (
-        <Wrapper className={"landing-section featured-jobs"}>
-            <h2 className="section-title">Featured Jobs</h2>
-            <p className="section-subtitle">
-                Know your worth and find the job that qualify your life
-            </p>
-            <ul className="featured-jobs">
-                {jobs.map((job) => {
-                    return <SingleFeaturedJob key={job.id} job={job} />;
-                })}
-            </ul>
-            <button className="btn btn-primary mt-6">Load more listing</button>
-        </Wrapper>
+        <div className="page">
+            <div className="page-header">
+                <h1>Jobs</h1>
+                <BreadCrumbs />
+            </div>
+            <div className="container-fluid">
+                <Wrapper>
+                    <div className="row">
+                        <div className="col-4">
+                            <div className="page-filters">
+                                <Filters />
+                            </div>
+                        </div>
+                        <div className="col-8">
+                            <div className="sort-container">
+                                <span>Showing 1 – 10 of 18 results</span>
+                                <div className="sort-inputs">
+                                    <SortInputs />
+                                </div>
+                            </div>
+                            <ul className="jobs-list">
+                                {temp_jobs.map((job) => (
+                                    <SingleFeaturedJob
+                                        key={job.id}
+                                        job={job}
+                                        showSalary={true}
+                                        squareImage={true}
+                                    />
+                                ))}
+                            </ul>
+                            <Pagination />
+                        </div>
+                    </div>
+                </Wrapper>
+            </div>
+        </div>
     );
 };
 
-export default FeaturedJobs;
+export default JobList;

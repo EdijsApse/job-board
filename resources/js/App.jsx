@@ -3,6 +3,7 @@ import AuthModal from "./components/Auth/AuthModal";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import Landing from "./pages/Landing";
+import JobList from "./pages/Job/List";
 
 const App = () => {
     const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
@@ -17,7 +18,8 @@ const App = () => {
         <Fragment>
             {isAuthModalVisible && <AuthModal onCloseModal={closeAuthModal} />}
             <Navigation showAuthModalHandler={openAuthModal} />
-            <Landing />
+            {/* <Landing /> */}
+            <JobList />
             <Footer />
         </Fragment>
     );
