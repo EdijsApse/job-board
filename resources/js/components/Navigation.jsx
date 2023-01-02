@@ -1,33 +1,37 @@
 import Logo from "./assets/logo.png";
+import { NavLink } from "react-router-dom";
 
-const Navigation = ({showAuthModalHandler}) => {
+const Navigation = ({ showAuthModalHandler }) => {
     return (
         <div className="fixed-navigation">
             <nav className="navbar navbar-expand-lg">
-                <a className="navbar-brand" href="#">
+                <NavLink to="/" className="navbar-brand">
                     <img src={Logo} alt="WeWork logo" />
-                </a>
+                </NavLink>
                 <button className="navbar-toggler" type="button">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link" href="#">
+                        <NavLink to="/" className="nav-item nav-link">
                             Home
-                        </a>
-                        <a className="nav-item nav-link" href="#">
-                            Find job
-                        </a>
-                        <a className="nav-item nav-link" href="#">
+                        </NavLink>
+                        <NavLink to="/jobs" className="nav-item nav-link">
+                            Jobs
+                        </NavLink>
+                        <NavLink to="/employers" className="nav-item nav-link">
                             Employers
-                        </a>
-                        <a className="nav-item nav-link" href="#">
+                        </NavLink>
+                        <NavLink to="/candidates" className="nav-item nav-link">
                             Candidates
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
                 <div className="auth-buttons">
-                    <button className="btn btn-secondary" onClick={showAuthModalHandler}>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={showAuthModalHandler}
+                    >
                         Login / Register
                     </button>
                     <button className="btn btn-primary">Job Post</button>

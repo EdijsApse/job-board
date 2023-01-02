@@ -3,6 +3,7 @@ import jobTestImage from "../../components/assets/job-test-image.jpg";
 import Badge from "../../components/UI/Badge";
 import Wrapper from "../../components/UI/Wrapper";
 import SingleJobCard from "../../components/Job/SingleJobCard";
+import { useParams } from "react-router-dom";
 
 const job = {
     image: image,
@@ -83,6 +84,7 @@ const related_jobs = [
 ];
 
 const JobView = () => {
+    const { id } = useParams();
     return (
         <div className="view-page single-job-page">
             <div className="container-fluid bg-pale-gray">
@@ -98,7 +100,7 @@ const JobView = () => {
                                 </div>
                                 <div className="job-info">
                                     <h1 className="view-page-title">
-                                        {job.title}
+                                        {job.title} id - {id}
                                     </h1>
                                     <div className="job-details">
                                         <div className="single-detail">

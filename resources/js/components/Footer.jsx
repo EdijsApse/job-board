@@ -1,5 +1,6 @@
 import Wrapper from "./UI/Wrapper";
 import logo from "./assets/logo.png";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -7,9 +8,9 @@ const Footer = () => {
             <Wrapper className={"top-row"}>
                 <div className="footer-grid">
                     <div className="footer-col">
-                        <a href="/" className="footers-site-logo">
+                        <NavLink to="/" className="footers-site-logo">
                             <img src={logo} alt="We Work logo" />
-                        </a>
+                        </NavLink>
                         <h6>Call us</h6>
                         <a href="tel:1234567890" className="tel-link">
                             123 456 7890
@@ -27,19 +28,23 @@ const Footer = () => {
                         <h6>For Candidates</h6>
                         <ul>
                             <li>
-                                <a href="">Browse Jobs</a>
+                                <NavLink to="/jobs">Jobs</NavLink>
                             </li>
                             <li>
-                                <a href="">Browse Candidates</a>
+                                <NavLink to="/candidates">Candidates</NavLink>
                             </li>
                             <li>
-                                <a href="">Candidate Dashboard</a>
+                                <NavLink to="/candidate-dashboard">
+                                    Candidate Dashboard
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="">Job Alerts</a>
+                                <NavLink to="/job-alerts">Job Alerts</NavLink>
                             </li>
                             <li>
-                                <a href="">My Bookmarks</a>
+                                <NavLink to="/my-bookmarks">
+                                    My Bookmarks
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
@@ -47,16 +52,18 @@ const Footer = () => {
                         <h6>For Employers</h6>
                         <ul>
                             <li>
-                                <a href="">All Employers</a>
+                                <NavLink to="/employers">All Employers</NavLink>
                             </li>
                             <li>
-                                <a href="">Employer Dashboard</a>
+                                <NavLink to="/employer-dashboard">
+                                    Employer Dashboard
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="">Submit Job</a>
+                                <NavLink to="/jobs/new">Submit Job</NavLink>
                             </li>
                             <li>
-                                <a href="">Job Packages</a>
+                                <NavLink to="/pricings">Job Packages</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -64,19 +71,19 @@ const Footer = () => {
                         <h6>About Us</h6>
                         <ul>
                             <li>
-                                <a href="">Contact Us</a>
+                                <NavLink to="/contact">Contact Us</NavLink>
                             </li>
                             <li>
-                                <a href="">About Us</a>
+                                <NavLink to="/about">About Us</NavLink>
                             </li>
                             <li>
-                                <a href="">Terms</a>
+                                <NavLink to="/terms">Terms</NavLink>
                             </li>
                             <li>
-                                <a href="">Packages</a>
+                                <NavLink to="/packages">Packages</NavLink>
                             </li>
                             <li>
-                                <a href="">FAQ</a>
+                                <NavLink to="/faq">FAQ</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -84,19 +91,23 @@ const Footer = () => {
                         <h6>Helpful Resources</h6>
                         <ul>
                             <li>
-                                <a href="">Site Map</a>
+                                <NavLink to="/site-map">Site Map</NavLink>
                             </li>
                             <li>
-                                <a href="">Terms of Use</a>
+                                <NavLink to="/terms">Terms of Use</NavLink>
                             </li>
                             <li>
-                                <a href="">Privacy Center</a>
+                                <NavLink to="/privacy">Privacy Center</NavLink>
                             </li>
                             <li>
-                                <a href="">Security Center</a>
+                                <NavLink to="/security">
+                                    Security Center
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="">Accessibility Center</a>
+                                <NavLink to="/accessibility">
+                                    Accessibility Center
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

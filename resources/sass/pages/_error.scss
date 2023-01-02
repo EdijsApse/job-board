@@ -1,0 +1,32 @@
+.error-page {
+    .error-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: $space-8 *2;
+        padding-bottom: $space-8 *2;
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: $space-4;
+        }
+        .status-code {
+            margin-bottom: $space-4;
+            font-size: 1.8rem;
+            color: $deep-blue;
+        }
+        h3 {
+            @include font-regular();
+            font-size: 1.6rem;
+            color: $gray;
+            margin-bottom: $space-8;
+        }
+        .btn {
+            display: inline-block;
+            height: auto;
+            padding: $space-4;
+            max-width: 160px;
+        }
+    }
+}

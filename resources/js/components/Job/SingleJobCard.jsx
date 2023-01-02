@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Badge from "../UI/Badge";
 import Card from "../UI/Card";
 
@@ -16,7 +17,9 @@ const SingleJobCard = ({
                     <img src={job.image} alt={`${job.title} image`} />
                 </div>
                 <div className="job-info">
-                    <h5>{job.title}</h5>
+                    <NavLink to={`/jobs/${job.id}`} className="job-link">
+                        {job.title}
+                    </NavLink>
                     <div className="job-details">
                         <div className="single-detail">
                             <i className="fa-solid fa-briefcase"></i>

@@ -16,7 +16,10 @@
             }
         }
         .job-info {
-            h5 {
+            .job-link {
+                @include font-semibold();
+                text-decoration: none;
+                color: $dark;
                 font-size: 1.1rem;
                 cursor: pointer;
                 transition: all 0.3s;
