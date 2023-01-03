@@ -1,7 +1,20 @@
 import Logo from "./assets/logo.png";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store/slices/auth";
 
-const Navigation = ({ showAuthModalHandler }) => {
+const Navigation = () => {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const authDispatch = useDispatch();
+
+    const showAuthModalHandler = () => {
+        authDispatch(authActions.showLoginModal());
+    };
+
+    const logout = () => {
+        authDispatch(authActions.logout());
+    };
+
     return (
         <div className="fixed-navigation">
             <nav className="navbar navbar-expand-lg">
@@ -28,12 +41,19 @@ const Navigation = ({ showAuthModalHandler }) => {
                     </div>
                 </div>
                 <div className="auth-buttons">
-                    <button
-                        className="btn btn-secondary"
-                        onClick={showAuthModalHandler}
-                    >
-                        Login / Register
-                    </button>
+                    {!isAuthenticated && (
+                        <button
+                            className="btn btn-secondary"
+                            onClick={showAuthModalHandler}
+                        >
+                            Login / Register
+                        </button>
+                    )}
+                    {isAuthenticated && (
+                        <button className="btn btn-secondary" onClick={logout}>
+                            Logout
+                        </button>
+                    )}
                     <button className="btn btn-primary">Job Post</button>
                 </div>
             </nav>

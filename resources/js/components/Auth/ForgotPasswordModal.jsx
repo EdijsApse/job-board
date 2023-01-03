@@ -1,8 +1,11 @@
 import { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/slices/auth";
 
-const ForgotPasswordModal = ({ onShowLoginModal }) => {
+const ForgotPasswordModal = () => {
+    const authDispatch = useDispatch();
     const onLoginClickHandler = () => {
-        onShowLoginModal();
+        authDispatch(authActions.showLoginModal());
     };
     return (
         <Fragment>

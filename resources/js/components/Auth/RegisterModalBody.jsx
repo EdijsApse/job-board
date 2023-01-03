@@ -1,12 +1,15 @@
 import { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/slices/auth";
 
 const TYPE_CANDIDATE = 1;
 const TYPE_EMPLOYER = 2;
 
-const RegisterModalBody = ({ onShowLoginModal }) => {
+const RegisterModalBody = () => {
     const [selectedType, setSelectedType] = useState(TYPE_CANDIDATE);
+    const authDispatch = useDispatch();
     const onLoginClickHandler = () => {
-        onShowLoginModal();
+        authDispatch(authActions.showLoginModal());
     };
 
     const selectEmployerTypeHandler = () => {
@@ -14,6 +17,11 @@ const RegisterModalBody = ({ onShowLoginModal }) => {
     };
     const selectCandidateTypeHandler = () => {
         setSelectedType(TYPE_CANDIDATE);
+    };
+
+    const registerFormHandler = (e) => {
+        e.preventDefault();
+        authDispatch(authActions.register({ email: "email" }));
     };
 
     return (
@@ -39,9 +47,11 @@ const RegisterModalBody = ({ onShowLoginModal }) => {
                     <span>Employer</span>
                 </button>
             </div>
-            <form className="register-form">
+            <form className="register-form" onSubmit={registerFormHandler}>
                 <div className="form-group">
-                    <label htmlFor="email">Email<sup className="asterisk">*</sup></label>
+                    <label htmlFor="email">
+                        Email<sup className="asterisk">*</sup>
+                    </label>
                     <input
                         id="email"
                         type="email"
@@ -50,7 +60,9 @@ const RegisterModalBody = ({ onShowLoginModal }) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password<sup className="asterisk">*</sup></label>
+                    <label htmlFor="password">
+                        Password<sup className="asterisk">*</sup>
+                    </label>
                     <input
                         id="password"
                         type="password"
@@ -59,7 +71,9 @@ const RegisterModalBody = ({ onShowLoginModal }) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="confirm">Confirm Password<sup className="asterisk">*</sup></label>
+                    <label htmlFor="confirm">
+                        Confirm Password<sup className="asterisk">*</sup>
+                    </label>
                     <input
                         id="confirm"
                         type="password"

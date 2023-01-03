@@ -1,18 +1,27 @@
 import { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/slices/auth";
 
-const LoginModalBody = ({ onShowRegisterModal, onShowForgotPasswordModal }) => {
+const LoginModalBody = () => {
+    const authDispatch = useDispatch();
+
     const onRegisterClickHandler = () => {
-        onShowRegisterModal();
-    }
-    
+        authDispatch(authActions.showRegisterModal());
+    };
+
     const onForgotPasswordClick = () => {
-        onShowForgotPasswordModal();
-    }
+        authDispatch(authActions.showForgotPasswordModal());
+    };
+
+    const loginFormHandler = (e) => {
+        e.preventDefault();
+        authDispatch(authActions.login({ email: 'email' }));
+    };
 
     return (
         <Fragment>
             <h2>Login to WeWork</h2>
-            <form>
+            <form onSubmit={loginFormHandler}>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
@@ -42,7 +51,9 @@ const LoginModalBody = ({ onShowRegisterModal, onShowForgotPasswordModal }) => {
                             Keep me signed in
                         </label>
                     </div>
-                    <span className="clickable" onClick={onForgotPasswordClick}>Forgotten password ?</span>
+                    <span className="clickable" onClick={onForgotPasswordClick}>
+                        Forgotten password ?
+                    </span>
                 </div>
                 <button className="btn btn-primary">Login</button>
             </form>
@@ -70,7 +81,10 @@ const LoginModalBody = ({ onShowRegisterModal, onShowForgotPasswordModal }) => {
                 </button>
             </div>
             <p className="auth-footer-link">
-                Don't you have an account? <span className="link-text" onClick={onRegisterClickHandler}>Register</span>
+                Don't you have an account?{" "}
+                <span className="link-text" onClick={onRegisterClickHandler}>
+                    Register
+                </span>
             </p>
         </Fragment>
     );

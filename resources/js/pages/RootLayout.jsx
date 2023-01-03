@@ -1,26 +1,24 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import AuthModal from "../components/Auth/AuthModal";
+import { useSelector } from "react-redux";
 
 const RootLayout = () => {
-    const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
-    const openAuthModal = () => {
-        setIsAuthModalVisible(true);
-    };
-    const closeAuthModal = () => {
-        setIsAuthModalVisible(false);
-    };
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isAuthModalVisible = useSelector(
+        (state) => state.auth.modal.isVisible
+    );
 
     return (
         <Fragment>
-            {isAuthModalVisible && <AuthModal onCloseModal={closeAuthModal} />}
-            <Navigation showAuthModalHandler={openAuthModal} />
+            {!isAuthenticated && isAuthModalVisible && <AuthModal />}
+            <Navigation />
             <Outlet />
             <Footer />
             <ScrollRestoration
-                getKey={(location, matches) => {
+                getKey={(location) => {
                     return location.key;
                 }}
             />
