@@ -60,7 +60,7 @@ const Footer = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/jobs/new">Submit Job</NavLink>
+                                <NavLink to="/jobs/create">Submit Job</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/pricings">Job Packages</NavLink>

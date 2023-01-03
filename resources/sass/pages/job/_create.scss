@@ -1,0 +1,26 @@
+.create-job-page {
+    main {
+        margin-bottom: $space-6 * 2;
+    }
+    .job-form-section {
+        h2 {
+            margin-bottom: $space-6;
+        }
+        .row {
+            margin-bottom: $space-6;
+        }
+        .job-badges-switches {
+            h5 {
+                font-size: 1.2rem;
+                margin-bottom: $space-4;
+            }
+            .form-switch {
+                margin-bottom: $space-2;
+            }
+        }
+        .submit-job {
+            margin-top: $space-6;
+            min-width: 160px;
+        }
+    }
+}

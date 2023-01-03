@@ -29,28 +29,6 @@
         }
         .form-group {
             margin-bottom: $space-8;
-            label {
-                margin-bottom: $space-2;
-                .asterisk {
-                    font-size: 0.95rem;
-                    margin-left: $space-1;
-                    color: $red;
-                }
-            }
-            input {
-                @include font-regular();
-                padding: $space-4 $space-6;
-                background-color: $cloud-blue;
-                border: 1px solid $cloud-blue;
-                outline: none;
-                box-shadow: none;
-                transition: all 0.3s;
-                font-size: 0.9rem;
-                &:focus {
-                    border-color: $deep-blue;
-                    background-color: #fff;
-                }
-            }
         }
         .forgot-password-container {
             display: flex;
