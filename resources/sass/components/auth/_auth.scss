@@ -137,12 +137,13 @@
             margin-left: $space-2;
         }
     }
-
+    .account-type-wrapper {
+        margin-bottom: $space-8;
+    }
     .account-types {
         display: grid;
         grid-template-columns: 1fr 1fr;
         column-gap: $space-8;
-        margin-bottom: $space-8;
         .btn-acc-type {
             border-color: $green;
             background-color: $bright-green;

@@ -3,10 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const LOGIN_MODAL = 1;
 export const REGISTER_MODAL = 2;
 export const FORGOT_PWD_MODAL = 3;
+export const storageTokenKey = "personal_user_token";
 
 const initialState = {
     user: null,
+    isLoading: false,
+    refreshingUser: false,
     isAuthenticated: false,
+    registerFormErrors: {},
+    loginFormErrors: {},
     modal: {
         isVisible: false,
         modal_id: null,
@@ -17,21 +22,28 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        login(state, action) {
-            const { email, password } = action;
-            state.user = {};
-            state.isAuthenticated = true;
-            state.modal.isVisible = false;
+        setRefreshingUserState(state, { payload }) {
+            state.refreshingUser = payload.refreshingUser;
         },
-        register(state, action) {
-            const { email, password, password_confirm } = action;
-            state.user = {};
+        changeLoadingState(state, action) {
+            const { isLoading } = action.payload;
+            state.isLoading = isLoading;
+        },
+        setRegisterFormErrors(state, action) {
+            const { errors } = action.payload;
+            state.registerFormErrors = errors;
+        },
+        setLoginFormErrors(state, action) {
+            const { errors } = action.payload;
+            state.loginFormErrors = errors;
+        },
+        authenticateUser(state, { payload }) {
+            state.user = payload.user;
             state.isAuthenticated = true;
-            state.modal.isVisible = false;
         },
         logout(state) {
-            state.user = null;
-            state.isAuthenticated = false;
+            localStorage.removeItem(storageTokenKey);
+            window.location.reload();
         },
         showLoginModal(state) {
             state.modal.isVisible = true;
@@ -47,6 +59,8 @@ const authSlice = createSlice({
         },
         hideModal(state) {
             state.modal.isVisible = false;
+            state.loginFormErrors = {};
+            state.registerFormErrors = {};
         },
     },
 });

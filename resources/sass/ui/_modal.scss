@@ -3,6 +3,7 @@
     .modal-dialog {
         max-width: 600px;
         .modal-content {
+            position: relative;
             padding: $space-8 + $space-2 $space-8 + $space-2;
             border: none;
             .modal-body {

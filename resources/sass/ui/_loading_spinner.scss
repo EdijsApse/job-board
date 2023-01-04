@@ -1,0 +1,19 @@
+.loading-spinner-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+    .spinner-border {
+        color: $deep-blue;
+        width: 5rem;
+        height: 5rem;
+        border-width: 0.4rem;
+        animation-duration: 0.9s;
+    }
+}

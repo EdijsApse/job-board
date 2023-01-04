@@ -1,9 +1,17 @@
-import { Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { Fragment, useRef } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { authActions } from "../../store/slices/auth";
+import { login } from "../../store/thunks/auth";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const LoginModalBody = () => {
     const authDispatch = useDispatch();
+
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const errors = useSelector((state) => state.auth.loginFormErrors);
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
 
     const onRegisterClickHandler = () => {
         authDispatch(authActions.showRegisterModal());
@@ -15,42 +23,52 @@ const LoginModalBody = () => {
 
     const loginFormHandler = (e) => {
         e.preventDefault();
-        authDispatch(authActions.login({ email: 'email' }));
+        authDispatch(
+            login({
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+            })
+        );
     };
 
     return (
         <Fragment>
             <h2>Login to WeWork</h2>
+            {isLoading && <LoadingSpinner />}
             <form onSubmit={loginFormHandler}>
-                <div className="form-group">
+                <div
+                    className={`form-group ${errors.email ? "with-error" : ""}`}
+                >
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
                         type="email"
                         placeholder="Email"
                         className="form-control"
+                        ref={emailRef}
                     />
+                    {errors.email && (
+                        <p className="input-error">{errors.email}</p>
+                    )}
                 </div>
-                <div className="form-group">
+                <div
+                    className={`form-group ${
+                        errors.password ? "with-error" : ""
+                    }`}
+                >
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         type="password"
                         placeholder="Password"
                         className="form-control"
+                        ref={passwordRef}
                     />
+                    {errors.password && (
+                        <p className="input-error">{errors.password}</p>
+                    )}
                 </div>
                 <div className="forgot-password-container">
-                    <div className="form-check">
-                        <input
-                            id="remember"
-                            className="form-check-input"
-                            type="checkbox"
-                        />
-                        <label className="form-check-label" htmlFor="remember">
-                            Keep me signed in
-                        </label>
-                    </div>
                     <span className="clickable" onClick={onForgotPasswordClick}>
                         Forgotten password ?
                     </span>
