@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,12 +15,18 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * User Types
+     */
+    CONST TYPE_CANDIDATE = 1;
+    CONST TYPE_EMPLOYER = 2;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_type',
         'email',
         'password',
     ];
@@ -40,5 +48,25 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'user_type' => 'integer'
     ];
+
+    /**
+     * Determines if user is candidate
+     * @return boolean
+     */
+    public function isCandidate()
+    {
+        return $this->user_type === self::TYPE_CANDIDATE;
+    }
+
+    /**
+     * Determines if user is employer
+     * 
+     * @return boolean
+     */
+    public function isEmployer()
+    {
+        return $this->user_type === self::TYPE_EMPLOYER;
+    }
 }
