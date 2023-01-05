@@ -29,6 +29,14 @@ const Navigation = () => {
                         <NavLink to="/" className="nav-item nav-link">
                             Home
                         </NavLink>
+                        {isAuthenticated && (
+                            <NavLink
+                                to="/dashboard"
+                                className="nav-item nav-link"
+                            >
+                                Dashboard
+                            </NavLink>
+                        )}
                         <NavLink to="/jobs" className="nav-item nav-link">
                             Jobs
                         </NavLink>

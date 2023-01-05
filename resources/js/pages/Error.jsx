@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { NavLink, Outlet, useRouteError } from "react-router-dom";
+import { NavLink, useRouteError } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import AuthModal from "../components/Auth/AuthModal";
@@ -7,7 +7,6 @@ import Wrapper from "../components/UI/Wrapper";
 
 const NotFoundPage = () => {
     const error = useRouteError();
-    console.log(error);
     const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
     const openAuthModal = () => {
         setIsAuthModalVisible(true);

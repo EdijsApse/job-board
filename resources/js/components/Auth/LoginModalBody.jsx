@@ -1,5 +1,5 @@
 import { Fragment, useRef } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slices/auth";
 import { login } from "../../store/thunks/auth";
 import LoadingSpinner from "../UI/LoadingSpinner";
