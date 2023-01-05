@@ -11,6 +11,7 @@ export const register = (payload) => {
                 const { user, token } = response.data;
                 if (user && token) {
                     dispatch(authActions.authenticateUser({ user: user }));
+                    dispatch(authActions.setUserAsLoaded());
                     axios.defaults.headers.common = {
                         Authorization: `Bearer ${token}`,
                     };
@@ -45,6 +46,7 @@ export const login = (payload) => {
                 const { user, token } = response.data;
                 if (user && token) {
                     dispatch(authActions.authenticateUser({ user: user }));
+                    dispatch(authActions.setUserAsLoaded());
                     axios.defaults.headers.common = {
                         Authorization: `Bearer ${token}`,
                     };
@@ -72,11 +74,8 @@ export const login = (payload) => {
 export const refreshUser = () => {
     return async (dispatch) => {
         const token = localStorage.getItem(storageTokenKey);
-        dispatch(authActions.setRefreshingUserState({ refreshingUser: true }));
         if (!token) {
-            dispatch(
-                authActions.setRefreshingUserState({ refreshingUser: false })
-            );
+            dispatch(authActions.setUserAsLoaded());
             return;
         }
         axios.defaults.headers.common = {
@@ -88,17 +87,12 @@ export const refreshUser = () => {
                 const { user } = response.data;
                 if (user) {
                     dispatch(authActions.authenticateUser({ user: user }));
+                    dispatch(authActions.setUserAsLoaded());
                 }
             })
             .catch(() => {
                 localStorage.removeItem(storageTokenKey);
-            })
-            .finally(() => {
-                dispatch(
-                    authActions.setRefreshingUserState({
-                        refreshingUser: false,
-                    })
-                );
+                dispatch(authActions.setUserAsLoaded());
             });
     };
 };

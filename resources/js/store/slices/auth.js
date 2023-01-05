@@ -7,8 +7,8 @@ export const storageTokenKey = "personal_user_token";
 
 const initialState = {
     user: null,
+    userIsLoaded: false,
     isLoading: false,
-    refreshingUser: false,
     isAuthenticated: false,
     registerFormErrors: {},
     loginFormErrors: {},
@@ -22,8 +22,8 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setRefreshingUserState(state, { payload }) {
-            state.refreshingUser = payload.refreshingUser;
+        setUserAsLoaded(state) {
+            state.userIsLoaded = true;
         },
         changeLoadingState(state, action) {
             const { isLoading } = action.payload;
