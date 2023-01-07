@@ -82,7 +82,6 @@ export const login = (payload) => {
                         authActions.setLoginFormErrors({ errors: errorBag })
                     );
                 } else {
-                    console.log('Error')
                     dispatch(
                         alertActions.showWarningAlert({
                             message:

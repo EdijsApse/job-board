@@ -232,14 +232,34 @@ $navigationHeight: 112.47px;
 .dashboard-container {
     padding-top: $navigationHeight;
     background-color: $pale-gray;
-    display: grid;
-    grid-template-columns: 360px 1fr;
+    .sidebar {
+        position: fixed;
+        left: 0;
+        height: calc(100vh - 112.47px);
+        width: 360px;
+        overflow-y: auto;
+    }
     .dashboard-main {
+        display: flex;
+        flex-direction: column;
+        margin-left: 360px;
         padding: $space-8 * 2 $space-6 * 2;
+        padding-bottom: 0;
+        min-height: calc(100vh - $navigationHeight);
         .dashboard-page {
-            h1 {
+            margin-bottom: $space-8 * 2;
+            .page-title {
                 font-size: 1.8rem;
+                margin-bottom: $space-8;
             }
+        }
+        .dashboard-footer {
+            margin-top: auto;
+        }
+    }
+    .dashboard-form {
+        .row {
+            margin-bottom: $space-6;
         }
     }
 }

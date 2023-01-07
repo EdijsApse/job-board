@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className="footer">
             <Wrapper className={"top-row"}>
                 <div className="footer-grid">
                     <div className="footer-col">

@@ -1,4 +1,4 @@
-footer {
+.footer {
     background-color: $pale-gray;
     .top-row {
         padding-top: $space-8 * 3;
@@ -107,5 +107,16 @@ footer {
                 }
             }
         }
+    }
+}
+
+.dashboard-footer {
+    padding: $space-8;
+    background-color: $pale-gray;
+    p {
+        text-align: center;
+        margin-bottom: 0;
+        color: gray;
+        font-size: 0.9rem;
     }
 }
