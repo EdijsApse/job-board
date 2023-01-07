@@ -1,24 +1,17 @@
-import { Fragment } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/Dashboard/Sidebar";
-import Navigation from "../../components/Navigation";
+import BaseLayout from "../BaseLayout";
 
 const DashboardLayout = () => {
     return (
-        <Fragment>
-            <Navigation />
+        <BaseLayout>
             <div className="dashboard-container">
                 <Sidebar />
                 <div className="dashboard-main">
                     <Outlet></Outlet>
                 </div>
             </div>
-            <ScrollRestoration
-                getKey={(location) => {
-                    return location.key;
-                }}
-            />
-        </Fragment>
+        </BaseLayout>
     );
 };
 

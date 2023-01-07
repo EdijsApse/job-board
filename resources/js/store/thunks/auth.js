@@ -1,5 +1,6 @@
 import { authActions, storageTokenKey } from "../slices/auth";
 import axios from "../../axios";
+import { alertActions } from "../slices/alert";
 
 export const register = (payload) => {
     return async (dispatch) => {
@@ -12,6 +13,11 @@ export const register = (payload) => {
                 if (user && token) {
                     dispatch(authActions.authenticateUser({ user: user }));
                     dispatch(authActions.setUserAsLoaded());
+                    dispatch(
+                        alertActions.showSuccessAlert({
+                            message: "Successfully registered!",
+                        })
+                    );
                     axios.defaults.headers.common = {
                         Authorization: `Bearer ${token}`,
                     };
@@ -27,6 +33,13 @@ export const register = (payload) => {
                     }
                     dispatch(
                         authActions.setRegisterFormErrors({ errors: errorBag })
+                    );
+                } else {
+                    dispatch(
+                        alertActions.showWarningAlert({
+                            message:
+                                "Ooops.... Something went wrong! Please try again later!",
+                        })
                     );
                 }
             })
@@ -47,6 +60,11 @@ export const login = (payload) => {
                 if (user && token) {
                     dispatch(authActions.authenticateUser({ user: user }));
                     dispatch(authActions.setUserAsLoaded());
+                    dispatch(
+                        alertActions.showSuccessAlert({
+                            message: "Welcome back!",
+                        })
+                    );
                     axios.defaults.headers.common = {
                         Authorization: `Bearer ${token}`,
                     };
@@ -62,6 +80,14 @@ export const login = (payload) => {
                     }
                     dispatch(
                         authActions.setLoginFormErrors({ errors: errorBag })
+                    );
+                } else {
+                    console.log('Error')
+                    dispatch(
+                        alertActions.showWarningAlert({
+                            message:
+                                "Ooops.... Something went wrong! Please try again later!",
+                        })
                     );
                 }
             })

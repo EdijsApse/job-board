@@ -1,9 +1,8 @@
-import { Fragment } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
-import Navigation from "../components/Navigation";
+import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import AuthModal from "../components/Auth/AuthModal";
 import { useSelector } from "react-redux";
+import BaseLayout from "./BaseLayout";
 
 const RootLayout = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -12,17 +11,11 @@ const RootLayout = () => {
     );
 
     return (
-        <Fragment>
+        <BaseLayout>
             {!isAuthenticated && isAuthModalVisible && <AuthModal />}
-            <Navigation />
             <Outlet />
             <Footer />
-            <ScrollRestoration
-                getKey={(location) => {
-                    return location.key;
-                }}
-            />
-        </Fragment>
+        </BaseLayout>
     );
 };
 
