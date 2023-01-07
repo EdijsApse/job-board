@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { alertActions } from "../../store/slices/alert";
 
 const Alert = () => {
+    console.log('Render!')
     const alertMessage = useSelector((state) => state.alert.message);
     const isSuccessAlert = useSelector((state) => state.alert.success);
     const dispatch = useDispatch();

@@ -16,6 +16,16 @@ const AuthModal = () => {
     const onCloseModal = () => {
         authDispatch(authActions.hideModal());
     };
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isAuthModalVisible = useSelector(
+        (state) => state.auth.modal.isVisible
+    );
+
+    if (isAuthenticated || !isAuthModalVisible) {
+        return null;
+    }
+
     return (
         <Modal onClose={onCloseModal}>
             <div className="auth-modal-body">
