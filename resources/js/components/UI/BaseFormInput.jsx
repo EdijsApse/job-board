@@ -2,9 +2,11 @@ const BaseFormInput = ({
     id,
     value,
     labelName,
+    labelClassName = "",
     setInputValue,
     isRequired = false,
     type = "text",
+    placeholder = "",
     inputErrorMessage,
 }) => {
     const onChangeHandler = (e) => {
@@ -12,11 +14,18 @@ const BaseFormInput = ({
     };
     return (
         <div className={`form-group ${inputErrorMessage ? "with-error" : ""}`}>
-            <label htmlFor={id}>
+            <label htmlFor={id} className={labelClassName}>
                 {labelName}
-                {isRequired && <span className={"asterisk"}>*</span>}
+                {isRequired && <sup className={"asterisk"}>*</sup>}
             </label>
-            <input type={type} value={value} onChange={onChangeHandler} id={id} className="form-control" />
+            <input
+                type={type}
+                value={value}
+                onChange={onChangeHandler}
+                id={id}
+                className="form-control"
+                placeholder={placeholder}
+            />
             {inputErrorMessage && (
                 <p className="input-error">{inputErrorMessage}</p>
             )}

@@ -1,7 +1,60 @@
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
 import Wrapper from "../../components/UI/Wrapper";
+import BaseFormInput from "../../components/UI/BaseFormInput";
+import { useState } from "react";
+import BaseFormSelect from "../../components/UI/BaseFormSelect";
+import BaseTextareaInput from "../../components/UI/BaseTextareaInput";
+
+const categoryOptions = [
+    {
+        value: "advertising",
+        label: "Advertising",
+    },
+];
+const cityOptions = [
+    {
+        value: "riga",
+        label: "Riga",
+    },
+];
+const countryOptions = [
+    {
+        value: "latvia",
+        label: "Latvia",
+    },
+];
+
+const employmentTypeOptions = [
+    {
+        value: "part",
+        label: "Part Time",
+    },
+    {
+        value: "full",
+        label: "Full Time",
+    },
+];
+
+const qualificationOptions = [
+    {
+        value: "bachelor",
+        label: "Bachelor Degree",
+    },
+];
 
 const CreateJob = () => {
+    const [jobTitle, setJobTitle] = useState("");
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
+    const [category, setCategory] = useState("");
+    const [employmentType, setEmploymentType] = useState("");
+    const [minSalary, setMinSalary] = useState("");
+    const [maxSalary, setMaxSalary] = useState("");
+    const [jobDescription, setJobDescription] = useState("");
+    const [expDate, setExpDate] = useState("");
+    const [qualification, setQualification] = useState("");
+    const [experience, setExperience] = useState("");
+
     return (
         <div className="page create-job-page">
             <div className="page-header">
@@ -14,181 +67,166 @@ const CreateJob = () => {
                     <form>
                         <div className="row">
                             <div className="col-12">
-                                <div className="form-group">
-                                    <label htmlFor="title" className="bold">
-                                        Job Title
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <input
-                                        id="title"
-                                        type="text"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <BaseFormInput
+                                    id="title"
+                                    labelClassName="bold"
+                                    labelName="Job Title"
+                                    value={jobTitle}
+                                    setInputValue={(value) => {
+                                        setJobTitle(value);
+                                    }}
+                                    isRequired
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label className="bold" htmlFor="country">
-                                        Country
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <select className="form-select">
-                                        <option>Latvia</option>
-                                    </select>
-                                </div>
+                                <BaseFormSelect
+                                    id="country"
+                                    labelName="Country"
+                                    labelClassName="bold"
+                                    selected={country}
+                                    selectValue={(value) => {
+                                        setCountry(value);
+                                    }}
+                                    placeholder="Select country"
+                                    options={countryOptions}
+                                    isRequired
+                                />
                             </div>
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label className="bold" htmlFor="city">
-                                        City<span className="asterisk">*</span>
-                                    </label>
-                                    <select className="form-select">
-                                        <option>Riga</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6">
-                                <div className="form-group">
-                                    <label htmlFor="category" className="bold">
-                                        Category
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <select
-                                        id="category"
-                                        className="form-select"
-                                    >
-                                        <option>Health Care</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="employment-type"
-                                        className="bold"
-                                    >
-                                        Type
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <select
-                                        id="employment-type"
-                                        className="form-select"
-                                    >
-                                        <option>Full Time</option>
-                                    </select>
-                                </div>
+                                <BaseFormSelect
+                                    id="city"
+                                    labelName="City"
+                                    labelClassName="bold"
+                                    selected={city}
+                                    selectValue={(value) => {
+                                        setCity(value);
+                                    }}
+                                    placeholder="Select city"
+                                    options={cityOptions}
+                                    isRequired
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="min-salary"
-                                        className="bold"
-                                    >
-                                        Min Salary
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <input
-                                        id="min-salary"
-                                        type="number"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <BaseFormSelect
+                                    id="category"
+                                    labelName="Category"
+                                    labelClassName="bold"
+                                    selected={category}
+                                    selectValue={(value) => {
+                                        setCategory(value);
+                                    }}
+                                    placeholder="Select category"
+                                    options={categoryOptions}
+                                    isRequired
+                                />
                             </div>
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="max-salary"
-                                        className="bold"
-                                    >
-                                        Max Salary
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <input
-                                        id="max-salary"
-                                        type="number"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <BaseFormSelect
+                                    id="employment-type"
+                                    labelClassName="bold"
+                                    labelName="Type"
+                                    selected={employmentType}
+                                    selectValue={(value) => {
+                                        setEmploymentType(value);
+                                    }}
+                                    placeholder="Select employment type"
+                                    options={employmentTypeOptions}
+                                    isRequired
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-6">
+                                <BaseFormInput
+                                    id="min-salary"
+                                    labelClassName="bold"
+                                    labelName="Min Salary"
+                                    value={minSalary}
+                                    setInputValue={(value) => {
+                                        setMinSalary(value);
+                                    }}
+                                    type="number"
+                                    isRequired
+                                />
+                            </div>
+                            <div className="col-6">
+                                <BaseFormInput
+                                    id="max-salary"
+                                    labelClassName="bold"
+                                    labelName="Max Salary"
+                                    value={maxSalary}
+                                    setInputValue={(value) => {
+                                        setMaxSalary(value);
+                                    }}
+                                    type="number"
+                                    isRequired
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="job-description"
-                                        className="bold"
-                                    >
-                                        Job Description
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <textarea
-                                        id="job-description"
-                                        className="form-control"
-                                    ></textarea>
-                                </div>
+                                <BaseTextareaInput
+                                    id="job-description"
+                                    labelName="Job Description"
+                                    labelClassName="bold"
+                                    value={jobDescription}
+                                    setNewValue={(value) => {
+                                        setJobDescription(value);
+                                    }}
+                                    isRequired
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="expiration-date"
-                                        className="bold"
-                                    >
-                                        Expiration date
-                                        <span className="asterisk">*</span>
-                                    </label>
-                                    <input
-                                        type="date"
-                                        id="expiration-date"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <BaseFormInput
+                                    id="expiration-date"
+                                    labelClassName="bold"
+                                    labelName="Expiration date"
+                                    value={expDate}
+                                    setInputValue={(value) => {
+                                        setExpDate(value);
+                                    }}
+                                    type="date"
+                                    isRequired
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="qualification"
-                                        className="bold"
-                                    >
-                                        Qualification
-                                    </label>
-                                    <select
-                                        id="qualification"
-                                        className="form-select"
-                                    >
-                                        <option>Bachelor Degree</option>
-                                    </select>
-                                </div>
+                                <BaseFormSelect
+                                    id="qualification"
+                                    labelClassName="bold"
+                                    labelName="Qualification"
+                                    selected={qualification}
+                                    selectValue={(value) => {
+                                        setQualification(value);
+                                    }}
+                                    placeholder="Select qualification level required"
+                                    options={qualificationOptions}
+                                />
                             </div>
                             <div className="col-6">
-                                <div className="form-group">
-                                    <label
-                                        htmlFor="experience"
-                                        className="bold"
-                                    >
-                                        Experience (Years)
-                                    </label>
-                                    <input
-                                        type="number"
-                                        id="experience"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <BaseFormInput
+                                    id="experience"
+                                    labelClassName="bold"
+                                    labelName="Experience (Years)"
+                                    value={experience}
+                                    setInputValue={(value) => {
+                                        setExperience(value);
+                                    }}
+                                    type="number"
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
                                 <div className="job-badges-switches">
-                                <h5>Job badges</h5>
+                                    <h5>Job badges</h5>
                                     <div className="form-switch">
                                         <input
                                             type="checkbox"
@@ -218,7 +256,9 @@ const CreateJob = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn btn-primary submit-job">Create Job</button>
+                        <button className="btn btn-primary submit-job">
+                            Create Job
+                        </button>
                     </form>
                 </Wrapper>
             </main>

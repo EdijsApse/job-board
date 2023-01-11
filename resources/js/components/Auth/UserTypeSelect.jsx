@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
-
 const TYPE_CANDIDATE = 1;
 const TYPE_EMPLOYER = 2;
 
-const UserTypeSelect = ({ onTypeSelected }) => {
-    const [selectedType, setSelectedType] = useState();
+const UserTypeSelect = ({ selectType, selectedType }) => {
     const selectCandidateTypeHandler = () => {
-        setSelectedType(TYPE_CANDIDATE);
+        selectType(TYPE_CANDIDATE);
     };
     const selectEmployerTypeHandler = () => {
-        setSelectedType(TYPE_EMPLOYER);
+        selectType(TYPE_EMPLOYER);
     };
-
-    useEffect(() => {
-        onTypeSelected(selectedType);
-    }, [onTypeSelected]);
 
     return (
         <div className="account-types">

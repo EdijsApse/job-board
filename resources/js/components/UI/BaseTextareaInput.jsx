@@ -1,6 +1,7 @@
 const BaseTextareaInput = ({
     id,
     labelName,
+    labelClassName = "",
     isRequired = false,
     inputErrorMessage,
     value,
@@ -12,9 +13,9 @@ const BaseTextareaInput = ({
 
     return (
         <div className={`form-group ${inputErrorMessage ? "with-error" : ""}`}>
-            <label htmlFor={id}>
+            <label htmlFor={id} className={labelClassName}>
                 {labelName}
-                {isRequired && <span className={"asterisk"}>*</span>}
+                {isRequired && <sup className={"asterisk"}>*</sup>}
             </label>
             <textarea
                 id={id}

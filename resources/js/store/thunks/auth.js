@@ -56,7 +56,7 @@ export const login = (payload) => {
         axios
             .post("/login", payload)
             .then((response) => {
-                const { user, token } = response.data;
+                const { user, token, error } = response.data;
                 if (user && token) {
                     dispatch(authActions.authenticateUser({ user: user }));
                     dispatch(authActions.setUserAsLoaded());
@@ -69,6 +69,12 @@ export const login = (payload) => {
                         Authorization: `Bearer ${token}`,
                     };
                     localStorage.setItem(storageTokenKey, token);
+                } else if (error) {
+                    dispatch(
+                        alertActions.showWarningAlert({
+                            message: error,
+                        })
+                    );
                 }
             })
             .catch((error) => {

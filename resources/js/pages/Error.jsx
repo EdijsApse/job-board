@@ -22,6 +22,24 @@ const NotFoundPage = () => {
         });
     });
 
+    let errorContent = "";
+
+    if (error.status === 404) {
+        errorContent = (
+            <Fragment>
+                <h2 className="status-code">404</h2>
+                <h3>Page you are looking for, is not found!</h3>
+            </Fragment>
+        );
+    } else {
+        errorContent = (
+            <Fragment>
+                <h2 className="status-code">{error.name}</h2>
+                <h3>{error.message}</h3>
+            </Fragment>
+        );
+    }
+
     return (
         <Fragment>
             {isAuthModalVisible && <AuthModal onCloseModal={closeAuthModal} />}
@@ -29,12 +47,7 @@ const NotFoundPage = () => {
             <main className="page error-page">
                 <Wrapper className="error-main">
                     <h1>Oooops, Error occured</h1>
-                    {error.status === 404 && (
-                        <Fragment>
-                            <h2 className="status-code">404</h2>
-                            <h3>Page you are looking for, is not found!</h3>
-                        </Fragment>
-                    )}
+                    {errorContent}
                     <NavLink to="/" className="btn btn-primary">
                         Back to Home
                     </NavLink>

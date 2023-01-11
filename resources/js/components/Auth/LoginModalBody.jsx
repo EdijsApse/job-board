@@ -1,7 +1,8 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slices/auth";
 import { login } from "../../store/thunks/auth";
+import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const LoginModalBody = () => {
@@ -10,8 +11,8 @@ const LoginModalBody = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const errors = useSelector((state) => state.auth.loginFormErrors);
 
-    const emailRef = useRef();
-    const passwordRef = useRef();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const onRegisterClickHandler = () => {
         authDispatch(authActions.showRegisterModal());
@@ -25,8 +26,8 @@ const LoginModalBody = () => {
         e.preventDefault();
         authDispatch(
             login({
-                email: emailRef.current.value,
-                password: passwordRef.current.value,
+                email: email,
+                password: password,
             })
         );
     };
@@ -36,38 +37,30 @@ const LoginModalBody = () => {
             <h2>Login to WeWork</h2>
             {isLoading && <LoadingSpinner />}
             <form onSubmit={loginFormHandler}>
-                <div
-                    className={`form-group ${errors.email ? "with-error" : ""}`}
-                >
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                        className="form-control"
-                        ref={emailRef}
-                    />
-                    {errors.email && (
-                        <p className="input-error">{errors.email}</p>
-                    )}
-                </div>
-                <div
-                    className={`form-group ${
-                        errors.password ? "with-error" : ""
-                    }`}
-                >
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        className="form-control"
-                        ref={passwordRef}
-                    />
-                    {errors.password && (
-                        <p className="input-error">{errors.password}</p>
-                    )}
-                </div>
+                <BaseFormInput
+                    id="email"
+                    labelName="Email"
+                    type="email"
+                    value={email}
+                    setInputValue={(value) => {
+                        setEmail(value);
+                    }}
+                    inputErrorMessage={errors.email}
+                    placeholder="Email"
+                    isRequired
+                />
+                <BaseFormInput
+                    id="password"
+                    labelName="Password"
+                    type="password"
+                    value={password}
+                    setInputValue={(value) => {
+                        setPassword(value);
+                    }}
+                    inputErrorMessage={errors.password}
+                    placeholder="Password"
+                    isRequired
+                />
                 <div className="forgot-password-container">
                     <span className="clickable" onClick={onForgotPasswordClick}>
                         Forgotten password ?
