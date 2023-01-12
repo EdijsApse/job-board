@@ -1,33 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import BaseFormInput from "../../../components/UI/BaseFormInput";
 import BaseFormSelect from "../../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../../components/UI/BaseTextareaInput";
 import DashboardCard from "../../../components/UI/DashboardCard";
-
-const categoryOptions = [
-    {
-        value: "advertising",
-        label: "Advertising",
-    },
-];
-const cityOptions = [
-    {
-        value: "riga",
-        label: "Riga",
-    },
-];
-const countryOptions = [
-    {
-        value: "latvia",
-        label: "Latvia",
-    },
-];
-const sizeOptions = [
-    {
-        value: "1",
-        label: "1-5 Employers",
-    },
-];
 
 const Details = () => {
     const [companyName, setCompanyName] = useState("");
@@ -39,6 +15,11 @@ const Details = () => {
     const [companyCity, setCompanyCity] = useState("");
     const [companyCountry, setCompanyCountry] = useState("");
     const [companySize, setCompanySize] = useState("");
+
+    const countryOptions = useSelector((state) => state.selectOptions.countries);
+    const cityOptions = useSelector((state) => state.selectOptions.cities);
+    const sizeOptions = useSelector((state) => state.selectOptions.companySizes);
+    const categoryOptions = useSelector((state) => state.selectOptions.categories);
 
     const submitCompanyDetailsHandler = (e) => {
         e.preventDefault();
