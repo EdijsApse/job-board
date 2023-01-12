@@ -15,10 +15,10 @@ class CompanySizeSeeder extends Seeder
     public function run()
     {
         DB::table('company_sizes')->insert([
-            ['name' => 'Less than 10 Employees'],
-            ['name' => '10-49 Employees'],
-            ['name' => '50-249 Employees'],
-            ['name' => 'More than 250 Employees']
+            ['size' => 'Less than 10 Employees'],
+            ['size' => '10-49 Employees'],
+            ['size' => '50-249 Employees'],
+            ['size' => 'More than 250 Employees']
         ]);
     }
 }
