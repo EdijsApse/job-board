@@ -1,34 +1,71 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BaseFormInput from "../../../components/UI/BaseFormInput";
 import BaseFormSelect from "../../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../../components/UI/BaseTextareaInput";
 import DashboardCard from "../../../components/UI/DashboardCard";
+import LoadingSpinner from "../../../components/UI/LoadingSpinner";
+import { updateCompanyDetails } from "../../../store/thunks/employer";
 
 const Details = () => {
-    const [companyName, setCompanyName] = useState("");
-    const [companyEmail, setCompanyEmail] = useState("");
-    const [companyPhone, setCompanyPhone] = useState("");
-    const [aboutCompany, setAboutCompany] = useState("");
-    const [companyFoundedYear, setCompanyFoundedYear] = useState("");
-    const [companyCategory, setCompanyCategory] = useState("");
-    const [companyCity, setCompanyCity] = useState("");
-    const [companyCountry, setCompanyCountry] = useState("");
-    const [companySize, setCompanySize] = useState("");
+    const userCompany = useSelector((state) => {
+        const user = state.auth.user;
+        return user && user.company ? user.company : {};
+    });
 
-    const countryOptions = useSelector((state) => state.selectOptions.countries);
+    const dispatch = useDispatch();
+
+    const isLoading = useSelector((state) => state.employer.isLoading);
+    const errors = useSelector((state) => state.employer.errors);
+
+    const [companyName, setCompanyName] = useState(userCompany.name);
+    const [companyEmail, setCompanyEmail] = useState(userCompany.contact_email);
+    const [companyPhone, setCompanyPhone] = useState(userCompany.contact_phone);
+    const [aboutCompany, setAboutCompany] = useState(userCompany.about);
+    const [companyFoundedYear, setCompanyFoundedYear] = useState(
+        userCompany.year_founded
+    );
+    const [companyCategory, setCompanyCategory] = useState(
+        userCompany.category_id
+    );
+    const [companyCity, setCompanyCity] = useState(userCompany.city_id);
+    const [companyCountry, setCompanyCountry] = useState(
+        userCompany.country_id
+    );
+    const [companySize, setCompanySize] = useState(userCompany.company_size_id);
+
+    const countryOptions = useSelector(
+        (state) => state.selectOptions.countries
+    );
     const cityOptions = useSelector((state) => state.selectOptions.cities);
-    const sizeOptions = useSelector((state) => state.selectOptions.companySizes);
-    const categoryOptions = useSelector((state) => state.selectOptions.categories);
+    const sizeOptions = useSelector(
+        (state) => state.selectOptions.companySizes
+    );
+    const categoryOptions = useSelector(
+        (state) => state.selectOptions.categories
+    );
 
     const submitCompanyDetailsHandler = (e) => {
         e.preventDefault();
+        const data = {
+            name: companyName,
+            contact_email: companyEmail,
+            contact_phone: companyPhone,
+            year_founded: companyFoundedYear,
+            about: aboutCompany,
+            country_id: companyCountry,
+            city_id: companyCity,
+            category_id: companyCategory,
+            company_size_id: companySize,
+        };
+        dispatch(updateCompanyDetails(data));
     };
 
     return (
         <div className="dashboard-page">
             <h1 className="page-title">Company details</h1>
-            <DashboardCard>
+            <DashboardCard className="relative">
+                {isLoading && <LoadingSpinner />}
                 <form
                     className="dashboard-form"
                     onSubmit={submitCompanyDetailsHandler}
@@ -42,6 +79,7 @@ const Details = () => {
                                 setInputValue={(name) => {
                                     setCompanyName(name);
                                 }}
+                                inputErrorMessage={errors.name}
                                 isRequired
                             />
                         </div>
@@ -55,6 +93,7 @@ const Details = () => {
                                 }}
                                 options={categoryOptions}
                                 placeholder="Select comapny category"
+                                inputErrorMessage={errors.category_id}
                                 isRequired
                             />
                         </div>
@@ -70,6 +109,7 @@ const Details = () => {
                                 }}
                                 options={cityOptions}
                                 placeholder="Select city where located"
+                                inputErrorMessage={errors.city_id}
                                 isRequired
                             />
                         </div>
@@ -83,6 +123,7 @@ const Details = () => {
                                 }}
                                 placeholder="Select country where located"
                                 options={countryOptions}
+                                inputErrorMessage={errors.country_id}
                                 isRequired
                             />
                         </div>
@@ -97,6 +138,7 @@ const Details = () => {
                                 setInputValue={(value) => {
                                     setCompanyEmail(value);
                                 }}
+                                inputErrorMessage={errors.contact_email}
                                 isRequired
                             />
                         </div>
@@ -108,6 +150,7 @@ const Details = () => {
                                 setInputValue={(value) => {
                                     setCompanyPhone(value);
                                 }}
+                                inputErrorMessage={errors.contact_phone}
                                 isRequired
                             />
                         </div>
@@ -123,6 +166,7 @@ const Details = () => {
                                 }}
                                 options={sizeOptions}
                                 placeholder="Select company size"
+                                inputErrorMessage={errors.company_size_id}
                                 isRequired
                             />
                         </div>
@@ -135,6 +179,7 @@ const Details = () => {
                                 setInputValue={(value) => {
                                     setCompanyFoundedYear(value);
                                 }}
+                                inputErrorMessage={errors.year_founded}
                             />
                         </div>
                     </div>
@@ -147,6 +192,7 @@ const Details = () => {
                                 setNewValue={(value) => {
                                     setAboutCompany(value);
                                 }}
+                                inputErrorMessage={errors.about}
                                 isRequired
                             />
                         </div>

@@ -69,4 +69,13 @@ class User extends Authenticatable
     {
         return $this->user_type === self::TYPE_EMPLOYER;
     }
+
+    /**
+     * Get users company
+     * 
+    */
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
 }

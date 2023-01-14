@@ -89,10 +89,8 @@ class AuthController extends Controller
 
     public function refresh(Request $request)
     {
-        $user = $request->user();
-
         return response()->json([
-            'user' => new UserResource($user)
+            'user' => new UserResource($request->user())
         ]);
     }
 }

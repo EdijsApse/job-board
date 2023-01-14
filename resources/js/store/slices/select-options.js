@@ -36,8 +36,6 @@ const selectOptionsSlice = createSlice({
             state.companySizes = company_sizes.map((item) => {
                 return convertToLabelValue(item, "size");
             });
-
-            console.log(state.companySizes);
         },
     },
 });
