@@ -18,21 +18,27 @@ const Details = () => {
     const isLoading = useSelector((state) => state.employer.isLoading);
     const errors = useSelector((state) => state.employer.errors);
 
-    const [companyName, setCompanyName] = useState(userCompany.name);
-    const [companyEmail, setCompanyEmail] = useState(userCompany.contact_email);
-    const [companyPhone, setCompanyPhone] = useState(userCompany.contact_phone);
-    const [aboutCompany, setAboutCompany] = useState(userCompany.about);
+    const [companyName, setCompanyName] = useState(userCompany.name ?? "");
+    const [companyEmail, setCompanyEmail] = useState(
+        userCompany.contact_email ?? ""
+    );
+    const [companyPhone, setCompanyPhone] = useState(
+        userCompany.contact_phone ?? ""
+    );
+    const [aboutCompany, setAboutCompany] = useState(userCompany.about ?? "");
     const [companyFoundedYear, setCompanyFoundedYear] = useState(
-        userCompany.year_founded
+        userCompany.year_founded ?? ""
     );
     const [companyCategory, setCompanyCategory] = useState(
-        userCompany.category_id
+        userCompany.category_id ?? ""
     );
-    const [companyCity, setCompanyCity] = useState(userCompany.city_id);
+    const [companyCity, setCompanyCity] = useState(userCompany.city_id ?? "");
     const [companyCountry, setCompanyCountry] = useState(
-        userCompany.country_id
+        userCompany.country_id ?? ""
     );
-    const [companySize, setCompanySize] = useState(userCompany.company_size_id);
+    const [companySize, setCompanySize] = useState(
+        userCompany.company_size_id ?? ""
+    );
 
     const countryOptions = useSelector(
         (state) => state.selectOptions.countries
@@ -92,7 +98,7 @@ const Details = () => {
                                     setCompanyCategory(category);
                                 }}
                                 options={categoryOptions}
-                                placeholder="Select comapny category"
+                                placeholder="Select company category"
                                 inputErrorMessage={errors.category_id}
                                 isRequired
                             />

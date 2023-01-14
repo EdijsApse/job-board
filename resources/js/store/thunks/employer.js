@@ -4,7 +4,6 @@ import { authActions } from "../slices/auth";
 import { employerActions } from "../slices/employer";
 
 export const updateCompanyDetails = (companyDetails) => {
-    console.log(companyDetails);
     return (dispatch) => {
         dispatch(employerActions.setLoadingState({ isLoading: true }));
         dispatch(employerActions.setFormErrors({ errors: {} }));

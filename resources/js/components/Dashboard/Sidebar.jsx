@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
 import profileImage from "../assets/test-logo.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 
 const Sidebar = () => {
+    const isEmployer = useSelector((state) => {
+        const user = state.auth.user;
+        return user && user.is_employer;
+    });
     return (
         <aside className="sidebar">
             <div className="dashboard-sidebar">
@@ -24,12 +29,14 @@ const Sidebar = () => {
                             <span>User Dashboard</span>
                         </SidebarLink>
                     </li>
-                    <li>
-                        <SidebarLink to="/dashboard/company">
-                            <i className="fa-solid fa-building"></i>
-                            <span>Company Details</span>
-                        </SidebarLink>
-                    </li>
+                    {isEmployer && (
+                        <li>
+                            <SidebarLink to="/dashboard/company">
+                                <i className="fa-solid fa-building"></i>
+                                <span>Company Details</span>
+                            </SidebarLink>
+                        </li>
+                    )}
                     <li>
                         <a href="">
                             <i className="fa-solid fa-user-tie"></i>

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'refresh']);
-    Route::post('/user/company', [CompanyController::class, 'index']);
+    Route::post('/user/company', [CompanyController::class, 'index'])->middleware('employer');
 });
 
 Route::post('/register', [AuthController::class, 'register']);

@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import Landing from "../pages/Landing";
 import JobList from "../pages/Job/List";
 import JobView from "../pages/Job/View";
@@ -9,32 +7,10 @@ import CreateJob from "../pages/Job/Create";
 import DashboardLayout from "../pages/Dashboard/Layout";
 import DashboardIndex from "../pages/Dashboard/Index";
 import DashboardCompany from "../pages/Dashboard/Employer/Details";
-import { refreshUser } from "../store/thunks/auth";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
-import { useEffect } from "react";
 
-const PrepareApp = ({ children }) => {
-    const authDispatch = useDispatch();
-    const userIsLoaded = useSelector(state => state.auth.userIsLoaded);
-    
-    useEffect(() => {
-        authDispatch(refreshUser());
-    }, []);
-
-    if (!userIsLoaded) {
-        return <LoadingSpinner />;
-    }
-    return children;
-};
-
-const AuthenticatedUserOnly = ({ children }) => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    if (!isAuthenticated) {
-        return <Navigate to="/" />;
-    }
-
-    return children;
-};
+import PrepareApp from "./middlewares/PrepareApp";
+import AuthenticatedUserOnly from "./middlewares/AuthenticatedUserOnly";
+import EmployerOnly from "./middlewares/EmployerOnly";
 
 export default [
     {
@@ -54,7 +30,11 @@ export default [
             },
             {
                 path: "company",
-                element: <DashboardCompany />,
+                element: (
+                    <EmployerOnly>
+                        <DashboardCompany />
+                    </EmployerOnly>
+                ),
             },
         ],
     },
