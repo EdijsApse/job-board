@@ -4,6 +4,7 @@ import BaseFormInput from "../../../components/UI/BaseFormInput";
 import BaseFormSelect from "../../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../../components/UI/BaseTextareaInput";
 import DashboardCard from "../../../components/UI/DashboardCard";
+import ImagePicker from "../../../components/UI/ImagePicker";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import { updateCompanyDetails } from "../../../store/thunks/employer";
 
@@ -40,6 +41,8 @@ const Details = () => {
         userCompany.company_size_id ?? ""
     );
 
+    const [selectedImage, setSelectedImage] = useState("");
+    
     const countryOptions = useSelector(
         (state) => state.selectOptions.countries
     );
@@ -53,18 +56,30 @@ const Details = () => {
 
     const submitCompanyDetailsHandler = (e) => {
         e.preventDefault();
-        const data = {
-            name: companyName,
-            contact_email: companyEmail,
-            contact_phone: companyPhone,
-            year_founded: companyFoundedYear,
-            about: aboutCompany,
-            country_id: companyCountry,
-            city_id: companyCity,
-            category_id: companyCategory,
-            company_size_id: companySize,
-        };
-        dispatch(updateCompanyDetails(data));
+        const formData = new FormData();
+
+        formData.append("name", companyName);
+        formData.append("contact_email", companyEmail);
+        formData.append("contact_phone", companyPhone);
+        formData.append("year_founded", companyFoundedYear);
+        formData.append("about", aboutCompany);
+        formData.append("country_id", companyCountry);
+        formData.append("city_id", companyCity);
+        formData.append("category_id", companyCategory);
+        formData.append("company_size_id", companySize);
+        formData.append("file", selectedImage);
+
+        dispatch(updateCompanyDetails(formData));
+    };
+
+    const fileSelectedHandler = (file) => {
+        setSelectedImage(file);
+    };
+
+    const fileRemovedHandler = () => {
+        if (selectedImage) {
+            setSelectedImage("");
+        }
     };
 
     return (
@@ -77,10 +92,22 @@ const Details = () => {
                     onSubmit={submitCompanyDetailsHandler}
                 >
                     <div className="row">
+                        <div className="col-12">
+                            <ImagePicker
+                                labelText="Company logo"
+                                existingImage={userCompany.logo}
+                                onFileSelected={fileSelectedHandler}
+                                onFileRemoved={fileRemovedHandler}
+                                errorMessage={errors.file}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col-6">
                             <BaseFormInput
                                 id="company-name"
                                 labelName="Company Name"
+                                labelClassName="bold"
                                 value={companyName}
                                 setInputValue={(name) => {
                                     setCompanyName(name);
@@ -93,6 +120,7 @@ const Details = () => {
                             <BaseFormSelect
                                 id="company-category"
                                 labelName="Company Category"
+                                labelClassName="bold"
                                 selected={companyCategory}
                                 selectValue={(category) => {
                                     setCompanyCategory(category);
@@ -109,6 +137,7 @@ const Details = () => {
                             <BaseFormSelect
                                 id="company-city"
                                 labelName="City"
+                                labelClassName="bold"
                                 selected={companyCity}
                                 selectValue={(city) => {
                                     setCompanyCity(city);
@@ -123,6 +152,7 @@ const Details = () => {
                             <BaseFormSelect
                                 id="company-country"
                                 labelName="Country"
+                                labelClassName="bold"
                                 selected={companyCountry}
                                 selectValue={(country) => {
                                     setCompanyCountry(country);
@@ -139,6 +169,7 @@ const Details = () => {
                             <BaseFormInput
                                 id="company-email"
                                 labelName="Contact email"
+                                labelClassName="bold"
                                 type="email"
                                 value={companyEmail}
                                 setInputValue={(value) => {
@@ -152,6 +183,7 @@ const Details = () => {
                             <BaseFormInput
                                 id="company-phone"
                                 labelName="Contact phone"
+                                labelClassName="bold"
                                 value={companyPhone}
                                 setInputValue={(value) => {
                                     setCompanyPhone(value);
@@ -166,6 +198,7 @@ const Details = () => {
                             <BaseFormSelect
                                 id="company-size"
                                 labelName="Company size"
+                                labelClassName="bold"
                                 selected={companySize}
                                 selectValue={(size) => {
                                     setCompanySize(size);
@@ -180,6 +213,7 @@ const Details = () => {
                             <BaseFormInput
                                 id="founded-year"
                                 labelName="Founded year"
+                                labelClassName="bold"
                                 type="number"
                                 value={companyFoundedYear}
                                 setInputValue={(value) => {
@@ -194,6 +228,7 @@ const Details = () => {
                             <BaseTextareaInput
                                 id="company-about"
                                 labelName="About Company"
+                                labelClassName="bold"
                                 value={aboutCompany}
                                 setNewValue={(value) => {
                                     setAboutCompany(value);

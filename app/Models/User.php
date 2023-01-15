@@ -71,6 +71,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Gets full path where user related files will be stored
+     */
+    public function getFileStorageBasePath()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Gets full path where company related files will be stored
+     */
+    public function getCompanyFilesPath()
+    {
+        return $this->getFileStorageBasePath()."/company";
+    }
+
+    /**
      * Get users company
      * 
     */

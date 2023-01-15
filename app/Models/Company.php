@@ -24,7 +24,8 @@ class Company extends Model
         'city_id',
         'category_id',
         'company_size_id',
-        'user_id'
+        'user_id',
+        'logo'
     ];
 
     /**

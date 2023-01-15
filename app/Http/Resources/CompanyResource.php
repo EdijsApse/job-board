@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyResource extends JsonResource
 {
@@ -28,7 +29,8 @@ class CompanyResource extends JsonResource
             'category_id' => $this->category_id,
             'category' => new CategoryResource($this->category),
             'company_size_id' => $this->company_size_id,
-            'companySize' => new CompanySizeResource($this->companySize)
+            'companySize' => new CompanySizeResource($this->companySize),
+            'logo' => $this->logo ? Storage::disk('public')->url($this->logo) : null
         ];
     }
 }
