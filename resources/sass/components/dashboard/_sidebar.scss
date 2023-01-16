@@ -1,4 +1,5 @@
 .dashboard-sidebar {
+    height: 100%;
     padding: $space-8 $space-8;
     overflow-y: auto;
     background-color: #FFF;
@@ -21,10 +22,7 @@
         .profile-info {
             h6 {
                 font-size: 1.2rem;
-                margin-bottom: $space-1;
-            }
-            .sub-title {
-                margin-bottom: 0;
+                margin-bottom: $space-2;
             }
             .btn {
                 height: auto;

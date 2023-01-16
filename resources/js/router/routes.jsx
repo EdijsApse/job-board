@@ -7,6 +7,7 @@ import CreateJob from "../pages/Job/Create";
 import DashboardLayout from "../pages/Dashboard/Layout";
 import DashboardIndex from "../pages/Dashboard/Index";
 import DashboardCompany from "../pages/Dashboard/Employer/Details";
+import DashboardProfile from "../pages/Dashboard/Profile";
 
 import PrepareApp from "./middlewares/PrepareApp";
 import AuthenticatedUserOnly from "./middlewares/AuthenticatedUserOnly";
@@ -35,6 +36,10 @@ export default [
                         <DashboardCompany />
                     </EmployerOnly>
                 ),
+            },
+            {
+                path: "profile",
+                element: <DashboardProfile />,
             },
         ],
     },

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import profileImage from "../assets/test-logo.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 
@@ -7,21 +8,39 @@ const Sidebar = () => {
         const user = state.auth.user;
         return user && user.is_employer;
     });
+
+    const profile = useSelector((state) => {
+        const user = state.auth.user;
+        return user.profile ? user.profile : null;
+    });
+
+    let imgSrc = profileImage;
+
+    if (profile && profile.image) {
+        imgSrc = profile.image;
+    }
+
     return (
         <aside className="sidebar">
             <div className="dashboard-sidebar">
-                <div className="sidebar-profile-widget">
-                    <div className="profile-image">
-                        <img src={profileImage} alt="Profile image" />
+                {profile && (
+                    <div className="sidebar-profile-widget">
+                        <div className="profile-image">
+                            <img src={imgSrc} alt="Profile image" />
+                        </div>
+                        <div className="profile-info">
+                            <h6>
+                                {profile.name} {profile.surname}
+                            </h6>
+                            <NavLink
+                                to="/dashboard/profile"
+                                className="btn btn-primary"
+                            >
+                                Edit Profile
+                            </NavLink>
+                        </div>
                     </div>
-                    <div className="profile-info">
-                        <h6>Name</h6>
-                        <p className="sub-title">Some sub title</p>
-                        <button className="btn btn-primary">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
+                )}
                 <ul>
                     <li>
                         <SidebarLink to="/dashboard">
@@ -38,10 +57,10 @@ const Sidebar = () => {
                         </li>
                     )}
                     <li>
-                        <a href="">
+                        <SidebarLink to="/dashboard/profile">
                             <i className="fa-solid fa-user-tie"></i>
                             <span>Profile</span>
-                        </a>
+                        </SidebarLink>
                     </li>
                     <li>
                         <a href="">

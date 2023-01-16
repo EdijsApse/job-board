@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\CompanySize;
 use App\Models\Country;
+use App\Models\Profile;
+use Illuminate\Support\Arr;
 
 class PublicController extends Controller
 {
@@ -26,6 +28,12 @@ class PublicController extends Controller
             'cities' => new CityCollection(City::get()),
             'categories' => new CategoryCollection(Category::get()),
             'company_sizes' => new CompanySizeCollection(CompanySize::get()),
+            'genders' => Arr::map(Profile::getGenders(), function($label, $value) {
+                return [
+                    'id' => $value,
+                    'name' => $label
+                ];
+            })
         ]);
     }
 }

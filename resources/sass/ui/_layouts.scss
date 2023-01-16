@@ -252,6 +252,13 @@ $navigationHeight: 112.47px;
                 font-size: 1.8rem;
                 margin-bottom: $space-8;
             }
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: $space-8;
+            }
+            .dashboard-page-section {
+                margin-bottom: $space-8 * 2;
+            }
         }
         .dashboard-footer {
             margin-top: auto;

@@ -22,7 +22,8 @@ class UserResource extends JsonResource
             'user_type' => $this->user_type,
             'is_employer' => $this->isEmployer(),
             'is_candidate' => $this->isCandidate(),
-            'company' => new CompanyResource($this->company)
+            'company' => new CompanyResource($this->company),
+            'profile' => new ProfileResource($this->profile)
         ];
     }
 }

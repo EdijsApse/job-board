@@ -48,7 +48,7 @@ class CompanyController extends Controller
             $companyDetails['logo'] = $request->file('file')->store($user->getCompanyFilesPath(), 'public');
         }
 
-        $company = Company::updateOrCreate(
+        Company::updateOrCreate(
             ['user_id' => $user->id],
             $companyDetails
         );

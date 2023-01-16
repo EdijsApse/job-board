@@ -90,7 +90,7 @@ const ImagePicker = ({
                             <i className="fa-solid fa-xmark"></i>
                         </span>
                     )}
-                    <img src={imgSrc} alt="Company Logo" />
+                    <img src={imgSrc} alt={labelText} />
                 </div>
                 <div className="browse-button">
                     <input

@@ -87,11 +87,28 @@ class User extends Authenticatable
     }
 
     /**
+     * Gets full path where profile related files will be stored
+     */
+    public function getProfileFilesPath()
+    {
+        return $this->getFileStorageBasePath()."/profile";
+    }
+
+    /**
      * Get users company
      * 
     */
     public function company()
     {
         return $this->hasOne(Company::class);
+    }
+
+    /**
+     * Get users profile
+     * 
+    */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }
