@@ -1,0 +1,36 @@
+.skills-list-input-wrapper {
+    .input-with-button {
+        display: flex;
+        .btn {
+            min-width: 200px;
+            margin-left: $space-4;
+            height: auto;
+        }
+    }
+
+    .skills-list {
+        display: flex;
+        margin-left: -$space-1;
+        margin-right: -$space-1;
+        li {
+            position: relative;
+            margin: 0 $space-1;
+            margin-top: $space-4;
+            background-color: $cloud-blue;
+            color: $deep-blue;
+            border-radius: 50px;
+            padding: $space-1 $space-4;
+            span {
+                font-size: 0.9rem;
+            }
+            i {
+                position: absolute;
+                color: $dark;
+                top: -3px;
+                right: -3px;
+                cursor: pointer;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

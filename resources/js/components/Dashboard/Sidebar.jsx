@@ -9,6 +9,11 @@ const Sidebar = () => {
         return user && user.is_employer;
     });
 
+    const isCandidate = useSelector((state) => {
+        const user = state.auth.user;
+        return user && user.is_candidate;
+    });
+
     const profile = useSelector((state) => {
         const user = state.auth.user;
         return user.profile ? user.profile : null;
@@ -62,12 +67,14 @@ const Sidebar = () => {
                             <span>Profile</span>
                         </SidebarLink>
                     </li>
-                    <li>
-                        <a href="">
-                            <i className="fa-regular fa-clipboard"></i>
-                            <span>My Resume</span>
-                        </a>
-                    </li>
+                    {isCandidate && (
+                        <li>
+                            <SidebarLink to="/dashboard/resume">
+                                <i className="fa-regular fa-clipboard"></i>
+                                <span>My Resume</span>
+                            </SidebarLink>
+                        </li>
+                    )}
                     <li>
                         <a href="">
                             <i className="fa-solid fa-bullhorn"></i>

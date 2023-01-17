@@ -111,4 +111,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    /**
+     * Get resume basic details
+     * 
+    */
+    public function basicResumeDetails()
+    {
+        return $this->hasOne(BasicResumeDetails::class);
+    }
 }

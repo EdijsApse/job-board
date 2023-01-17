@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidateResumeController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'refresh']);
     Route::post('/user/company', [CompanyController::class, 'index'])->middleware('employer');
     Route::post('/user/profile', [ProfileController::class, 'index']);
+    Route::post('/candidate-resume/basic', [CandidateResumeController::class, 'updateBasicDetails']);
+    Route::get('/candidate-resume/basic', [CandidateResumeController::class, 'getUserBasicResumeDetails']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);
