@@ -6,21 +6,43 @@ const initialState = {
         isLoading: false,
         errors: {},
     },
+    salary: {
+        details: {},
+        isLoading: false,
+        errors: {},
+    },
 };
+
+const BasicDetailsReducers = {
+    setBasicFormErrors(state, { payload }) {
+        state.basic.errors = payload.errors;
+    },
+    setBasicIsLoadingState(state, { payload }) {
+        state.basic.isLoading = payload.isLoading;
+    },
+    setBasicDetails(state, { payload }) {
+        state.basic.details = payload.details;
+    },
+};
+
+const SalaryDetailsReducers = {
+    setSalaryFormErrors(state, { payload }) {
+        state.salary.errors = payload.errors;
+    },
+    setSalaryIsLoadingState(state, { payload }) {
+        state.salary.isLoading = payload.isLoading;
+    },
+    setSalaryDetails(state, { payload }) {
+        state.salary.details = payload.details;
+    },
+}
 
 const resumeSlice = createSlice({
     name: "resume",
     initialState,
     reducers: {
-        setBasicFormErrors(state, { payload }) {
-            state.basic.errors = payload.errors;
-        },
-        setBasicIsLoadingState(state, { payload }) {
-            state.basic.isLoading = payload.isLoading;
-        },
-        setBasicDetails(state, { payload }) {
-            state.basic.details = payload.details;
-        },
+        ...BasicDetailsReducers,
+        ...SalaryDetailsReducers
     },
 });
 

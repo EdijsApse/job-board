@@ -5,14 +5,15 @@ const initialState = {
     cities: [],
     companySizes: [],
     categories: [],
-    genders: []
+    genders: [],
+    salaryTypes: [],
 };
 /**
  * Converts item to format, which is needed for BaseFormSelect component
- * 
- * @param {*} item 
- * @param {*} labelKey 
- * @returns 
+ *
+ * @param {*} item
+ * @param {*} labelKey
+ * @returns
  */
 const convertToLabelValue = (item, labelKey = "name") => {
     return {
@@ -26,7 +27,14 @@ const selectOptionsSlice = createSlice({
     initialState,
     reducers: {
         setSelectOptions(state, { payload }) {
-            const { countries, cities, company_sizes, categories, genders } = payload;
+            const {
+                countries,
+                cities,
+                company_sizes,
+                categories,
+                genders,
+                salary_types,
+            } = payload;
             state.countries = countries.map((item) =>
                 convertToLabelValue(item)
             );
@@ -37,7 +45,8 @@ const selectOptionsSlice = createSlice({
             state.companySizes = company_sizes.map((item) => {
                 return convertToLabelValue(item, "size");
             });
-            state.genders = genders.map((item) =>
+            state.genders = genders.map((item) => convertToLabelValue(item));
+            state.salaryTypes = salary_types.map((item) =>
                 convertToLabelValue(item)
             );
         },

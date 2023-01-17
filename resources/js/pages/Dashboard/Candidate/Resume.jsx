@@ -1,4 +1,5 @@
 import ResumeForm from "../../../components/Dashboard/Candidate/ResumeForm";
+import SalaryForm from "../../../components/Dashboard/Candidate/SalaryForm";
 
 const Resume = () => {
     return (
@@ -7,8 +8,10 @@ const Resume = () => {
             <section className="dashboard-page-section">
                 <ResumeForm />
             </section>
-            
-            // Salary
+            <section className="dashboard-page-section">
+                <SalaryForm />
+            </section>
+
             // Experience
             // Education
         </div>

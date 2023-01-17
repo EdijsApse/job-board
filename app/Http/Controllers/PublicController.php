@@ -6,11 +6,14 @@ use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CityCollection;
 use App\Http\Resources\CompanySizeCollection;
 use App\Http\Resources\CountryCollection;
+use App\Http\Resources\SalaryTypeCollection;
+use App\Http\Resources\SalaryTypeResource;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\CompanySize;
 use App\Models\Country;
 use App\Models\Profile;
+use App\Models\SalaryType;
 use Illuminate\Support\Arr;
 
 class PublicController extends Controller
@@ -33,7 +36,8 @@ class PublicController extends Controller
                     'id' => $value,
                     'name' => $label
                 ];
-            })
+            }),
+            'salary_types' => new SalaryTypeCollection(SalaryType::get())
         ]);
     }
 }
