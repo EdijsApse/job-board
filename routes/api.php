@@ -28,6 +28,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/candidate-resume/salary', [CandidateResumeController::class, 'updateSalaryDetails']);
     Route::get('/candidate-resume/salary', [CandidateResumeController::class, 'getUserSalaryDetails']);
+
+    Route::post('/candidate-resume/experience', [CandidateResumeController::class, 'addExperience']);
+    Route::get('/candidate-resume/experience', [CandidateResumeController::class, 'getExperiences']);
+    Route::put('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'updateExperience']);
+    Route::delete('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'deleteExperience']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

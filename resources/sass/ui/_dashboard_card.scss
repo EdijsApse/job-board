@@ -2,9 +2,68 @@
     padding: $space-6;
     border-radius: $border-radius-sm;
     box-shadow: 0 0px 15px 0 rgb(64 79 104 / 5%);
-    background-color: #FFF;
+    background-color: #fff;
     .card-title {
         font-size: 1.2rem;
         margin-bottom: $space-6;
+    }
+    .resume-section-list {
+        margin-bottom: $space-8;
+        h3 {
+            margin: 0;
+            color: $deep-blue;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .item-with-form {
+            margin-bottom: $space-4;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            .single-section-list-item {
+                display: flex;
+                align-items: center;
+                background-color: $cloud-blue;
+                border-radius: $border-radius-sm;
+                border: 1px solid $cloud-blue;
+                padding: $space-4;
+                cursor: pointer;
+                transition: all 0.3s;
+                .remove-btn {
+                    color: $red;
+                    cursor: pointer;
+                    font-size: 0.8rem;
+                    margin-right: $space-4;
+                }
+                .item-details {
+                    h5 {
+                        font-size: 0.9rem;
+                        margin: 0;
+                    }
+                }
+                .expand-btn {
+                    margin-left: auto;
+                    font-size: 0.8rem;
+                    i {
+                        position: relative;
+                        top: 0px;
+                        transition: all 0.3s;
+                    }
+                }
+                &.item-form-opened {
+                    background-color: #fff;
+                    border-color: $deep-blue;
+                    .expand-btn {
+                        i {
+                            top: -2px;
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+            .dashboard-form {
+                margin-top: $space-4;
+            }
+        }
     }
 }

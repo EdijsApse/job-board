@@ -1,4 +1,3 @@
-import SalaryForm from "../../components/Dashboard/Candidate/SalaryForm";
 import ProfileForm from "../../components/Dashboard/ProfileForm";
 
 const Details = () => {

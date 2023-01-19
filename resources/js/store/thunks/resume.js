@@ -148,3 +148,72 @@ export const updateSalaryDetails = (details) => {
             });
     };
 };
+
+export const getExperiences = () => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setExperienceLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .get("/candidate-resume/experience")
+            .then((res) => {
+                const { experiences } = res.data;
+                dispatch(
+                    resumeActions.setExperiences({
+                        experiences: experiences ? experiences : [],
+                    })
+                );
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't load list of your experiences!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setExperienceLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};
+
+export const deleteExperience = (id) => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setExperienceLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .delete(`/candidate-resume/experience/${id}`)
+            .then((res) => {
+                const { message, success } = res.data;
+                if (success) {
+                    dispatch(alertActions.showSuccessAlert({ message }));
+                    dispatch(resumeActions.removeExperience({ id }));
+                } else {
+                    dispatch(alertActions.showWarningAlert({ message }));
+                }
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't delete experiences!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setExperienceLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};

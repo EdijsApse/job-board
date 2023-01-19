@@ -144,4 +144,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Salary::class);
     }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
 }

@@ -11,6 +11,10 @@ const initialState = {
         isLoading: false,
         errors: {},
     },
+    experience: {
+        items: [],
+        isLoading: false,
+    },
 };
 
 const BasicDetailsReducers = {
@@ -35,14 +39,49 @@ const SalaryDetailsReducers = {
     setSalaryDetails(state, { payload }) {
         state.salary.details = payload.details;
     },
-}
+};
+
+const ExperienceReducers = {
+    addExperience(state, { payload }) {
+        const { experience } = payload;
+        state.experience.items = [...state.experience.items, experience];
+    },
+    removeTempExperience(state, { payload }) {
+        const { temp_id } = payload;
+        state.experience.items = state.experience.items.filter(
+            (exp) => exp.temp_id !== temp_id
+        );
+    },
+    removeExperience(state, { payload }) {
+        const { id } = payload;
+        state.experience.items = state.experience.items.filter(
+            (exp) => exp.id !== id
+        );
+    },
+    replaceExperience(state, { payload }) {
+        const { experience, id } = payload;
+        const index = state.experience.items.findIndex((exp) => exp.id === id);
+        if (index !== -1) {
+            state.experience.items[index] = experience;
+        }
+    },
+    setExperiences(state, { payload }) {
+        const { experiences } = payload;
+        state.experience.items = experiences;
+    },
+    setExperienceLoadingState(state, { payload }) {
+        const { isLoading } = payload;
+        state.experience.isLoading = isLoading;
+    },
+};
 
 const resumeSlice = createSlice({
     name: "resume",
     initialState,
     reducers: {
         ...BasicDetailsReducers,
-        ...SalaryDetailsReducers
+        ...SalaryDetailsReducers,
+        ...ExperienceReducers,
     },
 });
 

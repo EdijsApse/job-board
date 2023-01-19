@@ -1,3 +1,4 @@
+import ExperienceSection from "../../../components/Dashboard/Candidate/ExperienceSection";
 import ResumeForm from "../../../components/Dashboard/Candidate/ResumeForm";
 import SalaryForm from "../../../components/Dashboard/Candidate/SalaryForm";
 
@@ -11,8 +12,10 @@ const Resume = () => {
             <section className="dashboard-page-section">
                 <SalaryForm />
             </section>
-
-            // Experience
+            <section className="dashboard-page-section">
+                <ExperienceSection />
+            </section>
+            
             // Education
         </div>
     );
