@@ -1,4 +1,5 @@
 import axios from "../../axios";
+import { axiosErrorResponseHandler } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { resumeActions } from "../slices/resume";
 
@@ -52,23 +53,23 @@ export const updateResumeBasicDetails = (details) => {
                 );
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            resumeActions.setBasicFormErrors({
+                                errors: formErrors,
+                            })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        resumeActions.setBasicFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
+            })
+            .finally(() => {
                 dispatch(
                     resumeActions.setBasicIsLoadingState({ isLoading: false })
                 );
@@ -114,7 +115,7 @@ export const updateSalaryDetails = (details) => {
                 if (success) {
                     dispatch(
                         resumeActions.setSalaryDetails({
-                            details
+                            details,
                         })
                     );
                     dispatch(alertActions.showSuccessAlert({ message }));
@@ -124,23 +125,23 @@ export const updateSalaryDetails = (details) => {
                 );
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            resumeActions.setSalaryFormErrors({
+                                errors: formErrors,
+                            })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        resumeActions.setSalaryFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
+            })
+            .finally(() => {
                 dispatch(
                     resumeActions.setSalaryIsLoadingState({ isLoading: false })
                 );

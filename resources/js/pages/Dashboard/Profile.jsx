@@ -8,10 +8,6 @@ const Details = () => {
                 <h1 className="page-title">Profile Details</h1>
                 <ProfileForm />
             </section>
-            <section className="dashboard-page-section">
-                <h2 className="section-title">Salary Details</h2>
-                <SalaryForm />
-            </section>
         </div>
     );
 };

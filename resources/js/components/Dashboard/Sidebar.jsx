@@ -4,22 +4,20 @@ import profileImage from "../assets/test-logo.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 
 const Sidebar = () => {
-    const isEmployer = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_employer;
-    });
+    const user = useSelector(state => {
+        return state.auth.user;
+    })
 
-    const isCandidate = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_candidate;
-    });
+    const isEmployer = user && user.is_employer;
+    const isCandidate = user && user.is_candidate;
 
-    const profile = useSelector((state) => {
-        const user = state.auth.user;
-        return user.profile ? user.profile : null;
-    });
-
+    let profile = null;
     let imgSrc = profileImage;
+    const userType = user ? user.user_type_name : '';
+
+    if (user && user.profile) {
+        profile = user.profile;
+    }
 
     if (profile && profile.image) {
         imgSrc = profile.image;
@@ -37,6 +35,7 @@ const Sidebar = () => {
                             <h6>
                                 {profile.name} {profile.surname}
                             </h6>
+                            <p className="user-type-text">{userType}</p>
                             <NavLink
                                 to="/dashboard/profile"
                                 className="btn btn-primary"

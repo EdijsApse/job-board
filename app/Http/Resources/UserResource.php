@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'user_type' => $this->user_type,
+            'user_type_name' => $this->getUserTypeName(),
             'is_employer' => $this->isEmployer(),
             'is_candidate' => $this->isCandidate(),
             'company' => new CompanyResource($this->company),

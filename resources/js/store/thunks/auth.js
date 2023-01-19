@@ -1,6 +1,7 @@
 import { authActions, storageTokenKey } from "../slices/auth";
 import axios from "../../axios";
 import { alertActions } from "../slices/alert";
+import { axiosErrorResponseHandler } from "../../helpers";
 
 export const register = (payload) => {
     return async (dispatch) => {
@@ -25,23 +26,21 @@ export const register = (payload) => {
                 }
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            authActions.setRegisterFormErrors({
+                                errors: formErrors,
+                            })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        authActions.setRegisterFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
             })
             .finally(() => {
                 dispatch(authActions.changeLoadingState({ isLoading: false }));
@@ -78,23 +77,21 @@ export const login = (payload) => {
                 }
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            authActions.setLoginFormErrors({
+                                errors: formErrors,
+                            })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        authActions.setLoginFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
             })
             .finally(() => {
                 dispatch(authActions.changeLoadingState({ isLoading: false }));

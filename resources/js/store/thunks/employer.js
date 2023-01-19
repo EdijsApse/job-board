@@ -1,4 +1,5 @@
 import axios from "../../axios";
+import { axiosErrorResponseHandler } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { authActions } from "../slices/auth";
 import { employerActions } from "../slices/employer";
@@ -26,23 +27,23 @@ export const updateCompanyDetails = (companyDetails) => {
                 dispatch(employerActions.setLoadingState({ isLoading: false }));
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            employerActions.setFormErrors({
+                                errors: formErrors,
+                            })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        employerActions.setFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
+            })
+            .finally(() => {
                 dispatch(employerActions.setLoadingState({ isLoading: false }));
             });
     };

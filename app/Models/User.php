@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -92,6 +91,22 @@ class User extends Authenticatable
     public function getProfileFilesPath()
     {
         return $this->getFileStorageBasePath()."/profile";
+    }
+
+    /**
+     * Get name of User type
+     */
+    public function getUserTypeName()
+    {
+        if ($this->user_type === self::TYPE_CANDIDATE) {
+            return 'candidate';
+        }
+
+        if ($this->user_type === self::TYPE_EMPLOYER) {
+            return 'employer';
+        }
+
+        return '';
     }
 
     /**

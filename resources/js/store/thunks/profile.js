@@ -1,4 +1,5 @@
 import axios from "../../axios";
+import { axiosErrorResponseHandler } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { authActions } from "../slices/auth";
 import { profileActions } from "../slices/profile";
@@ -17,23 +18,21 @@ export const updateProfileDetails = (details) => {
                 dispatch(profileActions.setLoadingState({ isLoading: false }));
             })
             .catch((error) => {
-                const { errors } = error.response.data;
-                const errorBag = {};
-                if (errors) {
-                    for (const input in errors) {
-                        errorBag[input] = errors[input][0];
+                axiosErrorResponseHandler(
+                    error,
+                    (formErrors) => {
+                        dispatch(
+                            profileActions.setFormErrors({ errors: formErrors })
+                        );
+                    },
+                    (message) => {
+                        dispatch(
+                            alertActions.showWarningAlert({ message: message })
+                        );
                     }
-                    dispatch(
-                        profileActions.setFormErrors({ errors: errorBag })
-                    );
-                } else {
-                    dispatch(
-                        alertActions.showWarningAlert({
-                            message:
-                                "Ooops.... Something went wrong! Please try again later!",
-                        })
-                    );
-                }
+                );
+            })
+            .finally(() => {
                 dispatch(profileActions.setLoadingState({ isLoading: false }));
             });
     };

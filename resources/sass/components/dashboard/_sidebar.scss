@@ -22,6 +22,11 @@
         .profile-info {
             h6 {
                 font-size: 1.2rem;
+                margin-bottom: 0;
+            }
+            .user-type-text {
+                font-size: 0.8rem;
+                text-transform: capitalize;
                 margin-bottom: $space-2;
             }
             .btn {
