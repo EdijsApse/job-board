@@ -51,7 +51,6 @@ const SalaryForm = () => {
     return (
         <DashboardCard className="relative">
             {isLoading && <LoadingSpinner />}
-            <h2 className="card-title">Salary Details</h2>
             <form className="dashboard-form" onSubmit={submitSalaryHandler}>
                 <div className="row">
                     <div className="col-6">

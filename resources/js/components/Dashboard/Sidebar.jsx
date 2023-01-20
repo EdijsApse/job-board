@@ -1,19 +1,32 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import profileImage from "../assets/test-logo.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 
 const Sidebar = () => {
-    const user = useSelector(state => {
+    const user = useSelector((state) => {
         return state.auth.user;
-    })
+    });
+
+    const location = useLocation();
+
+    const [isResumeDropdownVisible, setIsResumeDropdownVisible] =
+        useState(false);
+
+    useEffect(() => {
+        if (!location.pathname.includes("/resume")) {
+            setIsResumeDropdownVisible(false);
+        }
+    }, [location]);
 
     const isEmployer = user && user.is_employer;
     const isCandidate = user && user.is_candidate;
 
     let profile = null;
     let imgSrc = profileImage;
-    const userType = user ? user.user_type_name : '';
+    const userType = user ? user.user_type_name : "";
 
     if (user && user.profile) {
         profile = user.profile;
@@ -22,6 +35,12 @@ const Sidebar = () => {
     if (profile && profile.image) {
         imgSrc = profile.image;
     }
+
+    const toggleResumeDropdownVisibility = () => {
+        setIsResumeDropdownVisible((oldVisibility) => {
+            return !oldVisibility;
+        });
+    };
 
     return (
         <aside className="sidebar">
@@ -68,10 +87,37 @@ const Sidebar = () => {
                     </li>
                     {isCandidate && (
                         <li>
-                            <SidebarLink to="/dashboard/resume">
+                            <button
+                                className={`btn secondary ${
+                                    isResumeDropdownVisible ? "active" : ""
+                                }`}
+                                onClick={toggleResumeDropdownVisibility}
+                            >
                                 <i className="fa-regular fa-clipboard"></i>
                                 <span>My Resume</span>
-                            </SidebarLink>
+                            </button>
+                            {isResumeDropdownVisible && (
+                                <ul className="dropdown-links">
+                                    <li>
+                                        <SidebarLink to="/dashboard/resume">
+                                            <i className="fa-regular fa-clipboard"></i>
+                                            <span>Basic Details</span>
+                                        </SidebarLink>
+                                    </li>
+                                    <li>
+                                        <SidebarLink to="/dashboard/resume/salary">
+                                            <i className="fa-solid fa-coins"></i>
+                                            <span>Salary</span>
+                                        </SidebarLink>
+                                    </li>
+                                    <li>
+                                        <SidebarLink to="/dashboard/resume/experiences">
+                                            <i className="fa-solid fa-briefcase"></i>
+                                            <span>Experiences</span>
+                                        </SidebarLink>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
                     )}
                     <li>

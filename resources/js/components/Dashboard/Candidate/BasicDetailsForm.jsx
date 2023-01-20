@@ -11,7 +11,7 @@ import DashboardCard from "../../UI/DashboardCard";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import SkillsListInput from "./SkillsListInput";
 
-const ResumeForm = () => {
+const BasicDetailsForm = () => {
     const errors = useSelector((state) => state.resume.basic.errors);
     const isLoading = useSelector((state) => state.resume.basic.isLoading);
     const details = useSelector((state) => state.resume.basic.details);
@@ -73,7 +73,6 @@ const ResumeForm = () => {
     return (
         <DashboardCard className="relative">
             {isLoading && <LoadingSpinner />}
-            <h2 className="card-title">Basic Details</h2>
             <form
                 className="dashboard-form"
                 onSubmit={submitBasicDetailsHandler}
@@ -158,4 +157,4 @@ const ResumeForm = () => {
         </DashboardCard>
     );
 };
-export default ResumeForm;
+export default BasicDetailsForm;

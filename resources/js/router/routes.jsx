@@ -8,7 +8,9 @@ import DashboardLayout from "../pages/Dashboard/Layout";
 import DashboardIndex from "../pages/Dashboard/Index";
 import DashboardCompany from "../pages/Dashboard/Employer/Details";
 import DashboardProfile from "../pages/Dashboard/Profile";
-import DashboardResume from "../pages/Dashboard/Candidate/Resume";
+import BasicDetails from "../pages/Dashboard/Candidate/BasicDetails";
+import Experiences from "../pages/Dashboard/Candidate/Experiences";
+import Salary from "../pages/Dashboard/Candidate/Salary";
 
 import PrepareApp from "./middlewares/PrepareApp";
 import AuthenticatedUserOnly from "./middlewares/AuthenticatedUserOnly";
@@ -47,7 +49,23 @@ export default [
                 path: "resume",
                 element: (
                     <CandidateOnly>
-                        <DashboardResume />
+                        <BasicDetails />
+                    </CandidateOnly>
+                ),
+            },
+            {
+                path: "resume/salary",
+                element: (
+                    <CandidateOnly>
+                        <Salary />
+                    </CandidateOnly>
+                ),
+            },
+            {
+                path: "resume/experiences",
+                element: (
+                    <CandidateOnly>
+                        <Experiences />
                     </CandidateOnly>
                 ),
             },

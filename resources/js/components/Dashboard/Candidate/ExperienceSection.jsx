@@ -40,7 +40,6 @@ const ExperienceForm = () => {
     return (
         <DashboardCard className="relative">
             {isLoading && <LoadingSpinner />}
-            <h2 className="card-title">Experiences</h2>
             <div className="resume-section-list">
                 {experiences.length === 0 && <h3>No experiences added</h3>}
                 {experiences.map((exp) => (

@@ -2,7 +2,7 @@
     height: 100%;
     padding: $space-8 $space-8;
     overflow-y: auto;
-    background-color: #FFF;
+    background-color: #fff;
     box-shadow: 4px 0px 6px 0px $bright-gray;
     border-right: 1px solid $bright-gray;
     .sidebar-profile-widget {
@@ -39,13 +39,20 @@
     ul {
         li {
             margin-bottom: $space-1;
-            a {
+            a,
+            .btn {
                 display: block;
+                text-align: left;
+                width: 100%;
                 padding: $space-4 - $space-1 $space-6;
                 color: $gray;
                 text-decoration: none;
                 border-radius: $border-radius-sm;
                 transition: all 0.3s;
+                i {
+                    width: 15px;
+                    text-align: center;
+                }
                 span {
                     margin-left: $space-6;
                 }
@@ -56,6 +63,22 @@
                 &.active {
                     background-color: $darker-cloud-blue;
                     color: $deep-blue;
+                }
+            }
+            ul {
+                margin-left: 3rem;
+                li {
+                    margin: $space-2 0;
+                    font-size: 0.8rem;
+                    a {
+                        padding: $space-1;
+                        &.active {
+                            background-color: transparent;
+                        }
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
                 }
             }
         }
