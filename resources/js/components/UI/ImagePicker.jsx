@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useCallback } from "react";
 import { useReducer, useRef } from "react";
 import imagePlaceholder from "../assets/test-logo.png";
 
@@ -79,6 +81,10 @@ const ImagePicker = ({
     } else if (existingImage) {
         imgSrc = existingImage;
     }
+
+    useEffect(() => {
+        dispatch({ type: RESET_FILE_INPUT_STATE });
+    }, [existingImage, dispatch]);
 
     return (
         <div className="image-input-wrapper">

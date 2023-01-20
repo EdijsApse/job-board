@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../store/slices/auth";
 import { register } from "../../store/thunks/auth";
 import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
