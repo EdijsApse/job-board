@@ -5,6 +5,7 @@ use App\Http\Controllers\CandidateResumeController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Resume\EducationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/candidate-resume/experience', [CandidateResumeController::class, 'getExperiences']);
     Route::put('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'updateExperience']);
     Route::delete('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'deleteExperience']);
+
+    Route::get('/candidate-resume/education', [EducationController::class, 'index']);
+    Route::post('/candidate-resume/education', [EducationController::class, 'store']);
+    Route::put('/candidate-resume/education/{id}', [EducationController::class, 'update']);
+    Route::delete('/candidate-resume/education/{id}', [EducationController::class, 'destroy']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

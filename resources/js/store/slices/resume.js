@@ -15,6 +15,10 @@ const initialState = {
         items: [],
         isLoading: false,
     },
+    education: {
+        items: [],
+        isLoading: false,
+    },
 };
 
 const BasicDetailsReducers = {
@@ -75,6 +79,40 @@ const ExperienceReducers = {
     },
 };
 
+const EducationReducers = {
+    addEducation(state, { payload }) {
+        const { education } = payload;
+        state.education.items = [...state.education.items, education];
+    },
+    removeEducation(state, { payload }) {
+        const { temp_id, id } = payload;
+        if (temp_id) {
+            state.education.items = state.education.items.filter(
+                (edu) => edu.temp_id !== temp_id
+            );
+        } else {
+            state.education.items = state.education.items.filter(
+                (edu) => edu.id !== id
+            );
+        }
+    },
+    replaceEducation(state, { payload }) {
+        const { education, id } = payload;
+        const index = state.education.items.findIndex((edu) => edu.id === id);
+        if (index !== -1) {
+            state.education.items[index] = education;
+        }
+    },
+    setEducations(state, { payload }) {
+        const { educations } = payload;
+        state.education.items = educations;
+    },
+    setEducationLoadingState(state, { payload }) {
+        const { isLoading } = payload;
+        state.education.isLoading = isLoading;
+    },
+};
+
 const resumeSlice = createSlice({
     name: "resume",
     initialState,
@@ -82,6 +120,7 @@ const resumeSlice = createSlice({
         ...BasicDetailsReducers,
         ...SalaryDetailsReducers,
         ...ExperienceReducers,
+        ...EducationReducers,
     },
 });
 

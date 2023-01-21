@@ -217,3 +217,72 @@ export const deleteExperience = (id) => {
             });
     };
 };
+
+export const getEducations = () => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setEducationLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .get("/candidate-resume/education")
+            .then((res) => {
+                const { educations } = res.data;
+                dispatch(
+                    resumeActions.setEducations({
+                        educations: educations ?? [],
+                    })
+                );
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't load list of your educations!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setEducationLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};
+
+export const deleteEducation = (id) => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setEducationLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .delete(`/candidate-resume/education/${id}`)
+            .then((res) => {
+                const { message, success } = res.data;
+                if (success) {
+                    dispatch(alertActions.showSuccessAlert({ message }));
+                    dispatch(resumeActions.removeEducation({ id }));
+                } else {
+                    dispatch(alertActions.showWarningAlert({ message }));
+                }
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't delete educations!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setEducationLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};

@@ -116,6 +116,12 @@ const Sidebar = () => {
                                             <span>Experiences</span>
                                         </SidebarLink>
                                     </li>
+                                    <li>
+                                        <SidebarLink to="/dashboard/resume/educations">
+                                            <i className="fa-solid fa-graduation-cap"></i>
+                                            <span>Educations</span>
+                                        </SidebarLink>
+                                    </li>
                                 </ul>
                             )}
                         </li>
