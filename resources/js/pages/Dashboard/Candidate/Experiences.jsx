@@ -1,4 +1,4 @@
-import ExperienceSection from "../../../components/Dashboard/Candidate/ExperienceSection";
+import ExperienceSection from "../../../components/Dashboard/Candidate/Experience/List";
 
 const Experiences = () => {
     return (

@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CandidateResumeController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Resume\BasicDetailsController;
 use App\Http\Controllers\Resume\EducationController;
+use App\Http\Controllers\Resume\ExperienceController;
+use App\Http\Controllers\Resume\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,16 +26,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/company', [CompanyController::class, 'index'])->middleware('employer');
     Route::post('/user/profile', [ProfileController::class, 'index']);
 
-    Route::post('/candidate-resume/basic', [CandidateResumeController::class, 'updateBasicDetails']);
-    Route::get('/candidate-resume/basic', [CandidateResumeController::class, 'getUserBasicResumeDetails']);
+    Route::post('/candidate-resume/basic', [BasicDetailsController::class, 'store']);
+    Route::get('/candidate-resume/basic', [BasicDetailsController::class, 'index']);
 
-    Route::post('/candidate-resume/salary', [CandidateResumeController::class, 'updateSalaryDetails']);
-    Route::get('/candidate-resume/salary', [CandidateResumeController::class, 'getUserSalaryDetails']);
+    Route::post('/candidate-resume/salary', [SalaryController::class, 'store']);
+    Route::get('/candidate-resume/salary', [SalaryController::class, 'index']);
 
-    Route::post('/candidate-resume/experience', [CandidateResumeController::class, 'addExperience']);
-    Route::get('/candidate-resume/experience', [CandidateResumeController::class, 'getExperiences']);
-    Route::put('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'updateExperience']);
-    Route::delete('/candidate-resume/experience/{id}', [CandidateResumeController::class, 'deleteExperience']);
+    Route::post('/candidate-resume/experience', [ExperienceController::class, 'store']);
+    Route::get('/candidate-resume/experience', [ExperienceController::class, 'index']);
+    Route::put('/candidate-resume/experience/{id}', [ExperienceController::class, 'update']);
+    Route::delete('/candidate-resume/experience/{id}', [ExperienceController::class, 'destroy']);
 
     Route::get('/candidate-resume/education', [EducationController::class, 'index']);
     Route::post('/candidate-resume/education', [EducationController::class, 'store']);

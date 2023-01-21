@@ -1,14 +1,14 @@
 import { useState } from "react";
-import BaseFormInput from "../../UI/BaseFormInput";
-import BaseTextareaInput from "../../UI/BaseTextareaInput";
-import axios from "../../../axios";
+import BaseFormInput from "../../../UI/BaseFormInput";
+import BaseTextareaInput from "../../../UI/BaseTextareaInput";
+import axios from "../../../../axios";
 import { useDispatch } from "react-redux";
-import { alertActions } from "../../../store/slices/alert";
-import { axiosErrorResponseHandler } from "../../../helpers";
-import { resumeActions } from "../../../store/slices/resume";
-import LoadingSpinner from "../../UI/LoadingSpinner";
+import { alertActions } from "../../../../store/slices/alert";
+import { axiosErrorResponseHandler } from "../../../../helpers";
+import { resumeActions } from "../../../../store/slices/resume";
+import LoadingSpinner from "../../../UI/LoadingSpinner";
 
-const SingleExperienceForm = ({ experience, onCloseForm }) => {
+const Form = ({ experience, onCloseForm }) => {
     const { temp_id, id } = experience;
     const [employer, setEmployer] = useState(experience.employer);
     const [jobtitle, setJobtitle] = useState(experience.jobtitle);
@@ -193,4 +193,4 @@ const SingleExperienceForm = ({ experience, onCloseForm }) => {
     );
 };
 
-export default SingleExperienceForm;
+export default Form;

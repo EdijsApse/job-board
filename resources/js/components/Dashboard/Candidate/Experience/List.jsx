@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resumeActions } from "../../../store/slices/resume";
-import { deleteExperience, getExperiences } from "../../../store/thunks/resume";
-import DashboardCard from "../../UI/DashboardCard";
-import LoadingSpinner from "../../UI/LoadingSpinner";
-import ExperienceListItem from "./ExperienceListItem";
+import { resumeActions } from "../../../../store/slices/resume";
+import { deleteExperience, getExperiences } from "../../../../store/thunks/resume";
+import DashboardCard from "../../../UI/DashboardCard";
+import LoadingSpinner from "../../../UI/LoadingSpinner";
+import Item from "./Item";
 
-const ExperienceForm = () => {
+const List = () => {
     const isLoading = useSelector((state) => state.resume.experience.isLoading);
     const experiences = useSelector((state) => state.resume.experience.items);
     const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const ExperienceForm = () => {
             <div className="resume-section-list">
                 {experiences.length === 0 && <h3>No experiences added</h3>}
                 {experiences.map((exp) => (
-                    <ExperienceListItem
+                    <Item
                         experience={exp}
                         key={exp.id ? exp.id : exp.temp_id}
                         onRemoveExp={removeExpHandler.bind(null, exp.temp_id)}
@@ -61,4 +61,4 @@ const ExperienceForm = () => {
     );
 };
 
-export default ExperienceForm;
+export default List;

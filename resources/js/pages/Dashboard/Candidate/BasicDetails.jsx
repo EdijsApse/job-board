@@ -7,8 +7,6 @@ const BasicDetails = () => {
             <section className="dashboard-page-section">
                 <BasicDetailsForm />
             </section>
-            
-            // Education
         </div>
     );
 };

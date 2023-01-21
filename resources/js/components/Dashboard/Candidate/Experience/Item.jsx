@@ -1,7 +1,7 @@
 import { useState } from "react";
-import SingleExperienceForm from "./SingleExperienceForm";
+import Form from "./Form";
 
-const ExperienceListItem = ({ experience, onRemoveExp, onDeleteExp }) => {
+const Item = ({ experience, onRemoveExp, onDeleteExp }) => {
     const [formIsVisible, setFormIsVisible] = useState(
         experience.openFormByDefault ?? false
     );
@@ -47,7 +47,7 @@ const ExperienceListItem = ({ experience, onRemoveExp, onDeleteExp }) => {
                 </div>
             </div>
             {formIsVisible && (
-                <SingleExperienceForm
+                <Form
                     experience={experience}
                     onCloseForm={closeForm}
                 />
@@ -56,4 +56,4 @@ const ExperienceListItem = ({ experience, onRemoveExp, onDeleteExp }) => {
     );
 };
 
-export default ExperienceListItem;
+export default Item;
