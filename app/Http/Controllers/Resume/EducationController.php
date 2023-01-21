@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\EducationResource;
 use App\Models\Education;
+use Illuminate\Support\Facades\Gate;
 
 class EducationController extends Controller
 {
@@ -16,6 +17,9 @@ class EducationController extends Controller
      */
     public function index(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
 
         $user = $request->user();
 
@@ -32,6 +36,10 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
 
         $validated = $request->validate([
@@ -57,17 +65,12 @@ class EducationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Education $education)
     {
-        $user = $request->user();
 
-        $edu = Education::where(['user_id' => $user->id, 'id' => $id])->first();
-
-        if (!$edu) {
-            return response()->json([
-                'message' => 'Education not found!'
-            ], 404);
-        }
+        if (Gate::denies('edit-education', $education)) {
+            return response()->json(['message' => 'You cannot edit this resource!'], 403);
+        };
 
         $validated = $request->validate([
             'school' => 'required',
@@ -76,12 +79,12 @@ class EducationController extends Controller
             'summary' => 'nullable'
         ]);
 
-        $wasUpdated = $edu->update($validated);
+        $wasUpdated = $education->update($validated);
 
         return response()->json([
             'success' => $wasUpdated,
             'message' => $wasUpdated === true ? 'Education updated!' : 'Couldnt update education!',
-            'education' => new EducationResource($edu)
+            'education' => new EducationResource($education)
         ]);
     }
 
@@ -91,19 +94,13 @@ class EducationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Education $education)
     {
-        $user = $request->user();
+        if (Gate::denies('edit-education', $education)) {
+            return response()->json(['message' => 'You cannot edit this resource!'], 403);
+        };
 
-        $edu = Education::where(['id' => $id, 'user_id' => $user->id])->first();
-
-        if (!$edu) {
-            return response()->json([
-                'message' => 'Education not found!'
-            ], 404);
-        }
-
-        $wasDeleted = $edu->delete();
+        $wasDeleted = $education->delete();
 
         return response()->json([
             'success' => $wasDeleted,

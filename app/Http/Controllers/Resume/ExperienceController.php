@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\ExperienceResource;
 use App\Models\Experience;
+use Illuminate\Support\Facades\Gate;
 
 class ExperienceController extends Controller
 {
@@ -16,6 +17,10 @@ class ExperienceController extends Controller
      */
     public function index(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
 
         return response()->json([
@@ -31,6 +36,10 @@ class ExperienceController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
 
         $validated = $request->validate([
@@ -57,17 +66,12 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Experience $experience)
     {
-        $user = $request->user();
 
-        $exp = Experience::where(['id' => $id, 'user_id' => $user->id])->first();
-
-        if (!$exp) {
-            return response()->json([
-                'message' => 'Experience not found!'
-            ], 404);
-        }
+        if (Gate::denies('edit-experience', $experience)) {
+            return response()->json(['message' => 'You cannot edit this resource!'], 403);
+        };
 
         $validated = $request->validate([
             'jobtitle' => 'required',
@@ -77,12 +81,12 @@ class ExperienceController extends Controller
             'duties' => 'nullable'
         ]);
 
-        $wasUpdated = $exp->update($validated);
+        $wasUpdated = $experience->update($validated);
 
         return response()->json([
             'success' => $wasUpdated,
             'message' => $wasUpdated === true ? 'Experience updated!' : 'Couldnt update experience!',
-            'experience' => new ExperienceResource($exp)
+            'experience' => new ExperienceResource($experience)
         ]);
     }
 
@@ -92,19 +96,13 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Experience $experience)
     {
-        $user = $request->user();
+        if (Gate::denies('edit-experience', $experience)) {
+            return response()->json(['message' => 'You cannot edit this resource!'], 403);
+        };
 
-        $exp = Experience::where(['id' => $id, 'user_id' => $user->id])->first();
-
-        if (!$exp) {
-            return response()->json([
-                'message' => 'Experience not found!'
-            ], 404);
-        }
-
-        $wasDeleted = $exp->delete();
+        $wasDeleted = $experience->delete();
 
         return response()->json([
             'success' => $wasDeleted,

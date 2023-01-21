@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\SalaryResource;
 use App\Models\Salary;
+use Illuminate\Support\Facades\Gate;
 
 class SalaryController extends Controller
 {
@@ -16,6 +17,10 @@ class SalaryController extends Controller
      */
     public function index(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
         $salary = $user->salary;
 
@@ -36,6 +41,10 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
 
         $validated = $request->validate([

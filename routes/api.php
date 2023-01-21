@@ -26,21 +26,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/company', [CompanyController::class, 'index'])->middleware('employer');
     Route::post('/user/profile', [ProfileController::class, 'index']);
 
-    Route::post('/candidate-resume/basic', [BasicDetailsController::class, 'store']);
-    Route::get('/candidate-resume/basic', [BasicDetailsController::class, 'index']);
+    Route::prefix('candidate-resume')->group(function () {
+        Route::apiResource('/basic', BasicDetailsController::class)
+        ->only(['index', 'store']);
 
-    Route::post('/candidate-resume/salary', [SalaryController::class, 'store']);
-    Route::get('/candidate-resume/salary', [SalaryController::class, 'index']);
+        Route::apiResource('/salary', SalaryController::class)
+        ->only(['index', 'store']);
 
-    Route::post('/candidate-resume/experience', [ExperienceController::class, 'store']);
-    Route::get('/candidate-resume/experience', [ExperienceController::class, 'index']);
-    Route::put('/candidate-resume/experience/{id}', [ExperienceController::class, 'update']);
-    Route::delete('/candidate-resume/experience/{id}', [ExperienceController::class, 'destroy']);
+        Route::apiResource('/experience', ExperienceController::class)
+        ->only(['index', 'update', 'store', 'destroy'])->missing(function () {
+            return response()->json(['message' => 'Resource is not found!'], 404);
+        });
 
-    Route::get('/candidate-resume/education', [EducationController::class, 'index']);
-    Route::post('/candidate-resume/education', [EducationController::class, 'store']);
-    Route::put('/candidate-resume/education/{id}', [EducationController::class, 'update']);
-    Route::delete('/candidate-resume/education/{id}', [EducationController::class, 'destroy']);
+        Route::apiResource('/education', EducationController::class)
+        ->only(['index', 'update', 'store', 'destroy'])->missing(function () {
+            return response()->json(['message' => 'Resource is not found!'], 404);
+        });
+    });
 });
 
 Route::post('/register', [AuthController::class, 'register']);

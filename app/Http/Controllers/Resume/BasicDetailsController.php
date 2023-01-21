@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Resume;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\BasicResumeDetailsResource;
 use App\Models\BasicResumeDetails;
 
@@ -17,6 +17,11 @@ class BasicDetailsController extends Controller
      */
     public function index(Request $request)
     {
+
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
         $details = $user->basicResumeDetails;
 
@@ -37,6 +42,11 @@ class BasicDetailsController extends Controller
      */
     public function store(Request $request)
     {
+        
+        if (Gate::denies('update-resume')) {
+            return response()->json(['message' => 'You must be authenticated as Candidate for this action!'], 403);
+        };
+
         $user = $request->user();
 
         $validated = $request->validate([
