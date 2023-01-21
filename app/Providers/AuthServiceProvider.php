@@ -32,6 +32,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isCandidate();
         });
 
+        Gate::define('update-company', function (User $user) {
+            return $user->isEmployer();
+        });
+
         Gate::define('edit-education', function (User $user, Education $education) {
             return $education->user_id === $user->id;
         });

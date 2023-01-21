@@ -5,16 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
     /**
-     * Creates or Updates company details for current user
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function store(Request $request)
     {
+
+        if (Gate::denies('update-company')) {
+            return response()->json(['message' => 'You must be authenticated as Employer for this action!'], 403);
+        };
 
         $user = $request->user();
         $validatedDate = $request->validate(

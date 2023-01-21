@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'refresh']);
-    Route::post('/user/company', [CompanyController::class, 'index'])->middleware('employer');
+    Route::post('/user/company', [CompanyController::class, 'store']);
     Route::post('/user/profile', [ProfileController::class, 'index']);
 
     Route::prefix('candidate-resume')->group(function () {
