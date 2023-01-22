@@ -141,7 +141,7 @@ const Form = ({ education, onCloseForm }) => {
                 <div className="col-6">
                     <BaseFormInput
                         id="edu-year"
-                        labelName="Year"
+                        labelName="Graduation Year"
                         labelClassName="bold"
                         value={year}
                         setInputValue={(year) => {

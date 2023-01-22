@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             CompanySizeSeeder::class,
             CountrySeeder::class,
-            SalaryTypeSeeder::class
+            SalaryTypeSeeder::class,
+            LanguageSeeder::class,
+            LanguageLevelSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();
