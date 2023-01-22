@@ -158,4 +158,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Education::class);
     }
+
+    /**
+     * Get user language records
+     * 
+    */
+    public function resumeLanguages()
+    {
+        return $this->hasMany(ResumeLanguage::class);
+    }
 }

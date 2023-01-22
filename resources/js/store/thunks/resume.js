@@ -286,3 +286,72 @@ export const deleteEducation = (id) => {
             });
     };
 };
+
+export const getResumeLanguages = () => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setLanguageLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .get("/candidate-resume/language")
+            .then((res) => {
+                const { resume_languages } = res.data;
+                dispatch(
+                    resumeActions.setLanguages({
+                        languages: resume_languages ?? [],
+                    })
+                );
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't load list of your languages!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setLanguageLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};
+
+export const deleteLanguage = (id) => {
+    return (dispatch) => {
+        dispatch(
+            resumeActions.setLanguageLoadingState({
+                isLoading: true,
+            })
+        );
+        axios
+            .delete(`/candidate-resume/language/${id}`)
+            .then((res) => {
+                const { message, success } = res.data;
+                if (success) {
+                    dispatch(alertActions.showSuccessAlert({ message }));
+                    dispatch(resumeActions.removeLanguage({ id }));
+                } else {
+                    dispatch(alertActions.showWarningAlert({ message }));
+                }
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Couldn't delete language!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(
+                    resumeActions.setLanguageLoadingState({
+                        isLoading: false,
+                    })
+                );
+            });
+    };
+};

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Resume;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ResumeLanguageResource;
+use App\Models\ResumeLanguage;
 use Illuminate\Http\Request;
-use App\Http\Resources\ExperienceResource;
-use App\Models\Experience;
 use Illuminate\Support\Facades\Gate;
 
-class ExperienceController extends Controller
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class ExperienceController extends Controller
         $user = $request->user();
 
         return response()->json([
-            'experiences' => ExperienceResource::collection($user->experiences)
+            'resume_languages' => ResumeLanguageResource::collection($user->resumeLanguages)
         ]);
     }
 
@@ -43,19 +43,17 @@ class ExperienceController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'jobtitle' => 'required',
-            'employer' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date',
-            'duties' => 'nullable'
+            'language_id' => 'required|exists:languages,id',
+            'language_level_id' => 'required|exists:language_levels,id',
+            'additional_notes' => 'nullable',
         ]);
 
-        $exp = $user->experiences()->create($validated);
+        $record = $user->resumeLanguages()->create($validated);
 
         return response()->json([
             'success' => true,
-            'message' => 'Experience created!',
-            'experience' => new ExperienceResource($exp)
+            'message' => 'Resume language created!',
+            'resume_language' => new ResumeLanguageResource($record)
         ]);
     }
 
@@ -66,27 +64,25 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Experience $experience)
+    public function update(Request $request, ResumeLanguage $language)
     {
-
-        if (Gate::denies('edit-experience', $experience)) {
+        
+        if (Gate::denies('edit-resume-language', $language)) {
             return response()->json(['message' => 'You cannot edit this resource!'], 403);
         };
 
         $validated = $request->validate([
-            'jobtitle' => 'required',
-            'employer' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date',
-            'duties' => 'nullable'
+            'language_id' => 'required|exists:languages,id',
+            'language_level_id' => 'required|exists:language_levels,id',
+            'additional_notes' => 'nullable',
         ]);
 
-        $wasUpdated = $experience->update($validated);
+        $wasUpdated = $language->update($validated);
 
         return response()->json([
             'success' => $wasUpdated,
-            'message' => $wasUpdated === true ? 'Experience updated!' : 'Couldnt update experience!',
-            'experience' => new ExperienceResource($experience)
+            'message' => $wasUpdated === true ? 'Language record updated!' : 'Couldnt update language!',
+            'resume_language' => new ResumeLanguageResource($language)
         ]);
     }
 
@@ -96,17 +92,17 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Experience $experience)
+    public function destroy(ResumeLanguage $language)
     {
-        if (Gate::denies('edit-experience', $experience)) {
+        if (Gate::denies('edit-resume-language', $language)) {
             return response()->json(['message' => 'You cannot edit this resource!'], 403);
         };
 
-        $wasDeleted = $experience->delete();
+        $wasDeleted = $language->delete();
 
         return response()->json([
             'success' => $wasDeleted,
-            'message' => $wasDeleted === true ? 'Experience deleted!' : 'Couldnt delete experience!',
+            'message' => $wasDeleted === true ? 'Language record deleted!' : 'Couldnt delete language!',
         ]);
     }
 }

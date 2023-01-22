@@ -59,6 +59,12 @@ const SidebarResumeDropdowns = () => {
                             <span>Educations</span>
                         </SidebarLink>
                     </li>
+                    <li>
+                        <SidebarLink to="/dashboard/resume/languages">
+                            <i className="fa-solid fa-language"></i>
+                            <span>Languages</span>
+                        </SidebarLink>
+                    </li>
                 </ul>
             )}
         </li>

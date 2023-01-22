@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resume\BasicDetailsController;
 use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\ExperienceController;
+use App\Http\Controllers\Resume\LanguageController;
 use App\Http\Controllers\Resume\SalaryController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,12 +36,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::apiResource('/experience', ExperienceController::class)
         ->only(['index', 'update', 'store', 'destroy'])->missing(function () {
-            return response()->json(['message' => 'Resource is not found!'], 404);
+            return response()->json(['message' => 'Resource was not found!'], 404);
         });
 
         Route::apiResource('/education', EducationController::class)
         ->only(['index', 'update', 'store', 'destroy'])->missing(function () {
-            return response()->json(['message' => 'Resource is not found!'], 404);
+            return response()->json(['message' => 'Resource was not found!'], 404);
+        });
+
+        Route::apiResource('/language', LanguageController::class)
+        ->only(['index', 'update', 'store', 'destroy'])->missing(function () {
+            return response()->json(['message' => 'Resource was not found!'], 404);
         });
     });
 });

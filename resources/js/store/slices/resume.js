@@ -19,6 +19,10 @@ const initialState = {
         items: [],
         isLoading: false,
     },
+    language: {
+        items: [],
+        isLoading: false,
+    },
 };
 
 const BasicDetailsReducers = {
@@ -113,6 +117,40 @@ const EducationReducers = {
     },
 };
 
+const LanguageReducer = {
+    addLanguage(state, { payload }) {
+        const { language } = payload;
+        state.language.items = [...state.language.items, language];
+    },
+    removeLanguage(state, { payload }) {
+        const { temp_id, id } = payload;
+        if (temp_id) {
+            state.language.items = state.language.items.filter(
+                (lang) => lang.temp_id !== temp_id
+            );
+        } else {
+            state.language.items = state.language.items.filter(
+                (lang) => lang.id !== id
+            );
+        }
+    },
+    replaceLanguage(state, { payload }) {
+        const { language, id } = payload;
+        const index = state.language.items.findIndex((lang) => lang.id === id);
+        if (index !== -1) {
+            state.language.items[index] = language;
+        }
+    },
+    setLanguages(state, { payload }) {
+        const { languages } = payload;
+        state.language.items = languages;
+    },
+    setLanguageLoadingState(state, { payload }) {
+        const { isLoading } = payload;
+        state.language.isLoading = isLoading;
+    },
+};
+
 const resumeSlice = createSlice({
     name: "resume",
     initialState,
@@ -121,6 +159,7 @@ const resumeSlice = createSlice({
         ...SalaryDetailsReducers,
         ...ExperienceReducers,
         ...EducationReducers,
+        ...LanguageReducer,
     },
 });
 

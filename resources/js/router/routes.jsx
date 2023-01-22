@@ -12,6 +12,7 @@ import BasicDetails from "../pages/Dashboard/Candidate/BasicDetails";
 import Experiences from "../pages/Dashboard/Candidate/Experiences";
 import Salary from "../pages/Dashboard/Candidate/Salary";
 import Educations from "../pages/Dashboard/Candidate/Educations";
+import Languages from "../pages/Dashboard/Candidate/Languages";
 
 import PrepareApp from "./middlewares/PrepareApp";
 import AuthenticatedUserOnly from "./middlewares/AuthenticatedUserOnly";
@@ -75,6 +76,14 @@ export default [
                 element: (
                     <CandidateOnly>
                         <Educations />
+                    </CandidateOnly>
+                ),
+            },
+            {
+                path: "resume/languages",
+                element: (
+                    <CandidateOnly>
+                        <Languages />
                     </CandidateOnly>
                 ),
             },

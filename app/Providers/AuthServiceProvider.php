@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Models\User;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\ResumeLanguage;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -42,6 +43,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('edit-experience', function (User $user, Experience $experience) {
             return $experience->user_id === $user->id;
+        });
+
+        Gate::define('edit-resume-language', function (User $user, ResumeLanguage $resumeLanguage) {
+            return $resumeLanguage->user_id === $user->id;
         });
     }
 }
