@@ -225,6 +225,9 @@ $navigationHeight: 112.47px;
         background-color: $pale-gray;
         border-radius: $border-radius-sm;
         margin-bottom: $space-8;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
         h3 {
             font-size: 1.1rem;
             margin-bottom: $space-6;

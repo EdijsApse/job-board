@@ -42,7 +42,7 @@ const Details = () => {
     );
 
     const [selectedImage, setSelectedImage] = useState("");
-    
+
     const countryOptions = useSelector(
         (state) => state.selectOptions.countries
     );
@@ -83,167 +83,164 @@ const Details = () => {
     };
 
     return (
-        <div className="dashboard-page">
-            <h1 className="page-title">Company details</h1>
-            <DashboardCard className="relative">
-                {isLoading && <LoadingSpinner />}
-                <form
-                    className="dashboard-form"
-                    onSubmit={submitCompanyDetailsHandler}
-                >
-                    <div className="row">
-                        <div className="col-12">
-                            <ImagePicker
-                                labelText="Company logo"
-                                existingImage={userCompany.logo}
-                                onFileSelected={fileSelectedHandler}
-                                onFileRemoved={fileRemovedHandler}
-                                errorMessage={errors.file}
-                            />
-                        </div>
+        <DashboardCard className="relative">
+            {isLoading && <LoadingSpinner />}
+            <form
+                className="dashboard-form"
+                onSubmit={submitCompanyDetailsHandler}
+            >
+                <div className="row">
+                    <div className="col-12">
+                        <ImagePicker
+                            labelText="Company logo"
+                            existingImage={userCompany.logo}
+                            onFileSelected={fileSelectedHandler}
+                            onFileRemoved={fileRemovedHandler}
+                            errorMessage={errors.file}
+                        />
                     </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <BaseFormInput
-                                id="company-name"
-                                labelName="Company Name"
-                                labelClassName="bold"
-                                value={companyName}
-                                setInputValue={(name) => {
-                                    setCompanyName(name);
-                                }}
-                                inputErrorMessage={errors.name}
-                                isRequired
-                            />
-                        </div>
-                        <div className="col-6">
-                            <BaseFormSelect
-                                id="company-category"
-                                labelName="Company Category"
-                                labelClassName="bold"
-                                selected={companyCategory}
-                                selectValue={(category) => {
-                                    setCompanyCategory(category);
-                                }}
-                                options={categoryOptions}
-                                placeholder="Select company category"
-                                inputErrorMessage={errors.category_id}
-                                isRequired
-                            />
-                        </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <BaseFormInput
+                            id="company-name"
+                            labelName="Company Name"
+                            labelClassName="bold"
+                            value={companyName}
+                            setInputValue={(name) => {
+                                setCompanyName(name);
+                            }}
+                            inputErrorMessage={errors.name}
+                            isRequired
+                        />
                     </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <BaseFormSelect
-                                id="company-city"
-                                labelName="City"
-                                labelClassName="bold"
-                                selected={companyCity}
-                                selectValue={(city) => {
-                                    setCompanyCity(city);
-                                }}
-                                options={cityOptions}
-                                placeholder="Select city where located"
-                                inputErrorMessage={errors.city_id}
-                                isRequired
-                            />
-                        </div>
-                        <div className="col-6">
-                            <BaseFormSelect
-                                id="company-country"
-                                labelName="Country"
-                                labelClassName="bold"
-                                selected={companyCountry}
-                                selectValue={(country) => {
-                                    setCompanyCountry(country);
-                                }}
-                                placeholder="Select country where located"
-                                options={countryOptions}
-                                inputErrorMessage={errors.country_id}
-                                isRequired
-                            />
-                        </div>
+                    <div className="col-6">
+                        <BaseFormSelect
+                            id="company-category"
+                            labelName="Company Category"
+                            labelClassName="bold"
+                            selected={companyCategory}
+                            selectValue={(category) => {
+                                setCompanyCategory(category);
+                            }}
+                            options={categoryOptions}
+                            placeholder="Select company category"
+                            inputErrorMessage={errors.category_id}
+                            isRequired
+                        />
                     </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <BaseFormInput
-                                id="company-email"
-                                labelName="Contact email"
-                                labelClassName="bold"
-                                type="email"
-                                value={companyEmail}
-                                setInputValue={(value) => {
-                                    setCompanyEmail(value);
-                                }}
-                                inputErrorMessage={errors.contact_email}
-                                isRequired
-                            />
-                        </div>
-                        <div className="col-6">
-                            <BaseFormInput
-                                id="company-phone"
-                                labelName="Contact phone"
-                                labelClassName="bold"
-                                value={companyPhone}
-                                setInputValue={(value) => {
-                                    setCompanyPhone(value);
-                                }}
-                                inputErrorMessage={errors.contact_phone}
-                                isRequired
-                            />
-                        </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <BaseFormSelect
+                            id="company-city"
+                            labelName="City"
+                            labelClassName="bold"
+                            selected={companyCity}
+                            selectValue={(city) => {
+                                setCompanyCity(city);
+                            }}
+                            options={cityOptions}
+                            placeholder="Select city where located"
+                            inputErrorMessage={errors.city_id}
+                            isRequired
+                        />
                     </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <BaseFormSelect
-                                id="company-size"
-                                labelName="Company size"
-                                labelClassName="bold"
-                                selected={companySize}
-                                selectValue={(size) => {
-                                    setCompanySize(size);
-                                }}
-                                options={sizeOptions}
-                                placeholder="Select company size"
-                                inputErrorMessage={errors.company_size_id}
-                                isRequired
-                            />
-                        </div>
-                        <div className="col-6">
-                            <BaseFormInput
-                                id="founded-year"
-                                labelName="Founded year"
-                                labelClassName="bold"
-                                type="number"
-                                value={companyFoundedYear}
-                                setInputValue={(value) => {
-                                    setCompanyFoundedYear(value);
-                                }}
-                                inputErrorMessage={errors.year_founded}
-                            />
-                        </div>
+                    <div className="col-6">
+                        <BaseFormSelect
+                            id="company-country"
+                            labelName="Country"
+                            labelClassName="bold"
+                            selected={companyCountry}
+                            selectValue={(country) => {
+                                setCompanyCountry(country);
+                            }}
+                            placeholder="Select country where located"
+                            options={countryOptions}
+                            inputErrorMessage={errors.country_id}
+                            isRequired
+                        />
                     </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <BaseTextareaInput
-                                id="company-about"
-                                labelName="About Company"
-                                labelClassName="bold"
-                                value={aboutCompany}
-                                setNewValue={(value) => {
-                                    setAboutCompany(value);
-                                }}
-                                inputErrorMessage={errors.about}
-                                isRequired
-                            />
-                        </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <BaseFormInput
+                            id="company-email"
+                            labelName="Contact email"
+                            labelClassName="bold"
+                            type="email"
+                            value={companyEmail}
+                            setInputValue={(value) => {
+                                setCompanyEmail(value);
+                            }}
+                            inputErrorMessage={errors.contact_email}
+                            isRequired
+                        />
                     </div>
-                    <button className="btn btn-primary" type="submit">
-                        Save Details
-                    </button>
-                </form>
-            </DashboardCard>
-        </div>
+                    <div className="col-6">
+                        <BaseFormInput
+                            id="company-phone"
+                            labelName="Contact phone"
+                            labelClassName="bold"
+                            value={companyPhone}
+                            setInputValue={(value) => {
+                                setCompanyPhone(value);
+                            }}
+                            inputErrorMessage={errors.contact_phone}
+                            isRequired
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <BaseFormSelect
+                            id="company-size"
+                            labelName="Company size"
+                            labelClassName="bold"
+                            selected={companySize}
+                            selectValue={(size) => {
+                                setCompanySize(size);
+                            }}
+                            options={sizeOptions}
+                            placeholder="Select company size"
+                            inputErrorMessage={errors.company_size_id}
+                            isRequired
+                        />
+                    </div>
+                    <div className="col-6">
+                        <BaseFormInput
+                            id="founded-year"
+                            labelName="Founded year"
+                            labelClassName="bold"
+                            type="number"
+                            value={companyFoundedYear}
+                            setInputValue={(value) => {
+                                setCompanyFoundedYear(value);
+                            }}
+                            inputErrorMessage={errors.year_founded}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <BaseTextareaInput
+                            id="company-about"
+                            labelName="About Company"
+                            labelClassName="bold"
+                            value={aboutCompany}
+                            setNewValue={(value) => {
+                                setAboutCompany(value);
+                            }}
+                            inputErrorMessage={errors.about}
+                            isRequired
+                        />
+                    </div>
+                </div>
+                <button className="btn btn-primary" type="submit">
+                    Save Details
+                </button>
+            </form>
+        </DashboardCard>
     );
 };
 export default Details;
