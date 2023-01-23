@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resume\BasicDetailsController;
 use App\Http\Controllers\Resume\EducationController;
@@ -49,6 +50,11 @@ Route::middleware('auth:sanctum')->group(function () {
             return response()->json(['message' => 'Resource was not found!'], 404);
         });
     });
+
+    Route::apiResource('/job', JobController::class)
+        ->only(['index', 'update', 'store'])->missing(function () {
+            return response()->json(['message' => 'Resource was not found!'], 404);
+        });
 });
 
 Route::post('/register', [AuthController::class, 'register']);

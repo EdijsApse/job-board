@@ -42,11 +42,13 @@
     .form-check-input {
         position: relative;
         top: -2px;
+        left: -4px;
         box-shadow: none;
         outline: none;
         width: 40px;
         height: 20px;
         border: 1px solid $bright-gray;
+        padding: 0;
         filter: none;
         cursor: pointer;
         &:checked {
@@ -61,6 +63,7 @@
     }
     .form-check-label {
         margin-left: $space-2;
+        margin-bottom: 0;
         font-size: 0.9rem;
         cursor: pointer;
     }

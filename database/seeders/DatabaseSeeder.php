@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             SalaryTypeSeeder::class,
             LanguageSeeder::class,
-            LanguageLevelSeeder::class
+            LanguageLevelSeeder::class,
+            EmploymentTypeSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

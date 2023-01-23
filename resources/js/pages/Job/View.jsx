@@ -2,7 +2,7 @@ import image from "../../components/assets/test-logo.png";
 import jobTestImage from "../../components/assets/job-test-image.jpg";
 import Badge from "../../components/UI/Badge";
 import Wrapper from "../../components/UI/Wrapper";
-import SingleJobCard from "../../components/Job/SingleJobCard";
+import SingleJobCard from "../../components/Job/Item";
 import { useParams } from "react-router-dom";
 
 const job = {

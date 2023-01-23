@@ -28,6 +28,15 @@ class Company extends Model
         'logo'
     ];
 
+
+    /**
+     * Gets full path where job related files will be stored for specific company
+     */
+    public function getJobRelatedFilesPath()
+    {
+        return $this->user->getCompanyFilesPath()."/jobs";
+    }
+
     /**
      * Get the country.
      */
@@ -66,5 +75,13 @@ class Company extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Gets all jobs posted by company
+     */
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
     }
 }

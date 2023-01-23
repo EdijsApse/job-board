@@ -7,8 +7,9 @@ const initialState = {
     categories: [],
     genders: [],
     salaryTypes: [],
-    languages:[],
-    languageLevels:[]
+    languages: [],
+    languageLevels: [],
+    employmentTypes: [],
 };
 /**
  * Converts item to format, which is needed for BaseFormSelect component
@@ -38,6 +39,7 @@ const selectOptionsSlice = createSlice({
                 salary_types,
                 languages,
                 language_levels,
+                employment_types,
             } = payload;
             state.countries = countries.map((item) =>
                 convertToLabelValue(item)
@@ -57,6 +59,9 @@ const selectOptionsSlice = createSlice({
                 convertToLabelValue(item)
             );
             state.languageLevels = language_levels.map((item) =>
+                convertToLabelValue(item)
+            );
+            state.employmentTypes = employment_types.map((item) =>
                 convertToLabelValue(item)
             );
         },

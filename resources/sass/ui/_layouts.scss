@@ -29,6 +29,9 @@ $navigationHeight: 112.47px;
             }
         }
     }
+    .page-main {
+        margin-bottom: $space-8 + $space-4;
+    }
     .page-filters {
         background-color: $pale-gray;
         border-radius: $border-radius-sm;

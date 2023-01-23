@@ -1,5 +1,5 @@
 import Wrapper from "../UI/Wrapper";
-import SingleFeaturedJob from "../Job/SingleJobCard";
+import SingleFeaturedJob from "../Job/Item";
 import logo from "../assets/test-logo.png";
 
 const jobs = [

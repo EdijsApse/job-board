@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Models\User;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Job;
 use App\Models\ResumeLanguage;
 
 class AuthServiceProvider extends ServiceProvider
@@ -35,6 +36,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('update-company', function (User $user) {
             return $user->isEmployer();
+        });
+
+        Gate::define('post-jobs', function (User $user) {
+            return $user->company ? true : false;
+        });
+
+        Gate::define('edit-job', function (User $user, Job $job) {
+            return $user->company && $job->company_id === $user->company->id;
         });
 
         Gate::define('edit-education', function (User $user, Education $education) {

@@ -4,56 +4,76 @@ import BaseFormInput from "../../components/UI/BaseFormInput";
 import { useState } from "react";
 import BaseFormSelect from "../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../components/UI/BaseTextareaInput";
-
-const categoryOptions = [
-    {
-        value: "advertising",
-        label: "Advertising",
-    },
-];
-const cityOptions = [
-    {
-        value: "riga",
-        label: "Riga",
-    },
-];
-const countryOptions = [
-    {
-        value: "latvia",
-        label: "Latvia",
-    },
-];
-
-const employmentTypeOptions = [
-    {
-        value: "part",
-        label: "Part Time",
-    },
-    {
-        value: "full",
-        label: "Full Time",
-    },
-];
-
-const qualificationOptions = [
-    {
-        value: "bachelor",
-        label: "Bachelor Degree",
-    },
-];
+import ImagePicker from "../../components/UI/ImagePicker";
+import logo from "../../components/assets/test-logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import { createJob } from "../../store/thunks/job";
 
 const CreateJob = () => {
+    const employmentTypeOptions = useSelector(
+        (state) => state.selectOptions.employmentTypes
+    );
+    const cityOptions = useSelector((state) => state.selectOptions.cities);
+    const categoryOptions = useSelector(
+        (state) => state.selectOptions.categories
+    );
+    const salaryTypeOptions = useSelector(
+        (state) => state.selectOptions.salaryTypes
+    );
+
+    const errors = useSelector((state) => state.job.formErrors);
+    const isLoading = useSelector((state) => state.job.isLoading);
+
     const [jobTitle, setJobTitle] = useState("");
-    const [country, setCountry] = useState("");
+    const [image, setImage] = useState(null);
+    const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [category, setCategory] = useState("");
     const [employmentType, setEmploymentType] = useState("");
     const [minSalary, setMinSalary] = useState("");
     const [maxSalary, setMaxSalary] = useState("");
+    const [salaryType, setSalaryType] = useState("");
     const [jobDescription, setJobDescription] = useState("");
     const [expDate, setExpDate] = useState("");
-    const [qualification, setQualification] = useState("");
     const [experience, setExperience] = useState("");
+
+    const [isUrgent, setIsUrgent] = useState(false);
+    const [isFeatured, setIsFeatured] = useState(false);
+
+    const fileSelectedHandler = (file) => {
+        setImage(file);
+    };
+
+    const fileRemovedHandler = () => {
+        setImage(null);
+    };
+
+    const dispatch = useDispatch();
+
+    const submitJobHandler = (e) => {
+        e.preventDefault();
+        const jobData = new FormData();
+        jobData.append("jobtitle", jobTitle);
+        jobData.append("street", street);
+        jobData.append("city_id", city);
+        jobData.append("category_id", category);
+        jobData.append("employment_type_id", employmentType);
+        jobData.append("min_salary", minSalary);
+        jobData.append("max_salary", maxSalary);
+        jobData.append("salary_type_id", salaryType);
+        jobData.append("description", jobDescription);
+        jobData.append("expiration_date", expDate);
+        jobData.append("years_of_experience_required", experience);
+        jobData.append("is_urgent", isUrgent ? 1 : 0);
+        jobData.append("is_featured", isFeatured ? 1 : 0);
+
+        if (image) {
+            jobData.append("image", image);
+        }
+
+        dispatch(createJob(jobData));
+    };
 
     return (
         <div className="page create-job-page">
@@ -61,10 +81,22 @@ const CreateJob = () => {
                 <h1>Create Job</h1>
                 <BreadCrumbs />
             </div>
-            <main className="container-fluid">
-                <Wrapper className="job-form-section">
+            <main className="page-main container-fluid">
+                <Wrapper className="job-form-section relative">
+                    {isLoading && <LoadingSpinner />}
                     <h2>Post Job</h2>
-                    <form>
+                    <form onSubmit={submitJobHandler}>
+                        <div className="row">
+                            <div className="col-12">
+                                <ImagePicker
+                                    labelText="Job Image"
+                                    existingImage={logo}
+                                    onFileSelected={fileSelectedHandler}
+                                    onFileRemoved={fileRemovedHandler}
+                                    errorMessage={errors.image}
+                                />
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-12">
                                 <BaseFormInput
@@ -75,25 +107,12 @@ const CreateJob = () => {
                                     setInputValue={(value) => {
                                         setJobTitle(value);
                                     }}
+                                    inputErrorMessage={errors.jobtitle}
                                     isRequired
                                 />
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-6">
-                                <BaseFormSelect
-                                    id="country"
-                                    labelName="Country"
-                                    labelClassName="bold"
-                                    selected={country}
-                                    selectValue={(value) => {
-                                        setCountry(value);
-                                    }}
-                                    placeholder="Select country"
-                                    options={countryOptions}
-                                    isRequired
-                                />
-                            </div>
                             <div className="col-6">
                                 <BaseFormSelect
                                     id="city"
@@ -105,6 +124,20 @@ const CreateJob = () => {
                                     }}
                                     placeholder="Select city"
                                     options={cityOptions}
+                                    inputErrorMessage={errors.city_id}
+                                    isRequired
+                                />
+                            </div>
+                            <div className="col-6">
+                                <BaseFormInput
+                                    id="street"
+                                    labelClassName="bold"
+                                    labelName="Street"
+                                    value={street}
+                                    setInputValue={(street) => {
+                                        setStreet(street);
+                                    }}
+                                    inputErrorMessage={errors.street}
                                     isRequired
                                 />
                             </div>
@@ -121,6 +154,7 @@ const CreateJob = () => {
                                     }}
                                     placeholder="Select category"
                                     options={categoryOptions}
+                                    inputErrorMessage={errors.category_id}
                                     isRequired
                                 />
                             </div>
@@ -128,19 +162,22 @@ const CreateJob = () => {
                                 <BaseFormSelect
                                     id="employment-type"
                                     labelClassName="bold"
-                                    labelName="Type"
+                                    labelName="Employment Type"
                                     selected={employmentType}
                                     selectValue={(value) => {
                                         setEmploymentType(value);
                                     }}
                                     placeholder="Select employment type"
                                     options={employmentTypeOptions}
+                                    inputErrorMessage={
+                                        errors.employment_type_id
+                                    }
                                     isRequired
                                 />
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col-4">
                                 <BaseFormInput
                                     id="min-salary"
                                     labelClassName="bold"
@@ -150,10 +187,11 @@ const CreateJob = () => {
                                         setMinSalary(value);
                                     }}
                                     type="number"
+                                    inputErrorMessage={errors.min_salary}
                                     isRequired
                                 />
                             </div>
-                            <div className="col-6">
+                            <div className="col-4">
                                 <BaseFormInput
                                     id="max-salary"
                                     labelClassName="bold"
@@ -163,6 +201,22 @@ const CreateJob = () => {
                                         setMaxSalary(value);
                                     }}
                                     type="number"
+                                    inputErrorMessage={errors.max_salary}
+                                    isRequired
+                                />
+                            </div>
+                            <div className="col-4">
+                                <BaseFormSelect
+                                    id="salary-type"
+                                    labelClassName="bold"
+                                    labelName="Salary type"
+                                    selected={salaryType}
+                                    selectValue={(value) => {
+                                        setSalaryType(value);
+                                    }}
+                                    placeholder="Select salary type"
+                                    options={salaryTypeOptions}
+                                    inputErrorMessage={errors.salary_type_id}
                                     isRequired
                                 />
                             </div>
@@ -177,7 +231,7 @@ const CreateJob = () => {
                                     setNewValue={(value) => {
                                         setJobDescription(value);
                                     }}
-                                    isRequired
+                                    inputErrorMessage={errors.description}
                                 />
                             </div>
                         </div>
@@ -192,24 +246,12 @@ const CreateJob = () => {
                                         setExpDate(value);
                                     }}
                                     type="date"
+                                    inputErrorMessage={errors.expiration_date}
                                     isRequired
                                 />
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-6">
-                                <BaseFormSelect
-                                    id="qualification"
-                                    labelClassName="bold"
-                                    labelName="Qualification"
-                                    selected={qualification}
-                                    selectValue={(value) => {
-                                        setQualification(value);
-                                    }}
-                                    placeholder="Select qualification level required"
-                                    options={qualificationOptions}
-                                />
-                            </div>
                             <div className="col-6">
                                 <BaseFormInput
                                     id="experience"
@@ -219,6 +261,9 @@ const CreateJob = () => {
                                     setInputValue={(value) => {
                                         setExperience(value);
                                     }}
+                                    inputErrorMessage={
+                                        errors.years_of_experience_required
+                                    }
                                     type="number"
                                 />
                             </div>
@@ -232,6 +277,12 @@ const CreateJob = () => {
                                             type="checkbox"
                                             className="form-check-input"
                                             id="is_featured"
+                                            value={isFeatured}
+                                            onChange={() => {
+                                                setIsFeatured(
+                                                    (oldValue) => !oldValue
+                                                );
+                                            }}
                                         />
                                         <label
                                             className="bold form-check-label"
@@ -240,11 +291,22 @@ const CreateJob = () => {
                                             Featured Job
                                         </label>
                                     </div>
+                                    {errors.is_featured && (
+                                        <p className="input-error mb-2">
+                                            {errors.is_featured}
+                                        </p>
+                                    )}
                                     <div className="form-switch">
                                         <input
                                             type="checkbox"
                                             className="form-check-input"
                                             id="is_urgent"
+                                            value={isUrgent}
+                                            onChange={() => {
+                                                setIsUrgent(
+                                                    (oldValue) => !oldValue
+                                                );
+                                            }}
                                         />
                                         <label
                                             className="bold form-check-label"
@@ -253,6 +315,11 @@ const CreateJob = () => {
                                             Actively recruiting new employers
                                         </label>
                                     </div>
+                                    {errors.is_urgent && (
+                                        <p className="input-error mb-2">
+                                            {errors.is_urgent}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         </div>
