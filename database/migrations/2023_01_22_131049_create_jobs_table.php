@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('street');
             $table->double('min_salary', 10, 2);
             $table->double('max_salary', 10, 2);
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->json('requirements')->nullable();
+            $table->json('responsibilities')->nullable();
             $table->date('expiration_date');
             $table->integer('years_of_experience_required')->nullable();
             $table->boolean('is_urgent')->default(false);

@@ -9,6 +9,7 @@ import logo from "../../components/assets/test-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { createJob } from "../../store/thunks/job";
+import RemovableList from "../../components/UI/RemovableList";
 
 const CreateJob = () => {
     const employmentTypeOptions = useSelector(
@@ -37,6 +38,12 @@ const CreateJob = () => {
     const [jobDescription, setJobDescription] = useState("");
     const [expDate, setExpDate] = useState("");
     const [experience, setExperience] = useState("");
+
+    const [responsibilitiesList, setResponsibilitiesList] = useState([]);
+    const [requirementsList, setRequirementsList] = useState([]);
+
+    const [requirement, setRequirement] = useState("");
+    const [responsibility, setResponsibility] = useState("");
 
     const [isUrgent, setIsUrgent] = useState(false);
     const [isFeatured, setIsFeatured] = useState(false);
@@ -72,7 +79,45 @@ const CreateJob = () => {
             jobData.append("image", image);
         }
 
+        responsibilitiesList.forEach((res) => {
+            jobData.append("responsibilities[]", res);
+        });
+
+        requirementsList.forEach((req) => {
+            jobData.append("requirements[]", req);
+        });
+
         dispatch(createJob(jobData));
+    };
+
+    const addRequirementHandler = () => {
+        const exists = requirementsList.findIndex((req) => req === requirement);
+        if (requirement.trim() && exists === -1) {
+            setRequirementsList((list) => [...list, requirement]);
+        }
+        setRequirement("");
+    };
+
+    const removeRequirementHandler = (req) => {
+        setRequirementsList((list) =>
+            list.filter((existingReq) => existingReq !== req)
+        );
+    };
+
+    const addResposibilityHandler = () => {
+        const exists = responsibilitiesList.findIndex(
+            (res) => res === responsibility
+        );
+        if (responsibility.trim() && exists === -1) {
+            setResponsibilitiesList((list) => [...list, responsibility]);
+        }
+        setResponsibility("");
+    };
+
+    const removeResposibilityHandler = (res) => {
+        setResponsibilitiesList((list) =>
+            list.filter((existingRes) => existingRes !== res)
+        );
     };
 
     return (
@@ -232,9 +277,67 @@ const CreateJob = () => {
                                         setJobDescription(value);
                                     }}
                                     inputErrorMessage={errors.description}
+                                    isRequired
                                 />
                             </div>
                         </div>
+
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="removable-list-with-input">
+                                    <BaseTextareaInput
+                                        id="job-requirement"
+                                        labelName="List of Job Requirements"
+                                        labelClassName="bold"
+                                        value={requirement}
+                                        setNewValue={(value) => {
+                                            setRequirement(value);
+                                        }}
+                                    />
+                                    <RemovableList
+                                        list={requirementsList}
+                                        onRemoveItem={removeRequirementHandler}
+                                        onAddItem={addRequirementHandler}
+                                        actionText="Add Requirement"
+                                    />
+                                    {errors.requirements && (
+                                        <p className="input-error">
+                                            {errors.requirements}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="removable-list-with-input">
+                                    <BaseTextareaInput
+                                        id="job-responsibility"
+                                        labelName="List of Job Responsibilities"
+                                        labelClassName="bold"
+                                        value={responsibility}
+                                        setNewValue={(value) => {
+                                            setResponsibility(value);
+                                        }}
+                                    />
+                                    <RemovableList
+                                        list={responsibilitiesList}
+                                        onRemoveItem={
+                                            removeResposibilityHandler
+                                        }
+                                        onAddItem={addResposibilityHandler}
+                                        actionText="Add Resposibility"
+                                    />
+                                    {errors.responsibilities && (
+                                        <p className="input-error">
+                                            {errors.responsibilities}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="row">
                             <div className="col-6">
                                 <BaseFormInput

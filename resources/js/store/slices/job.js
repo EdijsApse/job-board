@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     list: [],
-    viewItem: null,
     isLoading: false,
     formErrors: {},
 };
@@ -19,10 +18,7 @@ const JobSlice = createSlice({
         },
         setItems(state, { payload }) {
             state.list = payload.items;
-        },
-        setViewItem(state, { payload }) {
-            state.viewItem = payload.item;
-        },
+        }
     },
 });
 

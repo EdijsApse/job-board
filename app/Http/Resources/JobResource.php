@@ -33,11 +33,13 @@ class JobResource extends JsonResource
             'max_salary' => $this->max_salary,
             'description' => $this->description,
             'requirements' => $this->requirements,
+            'responsibilities' => $this->responsibilities,
             'expiration_date' => $this->expiration_date,
             'years_of_experience_required' => $this->years_of_experience_required,
             'is_urgent' => $this->is_urgent,
             'is_featured' => $this->is_featured,
-            'image' => $this->getImageUrl()
+            'image' => $this->getImageUrl(),
+            'created' => $this->created_at->diffForHumans()
         ];
     }
 }

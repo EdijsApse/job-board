@@ -16,5 +16,11 @@
             margin-top: $space-6;
             min-width: 160px;
         }
+
+        .removable-list-with-input {
+            textarea {
+                min-height: 100px;
+            }
+        }
     }
 }

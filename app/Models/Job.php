@@ -27,6 +27,7 @@ class Job extends Model
         'max_salary',
         'description',
         'requirements',
+        'responsibilities',
         'expiration_date',
         'years_of_experience_required',
         'is_urgent',
@@ -41,6 +42,7 @@ class Job extends Model
      */
     protected $casts = [
         'requirements' => 'array',
+        'responsibilities' => 'array',
         'is_urgent' => 'boolean',
         'is_featured' => 'boolean',
     ];

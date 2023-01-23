@@ -13,6 +13,7 @@ import Experiences from "../pages/Dashboard/Candidate/Experiences";
 import Salary from "../pages/Dashboard/Candidate/Salary";
 import Educations from "../pages/Dashboard/Candidate/Educations";
 import Languages from "../pages/Dashboard/Candidate/Languages";
+import NotFoundPage from "../pages/NotFoundPage";
 
 import PrepareApp from "./middlewares/PrepareApp";
 import AuthenticatedUserOnly from "./middlewares/AuthenticatedUserOnly";
@@ -114,6 +115,10 @@ export default [
                 path: "jobs/:id",
                 element: <JobView />,
             },
+            {
+                path: "404",
+                element: <NotFoundPage />
+            }
         ],
     },
 ];

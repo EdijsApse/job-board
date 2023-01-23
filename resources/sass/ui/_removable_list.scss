@@ -1,0 +1,31 @@
+.removable-list-items {
+    ul {
+        margin-top: $space-6;
+        li {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem $space-4;
+            border-radius: $border-radius-sm;
+            background-color: $cloud-blue;
+            margin-bottom: $space-2;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            i {
+                font-size: 1.2rem;
+                color: $red;
+                margin-right: $space-4;
+                cursor: pointer;
+            }
+            span {
+                font-size: 0.9rem;
+            }
+        }
+    }
+    button {
+        margin-top: $space-6;
+        font-size: 0.8rem;
+        padding: 0 $space-6;
+        height: 35px;
+    }
+}

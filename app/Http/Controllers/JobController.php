@@ -44,8 +44,9 @@ class JobController extends Controller
             'street' => 'required',
             'min_salary' => 'required|decimal:0,2',
             'max_salary' => 'required|decimal:0,2',
-            'description' => 'nullable',
+            'description' => 'required',
             'requirements' => 'nullable|array',
+            'responsibilities' => 'nullable|array',
             'expiration_date' => 'required|date',
             'years_of_experience_required' => 'nullable|integer',
             'is_urgent' => 'boolean',
@@ -75,7 +76,7 @@ class JobController extends Controller
     public function show(Job $job)
     {
         return response()->json([
-            'job' => $job
+            'job' => new JobResource($job)
         ]);
     }
 
@@ -101,8 +102,9 @@ class JobController extends Controller
             'street' => 'required',
             'min_salary' => 'required|decimal:0,2',
             'max_salary' => 'required|decimal:0,2',
-            'description' => 'nullable',
+            'description' => 'required',
             'requirements' => 'nullable|array',
+            'responsibilities' => 'nullable|array',
             'expiration_date' => 'required|date',
             'years_of_experience_required' => 'required|integer',
             'is_urgent' => 'boolean',

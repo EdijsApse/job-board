@@ -1,90 +1,108 @@
-import image from "../../components/assets/test-logo.png";
-import jobTestImage from "../../components/assets/job-test-image.jpg";
+import placeholderImage from "../../components/assets/test-logo.png";
 import Badge from "../../components/UI/Badge";
 import Wrapper from "../../components/UI/Wrapper";
 import SingleJobCard from "../../components/Job/Item";
-import { useParams } from "react-router-dom";
-
-const job = {
-    image: image,
-    title: "Junior Graphic Designer (Web)",
-    category: "Design",
-    location: "New York",
-    created: "June 20, 2021",
-    salary: "$150 - $180 / week",
-    employment: "Full Time",
-    description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    responsibilities: [
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    ],
-    experience_required: [
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    ],
-    skills: ["PHP", "JavaScript", "Design", "Developer"],
-    photos: [jobTestImage, jobTestImage, jobTestImage, jobTestImage],
-    expiration_date: "May 6, 2026",
-    experience: "4 Year",
-    qualification: "Bachelor Degree",
-    is_featured: true,
-    is_urgent: true,
-    employer: {
-        id: "",
-        name: "Employer",
-        category: "Developer",
-        founded: "2005",
-        location: "New York",
-        phone: "123 456 7890",
-        email: "email@example.com",
-        logo: image,
-    },
-};
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import { useCallback } from "react";
+import axios from "../../axios";
+import { useState } from "react";
+import { alertActions } from "../../store/slices/alert";
 
 const related_jobs = [
     {
         id: 7,
-        title: "UX/UI Designer Web",
-        category: "Design, Development",
+        jobtitle: "UX/UI Designer Web",
+        category: { name: "Design, Development" },
+        city: {name: "Paris"},
         location: "Paris",
+        salary_type: {name: 'Hourly'},
+        employment_type: {name: 'Part-Time'},
         employment: "Freelance",
         is_urgent: true,
         is_featured: true,
-        image: image,
+        image: placeholderImage,
         salary: "$150 - $180 / week",
     },
     {
         id: 8,
-        title: "Executive, HR Operations",
-        category: "Customer, Marketing",
+        jobtitle: "Executive, HR Operations",
+        category: { name: "Customer, Marketing" },
+        city: {name: "New York"},
         location: "New York",
+        salary_type: {name: 'Hourly'},
+        employment_type: {name: 'Part-Time'},
         employment: "Temporary",
         is_urgent: false,
         is_featured: true,
-        image: image,
+        image: placeholderImage,
         salary: "$150 - $180 / week",
     },
     {
         id: 9,
-        title: "Senior/ Staff Nurse",
-        category: "Health and Care",
+        jobtitle: "Senior/ Staff Nurse",
+        category: { name: "Health and Care" },
+        city: {name: "Paris"},
         location: "Paris",
+        salary_type: {name: 'Hourly'},
+        employment_type: {name: 'Part-Time'},
         employment: "part Time",
         is_urgent: true,
-        image: image,
+        image: placeholderImage,
         salary: "$150 - $180 / week",
     },
 ];
 
 const JobView = () => {
     const { id } = useParams();
+    const [job, setJob] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const getSingleJob = useCallback(() => {
+        setIsLoading(true);
+        axios
+            .get(`/job/${id}`)
+            .then((res) => {
+                const { job } = res.data;
+                setJob(job);
+            })
+            .catch((err) => {
+                const responseStatus = err?.response?.status;
+                if (responseStatus !== 404) {
+                    dispatch(
+                        alertActions.showWarningAlert({
+                            message: "Oooops error occured!",
+                        })
+                    );
+                }
+                navigate("/404");
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, [id]);
+
+    useEffect(() => {
+        getSingleJob();
+    }, [getSingleJob]);
+
+    if (isLoading) {
+        return (
+            <div className="view-page single-job-page min-h-50 relative">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
+    const image = job.image ?? placeholderImage;
+    const companyLogo = job.company.logo ?? placeholderImage;
+    const location = `${job.city.name} - ${job.street}`;
+    const salary = `${job.min_salary} - ${job.max_salary} / ${job.salary_type.name}`;
+    
     return (
         <div className="view-page single-job-page">
             <div className="container-fluid bg-pale-gray">
@@ -94,30 +112,32 @@ const JobView = () => {
                             <div className="job-header">
                                 <div className="job-image">
                                     <img
-                                        src={job.image}
-                                        alt={`${job.title} image`}
+                                        src={image}
+                                        alt={`${job.jobtitle} image`}
                                     />
                                 </div>
                                 <div className="job-info">
                                     <h1 className="view-page-title">
-                                        {job.title} id - {id}
+                                        {job.jobtitle}
                                     </h1>
                                     <div className="job-details">
                                         <div className="single-detail">
                                             <i className="fa-solid fa-briefcase"></i>
-                                            <span>{job.category}</span>
+                                            <span>{job.category.name}</span>
                                         </div>
                                         <div className="single-detail">
                                             <i className="fa-solid fa-location-crosshairs"></i>
-                                            <span>{job.location}</span>
+                                            <span>{location}</span>
                                         </div>
                                         <div className="single-detail">
                                             <i className="fa-solid fa-money-bill-wave"></i>
-                                            <span>{job.salary}</span>
+                                            <span>{salary}</span>
                                         </div>
                                     </div>
                                     <div className="job-badges">
-                                        <Badge>{job.employment}</Badge>
+                                        <Badge>
+                                            {job.employment_type.name}
+                                        </Badge>
                                         {job.is_urgent && (
                                             <Badge className="orange">
                                                 Urgent
@@ -161,44 +181,34 @@ const JobView = () => {
                                         <h3>Job Description</h3>
                                         <p>{job.description}</p>
                                     </div>
-                                    <div className="single-info-section">
-                                        <h3>Key Responsibilities</h3>
-                                        <ul>
-                                            {job.responsibilities.map(
-                                                (resp, index) => (
-                                                    <li key={index}>{resp}</li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                    <div className="single-info-section">
-                                        <h3>Skill & Experience</h3>
-                                        <ul>
-                                            {job.experience_required.map(
-                                                (exp, index) => (
-                                                    <li key={index}>{exp}</li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                    <div className="single-info-section">
-                                        <h3>Photos</h3>
-                                        <div className="job-photos-list">
-                                            {job.photos.map((photo, index) => {
-                                                return (
-                                                    <div
-                                                        className="photo"
-                                                        key={index}
-                                                    >
-                                                        <img
-                                                            src={photo}
-                                                            alt={job.title}
-                                                        />
-                                                    </div>
-                                                );
-                                            })}
+                                    {job.responsibilities && (
+                                        <div className="single-info-section">
+                                            <h3>Key Responsibilities</h3>
+                                            <ul>
+                                                {job.responsibilities.map(
+                                                    (resp, index) => (
+                                                        <li key={index}>
+                                                            {resp}
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
                                         </div>
-                                    </div>
+                                    )}
+                                    {job.requirements && (
+                                        <div className="single-info-section">
+                                            <h3>Requirements</h3>
+                                            <ul>
+                                                {job.requirements.map(
+                                                    (exp, index) => (
+                                                        <li key={index}>
+                                                            {exp}
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="related-jobs">
@@ -234,7 +244,7 @@ const JobView = () => {
                                         </div>
                                         <div className="info">
                                             <h6>Location</h6>
-                                            <span>{job.location}</span>
+                                            <span>{location}</span>
                                         </div>
                                     </div>
                                     <div className="single-detail">
@@ -243,7 +253,7 @@ const JobView = () => {
                                         </div>
                                         <div className="info">
                                             <h6>Offered Salary</h6>
-                                            <span>{job.salary}</span>
+                                            <span>{salary}</span>
                                         </div>
                                     </div>
                                     <div className="single-detail">
@@ -252,7 +262,9 @@ const JobView = () => {
                                         </div>
                                         <div className="info">
                                             <h6>Employment Type</h6>
-                                            <span>{job.employment}</span>
+                                            <span>
+                                                {job.employment_type.name}
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="single-detail">
@@ -264,65 +276,57 @@ const JobView = () => {
                                             <span>{job.expiration_date}</span>
                                         </div>
                                     </div>
-                                    <div className="single-detail">
-                                        <div className="icon">
-                                            <i className="fa-solid fa-user-tie"></i>
+                                    {job.years_of_experience_required !=
+                                        null && (
+                                        <div className="single-detail">
+                                            <div className="icon">
+                                                <i className="fa-solid fa-user-tie"></i>
+                                            </div>
+                                            <div className="info">
+                                                <h6>Experience</h6>
+                                                <span>
+                                                    {
+                                                        job.years_of_experience_required
+                                                    }
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="info">
-                                            <h6>Experience</h6>
-                                            <span>{job.experience}</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-detail">
-                                        <div className="icon">
-                                            <i className="fa-solid fa-graduation-cap"></i>
-                                        </div>
-                                        <div className="info">
-                                            <h6>Qualification</h6>
-                                            <span>{job.qualification}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="sidebar-card job-skills">
-                                    <h3>Job Skills</h3>
-                                    <ul>
-                                        {job.skills.map((skill, index) => (
-                                            <li key={index}>{skill}</li>
-                                        ))}
-                                    </ul>
+                                    )}
                                 </div>
                                 <div className="sidebar-card job-employer">
                                     <div className="job-employer-header">
                                         <div className="image">
                                             <img
-                                                src={job.employer.logo}
-                                                alt={job.employer.title}
+                                                src={companyLogo}
+                                                alt={job.company.name}
                                             />
                                         </div>
                                         <div className="info">
-                                            <h5>{job.employer.name}</h5>
+                                            <h5>{job.company.name}</h5>
                                             <a href="">View Company Profile</a>
                                         </div>
                                     </div>
                                     <div className="single-company-detail">
                                         <h6>Category</h6>
-                                        <p>{job.employer.category}</p>
+                                        <p>{job.company.category.name}</p>
                                     </div>
-                                    <div className="single-company-detail">
-                                        <h6>Founded Date</h6>
-                                        <p>{job.employer.founded}</p>
-                                    </div>
+                                    {job.company.year_founded != null && (
+                                        <div className="single-company-detail">
+                                            <h6>Founded Date</h6>
+                                            <p>{job.company.year_founded}</p>
+                                        </div>
+                                    )}
                                     <div className="single-company-detail">
                                         <h6>Location</h6>
-                                        <p>{job.employer.location}</p>
+                                        <p>{job.company.city.name}</p>
                                     </div>
                                     <div className="single-company-detail">
                                         <h6>Phone Number</h6>
-                                        <p>{job.employer.phone}</p>
+                                        <p>{job.company.contact_phone}</p>
                                     </div>
                                     <div className="single-company-detail">
                                         <h6>Email</h6>
-                                        <p>{job.employer.email}</p>
+                                        <p>{job.company.contact_email}</p>
                                     </div>
                                     <button className="btn btn-secondary">
                                         Contact company
