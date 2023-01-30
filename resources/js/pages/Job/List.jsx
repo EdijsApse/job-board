@@ -6,17 +6,57 @@ import SortInputs from "../../components/Job/SortInputs";
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getJobs } from "../../store/thunks/job";
+import { useSearchParams } from "react-router-dom";
+import { getFiltersFromUrlSearchParams } from "../../helpers";
+import { useCallback } from "react";
 
 const JobList = () => {
     const isLoading = useSelector((state) => state.job.isLoading);
+
     const list = useSelector((state) => state.job.list);
+    const currentPage = useSelector((state) => state.job.currentPage);
+    const lastPage = useSelector((state) => state.job.lastPage);
+    const itemsPerPage = useSelector((state) => state.job.itemsPerPage);
+    const totalItems = useSelector((state) => state.job.totalItems);
+
     const dispatch = useDispatch();
 
+    const [searchParams, setSeachParams] = useSearchParams();
+
+    const filters = useMemo(() => {
+        return getFiltersFromUrlSearchParams(searchParams);
+    }, [searchParams]);
+
     useEffect(() => {
-        dispatch(getJobs());
-    }, []);
+        if (!isLoading) {
+            dispatch(getJobs(filters));
+        }
+    }, [filters]);
+
+    const setPageHandler = (page) => {
+        setSeachParams({ ...filters, page: page });
+    };
+
+    const setFilters = useCallback(
+        (newFilters) => {
+            const paramsList = { ...filters, ...newFilters, page: 1 };
+            const validParams = {};
+            for (let key in paramsList) {
+                if (paramsList[key]) {
+                    validParams[key] = paramsList[key];
+                }
+            }
+
+            setSeachParams(validParams);
+        },
+        [setSeachParams]
+    );
+
+    const resetSearchHandler = () => {
+        setSeachParams({ page: 1 });
+    };
 
     return (
         <div className="page">
@@ -29,17 +69,33 @@ const JobList = () => {
                     <div className="row">
                         <div className="col-4">
                             <div className="page-filters">
-                                <Filters />
+                                <Filters
+                                    preselectedFilters={filters}
+                                    updateFilters={setFilters}
+                                    resetSearch={resetSearchHandler}
+                                />
                             </div>
                         </div>
                         <div className="col-8 relative">
                             {isLoading && <LoadingSpinner />}
                             <div className="sort-container">
-                                <span>Showing 1 – 10 of 18 results</span>
-                                <div className="sort-inputs">
-                                    <SortInputs />
+                                <div className="search-result-details">
+                                    <span>
+                                        Items per page: <b>{itemsPerPage}</b>
+                                    </span>
+                                    <span>
+                                        Items found: <b>{totalItems}</b>
+                                    </span>
                                 </div>
+                                {/* <div className="sort-inputs">
+                                    <SortInputs />
+                                </div> */}
                             </div>
+                            {list.length === 0 && !isLoading && (
+                                <h6 className="no-list-items-title">
+                                    No Jobs found!
+                                </h6>
+                            )}
                             <ul className="jobs-list">
                                 {list.map((job) => (
                                     <Item
@@ -51,7 +107,13 @@ const JobList = () => {
                                     />
                                 ))}
                             </ul>
-                            <Pagination />
+                            {list.length > 0 && (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    lastPage={lastPage}
+                                    setPage={setPageHandler}
+                                />
+                            )}
                         </div>
                     </div>
                 </Wrapper>

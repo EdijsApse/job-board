@@ -3,16 +3,26 @@ import { axiosErrorResponseHandler } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { jobActions } from "../slices/job";
 
-export const getJobs = () => {
+export const getJobs = (searchParams) => {
     return (dispatch) => {
+        const params = new URLSearchParams();
+
+        for (let key in searchParams) {
+            if (searchParams[key]) {
+                params.append(key, searchParams[key]);
+            }
+        }
+
+        const queryString = params.toString();
+        let url = queryString ? `/job?${queryString}` : "/job";
+
         dispatch(jobActions.setLoadingState({ isLoading: true }));
+
         axios
-            .get("/job")
+            .get(url)
             .then((res) => {
-                const { jobs } = res.data;
-                if (jobs && jobs.length) {
-                    dispatch(jobActions.setItems({ items: jobs }));
-                }
+                const { data, meta } = res.data;
+                dispatch(jobActions.setItems({ items: data, meta: meta }));
             })
             .catch((err) => {
                 dispatch(

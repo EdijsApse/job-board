@@ -1,4 +1,8 @@
-export const axiosErrorResponseHandler = (errResponse, setFormErrorsCallBack, setAlertCallback) => {
+export const axiosErrorResponseHandler = (
+    errResponse,
+    setFormErrorsCallBack,
+    setAlertCallback
+) => {
     const { errors } = errResponse.response.data;
     const formErrors = {};
 
@@ -10,4 +14,17 @@ export const axiosErrorResponseHandler = (errResponse, setFormErrorsCallBack, se
     } else {
         setAlertCallback("Oooops.... Something went wrong! Try again later!");
     }
+};
+
+export const getFiltersFromUrlSearchParams = (URLSearchParams) => {
+    const searchParamsEntries = URLSearchParams.entries();
+    const filters = {};
+
+    for (let param of searchParamsEntries) {
+        const [key, value] = param;
+        if (value) {
+            filters[key] = value;
+        }
+    }
+    return filters;
 };

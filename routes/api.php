@@ -52,9 +52,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('/job', JobController::class)
-        ->only(['index', 'update', 'store', 'show'])->missing(function () {
+        ->only(['update', 'store'])->missing(function () {
             return response()->json(['message' => 'Resource was not found!'], 404);
         });
+});
+
+Route::apiResource('/job', JobController::class)
+->only(['index', 'show'])->missing(function () {
+    return response()->json(['message' => 'Resource was not found!'], 404);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobCollection;
 use App\Http\Resources\JobResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
@@ -14,11 +15,9 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json([
-            'jobs' => JobResource::collection(Job::get())
-        ]);
+        return new JobCollection(Job::filter(collect($request->all())));
     }
 
     /**

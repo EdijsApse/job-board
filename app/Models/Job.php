@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -59,6 +60,29 @@ class Job extends Model
             return Storage::disk('public')->url($this->company->logo);
         }
         return null;
+    }
+
+
+    public function scopeFilter(Builder $query, $collectionOfInputs)
+    {
+
+        if ($collectionOfInputs->get('keyword')) {
+            $query->where('jobtitle', 'like', "%".$collectionOfInputs->get('keyword')."%");
+        }
+
+        if ($collectionOfInputs->get('city_id')) {
+            $query->where('city_id', $collectionOfInputs->get('city_id'));
+        }
+
+        if ($collectionOfInputs->get('category_id')) {
+            $query->where('category_id', $collectionOfInputs->get('category_id'));
+        }
+
+        if ($collectionOfInputs->get('employment_type_id')) {
+            $query->where('employment_type_id', $collectionOfInputs->get('employment_type_id'));
+        }
+
+        return $query->paginate(20);
     }
 
     /**

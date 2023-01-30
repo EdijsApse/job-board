@@ -46,3 +46,20 @@ ul {
 .relative {
     position: relative;
 }
+
+.no-list-items-title {
+    font-size: 2rem;
+    text-align: center;
+    margin: $space-6 0;
+    &::after {
+        content: "";
+        width: 120px;
+        height: 4px;
+        border-radius: $border-radius-sm;
+        background-color: $deep-blue;
+        margin-top: $space-4;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}

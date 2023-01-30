@@ -1,6 +1,81 @@
-import { Fragment } from "react";
+import { useState } from "react";
+import { useCallback, useMemo, useReducer, useEffect, Fragment } from "react";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { getFiltersFromUrlSearchParams } from "../../helpers";
 
-const Filters = () => {
+const SET_KEYWORD = "SET_KEYWORD";
+const SET_CITY = "SET_CITY";
+const SET_CATEGORY = "SET_CATEGORY";
+const SET_EMPLOYMENT = "SET_EMPLOYMENT";
+const SET_INITIAL_STATE = "SET_INITIAL_STATE";
+
+const defaultState = {
+    city_id: "",
+    category_id: "",
+    employment_type_id: "",
+    keyword: "",
+};
+
+const filterReducer = (state = defaultState, action) => {
+    const { type, value } = action;
+
+    if (type === SET_INITIAL_STATE) {
+        const { city_id, category_id, employment_type_id, keyword } = value;
+        return {
+            city_id: city_id ?? "",
+            category_id: category_id ?? "",
+            employment_type_id: employment_type_id ?? "",
+            keyword: keyword ?? "",
+        };
+    }
+
+    if (type === SET_KEYWORD) {
+        return { ...state, keyword: value };
+    }
+    if (type === SET_CATEGORY) {
+        return { ...state, category_id: value };
+    }
+    if (type === SET_EMPLOYMENT) {
+        return { ...state, employment_type_id: value };
+    }
+    if (type === SET_CITY) {
+        return { ...state, city_id: value };
+    }
+    return state;
+};
+
+const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
+    const cities = useSelector((state) => state.selectOptions.cities);
+    const categories = useSelector((state) => state.selectOptions.categories);
+    const employmentTypes = useSelector(
+        (state) => state.selectOptions.employmentTypes
+    );
+    const [shouldWatchForChanges, setShouldWatchForChanges] = useState(false);
+
+    const [filterState, dispatch] = useReducer(filterReducer, defaultState);
+
+    useEffect(() => {
+        dispatch({ type: SET_INITIAL_STATE, value: preselectedFilters });
+    }, [preselectedFilters]);
+
+    const setFilterValue = (type, event) => {
+        dispatch({ type: type, value: event.target.value });
+    };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (shouldWatchForChanges) {
+                updateFilters(filterState);
+            }
+            setShouldWatchForChanges(true);
+        }, 300);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [filterState]);
+
     return (
         <Fragment>
             <div className="single-filter">
@@ -9,6 +84,8 @@ const Filters = () => {
                     <i className="fa-solid fa-magnifying-glass"></i>
                     <input
                         type="text"
+                        value={filterState.keyword}
+                        onChange={setFilterValue.bind(null, SET_KEYWORD)}
                         className="form-control"
                         placeholder="Job title, keywords ..."
                     />
@@ -18,19 +95,35 @@ const Filters = () => {
                 <h6>Location</h6>
                 <div className="form-group pre-icon">
                     <i className="fa-solid fa-location-dot"></i>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="City or postcode"
-                    />
+                    <select
+                        className="form-select"
+                        value={filterState.city_id}
+                        onChange={setFilterValue.bind(null, SET_CITY)}
+                    >
+                        <option value="">Choose a city ...</option>
+                        {cities.map((city) => (
+                            <option value={city.value} key={city.value}>
+                                {city.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
             <div className="single-filter">
                 <h6>Category</h6>
                 <div className="form-group pre-icon">
                     <i className="fa-solid fa-briefcase"></i>
-                    <select className="form-select">
-                        <option>Choose a category ...</option>
+                    <select
+                        className="form-select"
+                        value={filterState.category_id}
+                        onChange={setFilterValue.bind(null, SET_CATEGORY)}
+                    >
+                        <option value="">Choose a category ...</option>
+                        {categories.map((category) => (
+                            <option value={category.value} key={category.value}>
+                                {category.label}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -38,12 +131,21 @@ const Filters = () => {
                 <h6>Job type</h6>
                 <div className="form-group pre-icon">
                     <i className="fa-solid fa-briefcase"></i>
-                    <select className="form-select">
-                        <option>Job type</option>
+                    <select
+                        className="form-select"
+                        value={filterState.employment_type_id}
+                        onChange={setFilterValue.bind(null, SET_EMPLOYMENT)}
+                    >
+                        <option value="">Select job type</option>
+                        {employmentTypes.map((type) => (
+                            <option value={type.value} key={type.value}>
+                                {type.label}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>
-            <div className="single-filter">
+            {/* <div className="single-filter">
                 <h6>Date posted</h6>
 
                 <div className="form-check">
@@ -164,8 +266,10 @@ const Filters = () => {
                         5 Year
                     </label>
                 </div>
-            </div>
-            <button className="btn btn-primary">Find Jobs</button>
+            </div> */}
+            <button className="btn btn-primary" onClick={resetSearch}>
+                Reset Search
+            </button>
         </Fragment>
     );
 };

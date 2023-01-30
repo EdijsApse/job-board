@@ -119,6 +119,13 @@ $navigationHeight: 112.47px;
         justify-content: space-between;
         align-items: center;
         margin-bottom: $space-8;
+        .search-result-details {
+            display: flex;
+            flex-direction: column;
+            span {
+                display: block;
+            }
+        }
         .sort-inputs {
             display: flex;
             justify-content: flex-end;
