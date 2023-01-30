@@ -1,6 +1,7 @@
 .btn {
     @include font-regular();
-    padding: 0px $space-8;
+    padding: $space-4 $space-8;
+    padding-top: 0.85rem;
     font-size: 0.95rem;
     height: 50px;
     border: none;

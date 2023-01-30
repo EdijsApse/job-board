@@ -6,6 +6,8 @@ import ErrorPage from "../../pages/Error";
 import CreateJob from "../../pages/Job/Create";
 import NotFoundPage from "../../pages/NotFoundPage";
 import PrepareApp from "../middlewares/PrepareApp";
+import EmployerOnly from "../middlewares/EmployerOnly";
+import CompanyOnly from "../middlewares/CompanyOnly";
 
 export default {
     path: "/",
@@ -26,7 +28,13 @@ export default {
         },
         {
             path: "jobs/create",
-            element: <CreateJob />,
+            element: (
+                <EmployerOnly>
+                    <CompanyOnly>
+                        <CreateJob />
+                    </CompanyOnly>
+                </EmployerOnly>
+            ),
         },
         {
             path: "jobs/:id",

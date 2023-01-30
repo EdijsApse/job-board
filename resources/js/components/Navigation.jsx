@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/slices/auth";
 
 const Navigation = () => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user);
+    const isEmployer = user && user.is_employer;
+    const isCandidate = user && user.is_candidate;
     const authDispatch = useDispatch();
 
     const showAuthModalHandler = () => {
@@ -29,7 +31,7 @@ const Navigation = () => {
                         <NavLink to="/" className="nav-item nav-link">
                             Home
                         </NavLink>
-                        {isAuthenticated && (
+                        {user && (
                             <NavLink
                                 to="/dashboard"
                                 className="nav-item nav-link"
@@ -49,7 +51,7 @@ const Navigation = () => {
                     </div>
                 </div>
                 <div className="auth-buttons">
-                    {!isAuthenticated && (
+                    {!user && (
                         <button
                             className="btn btn-secondary"
                             onClick={showAuthModalHandler}
@@ -57,12 +59,24 @@ const Navigation = () => {
                             Login / Register
                         </button>
                     )}
-                    {isAuthenticated && (
+                    {user && (
                         <button className="btn btn-secondary" onClick={logout}>
                             Logout
                         </button>
                     )}
-                    <button className="btn btn-primary">Job Post</button>
+                    {isEmployer && (
+                        <NavLink to="/jobs/create" className="btn btn-primary">
+                            Job Post
+                        </NavLink>
+                    )}
+                    {isCandidate && (
+                        <NavLink
+                            to="/dashboard/resume"
+                            className="btn btn-primary"
+                        >
+                            Create Resume
+                        </NavLink>
+                    )}
                 </div>
             </nav>
         </div>
