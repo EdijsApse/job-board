@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CompanyCollection;
+use App\Http\Resources\CompanyResource;
+use App\Http\Resources\CompanyWithJobsResource;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Http\Resources\UserResource;
@@ -73,6 +75,19 @@ class CompanyController extends Controller
         return response()->json([
             'success' => true,
             'user' => new UserResource($request->user())
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Company  $company
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Company $employer)
+    {
+        return response()->json([
+            'employer' => new CompanyWithJobsResource($employer)
         ]);
     }
 }

@@ -1,4 +1,5 @@
 .single-employer-card {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,5 +38,10 @@
                 }
             }
         }
+    }
+    .btn-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
 }

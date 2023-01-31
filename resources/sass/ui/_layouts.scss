@@ -39,6 +39,16 @@ $navigationHeight: 112.47px;
     }
     .page-main {
         margin-bottom: $space-8 + $space-4;
+        .employers-list {
+            .single-employer-card {
+                &:hover {
+                    .badge {
+                        background-color: $deep-blue;
+                        color: #FFF;
+                    }
+                }
+            }
+        }
     }
     .page-filters {
         background-color: $pale-gray;

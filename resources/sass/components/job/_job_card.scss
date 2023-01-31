@@ -30,22 +30,6 @@
                     color: $deep-blue;
                 }
             }
-            .job-details {
-                display: flex;
-                flex-wrap: wrap;
-                .single-detail {
-                    @include font-light();
-                    margin-right: $space-6;
-                    color: $dark-gray;
-                    i {
-                        margin-right: $space-2;
-                        font-size: 0.9rem;
-                    }
-                    span {
-                        font-size: 0.8rem;
-                    }
-                }
-            }
         }
     }
     .job-badges {
@@ -58,21 +42,8 @@
         }
     }
     .btn-icon {
-        @include circle(30px);
         position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         right: 10px;
         top: 10px;
-        background-color: #fff;
-        cursor: pointer;
-        transition: all 0.3s;
-        i {
-            font-size: 0.9rem;
-        }
-        &:hover {
-            background-color: $cloud-blue;
-        }
     }
 }

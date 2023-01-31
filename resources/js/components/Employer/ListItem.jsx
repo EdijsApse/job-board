@@ -22,6 +22,9 @@ const ListItem = ({ employer }) => {
                 </div>
             </div>
             <Badge>{`Total Jobs - ${employer.jobs_count}`}</Badge>
+            <span className="btn-icon">
+                <i className="fa-regular fa-bookmark"></i>
+            </span>
         </Card>
     );
 };

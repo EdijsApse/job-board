@@ -104,7 +104,7 @@ const JobList = () => {
                                     No Jobs found!
                                 </h6>
                             )}
-                            <ul className="jobs-list">
+                            <ul>
                                 {list.map((job) => (
                                     <Item
                                         key={job.id}

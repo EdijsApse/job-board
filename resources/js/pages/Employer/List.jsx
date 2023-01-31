@@ -100,7 +100,7 @@ const EmployerList = () => {
                                     No Jobs found!
                                 </h6>
                             )}
-                            <ul className="jobs-list">
+                            <ul className="employers-list">
                                 {list.map((employer) => (
                                     <EmployerListItem
                                         employer={employer}

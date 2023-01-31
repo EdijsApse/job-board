@@ -22,7 +22,7 @@ const Item = ({
                     <NavLink to={`/jobs/${job.id}`} className="job-link">
                         {job.jobtitle}
                     </NavLink>
-                    <div className="job-details">
+                    <div className="details-list">
                         <div className="single-detail">
                             <i className="fa-solid fa-briefcase"></i>
                             <span>{job.category.name}</span>

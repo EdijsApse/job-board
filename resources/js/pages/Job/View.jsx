@@ -120,7 +120,7 @@ const JobView = () => {
                                 <h1 className="view-page-title">
                                     {job.jobtitle}
                                 </h1>
-                                <div className="job-details">
+                                <div className="details-list">
                                     <div className="single-detail">
                                         <i className="fa-solid fa-briefcase"></i>
                                         <span>{job.category.name}</span>
@@ -198,7 +198,7 @@ const JobView = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="related-jobs">
+                            <div className="related-items-section">
                                 <h4>Related jobs</h4>
                                 <ul>
                                     {related_jobs.map((singleJob) => (

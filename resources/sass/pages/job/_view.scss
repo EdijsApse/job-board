@@ -4,7 +4,7 @@
             margin-bottom: 0;
             .job-header {
                 .job-info {
-                    .job-details {
+                    .details-list {
                         .single-detail {
                             margin-right: $space-8;
                             i {
@@ -29,13 +29,6 @@
                     padding-bottom: 7px;
                 }
             }
-        }
-    }
-
-    .related-jobs {
-        h4 {
-            font-size: 1.7rem;
-            margin-bottom: $space-8;
         }
     }
 }

@@ -5,6 +5,7 @@
     border-radius: 50px;
     font-size: 0.8rem;
     @include font-regular();
+    transition: all 0.3s;
     &.orange {
         color: $orange;
         background-color: $bright-orange;

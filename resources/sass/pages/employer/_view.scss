@@ -1,0 +1,22 @@
+.single-employer-page {
+    .single-employer-card {
+        .employer-logo {
+            @include circle(100px);
+            overflow: hidden;
+            margin-right: $space-4;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .employer-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .details-list {
+                margin-bottom: $space-2;
+            }
+        }
+    }
+}

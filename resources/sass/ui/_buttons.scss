@@ -10,7 +10,7 @@
     transition: all 0.3s;
     &.btn-primary {
         background-color: $deep-blue;
-        color: #FFF;
+        color: #fff;
         &:hover {
             background-color: $deep-blue-hover;
         }
@@ -20,10 +20,26 @@
         color: $deep-blue;
         &:hover {
             background-color: $deep-blue;
-            color: #FFF;
+            color: #fff;
         }
         &:active {
             background-color: $deep-blue;
         }
+    }
+}
+
+.btn-icon {
+    @include circle(30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    i {
+        font-size: 0.9rem;
+    }
+    &:hover {
+        background-color: $cloud-blue;
     }
 }

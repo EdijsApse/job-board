@@ -82,7 +82,7 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
                             value={filterState.keyword}
                             onChange={setFilterValue.bind(null, SET_KEYWORD)}
                             className="form-control"
-                            placeholder="Job title, keywords ..."
+                            placeholder="Company name, keywords ..."
                         />
                     </div>
                 </div>
