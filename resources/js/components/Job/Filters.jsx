@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { useCallback, useMemo, useReducer, useEffect, Fragment } from "react";
+import { useReducer, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { getFiltersFromUrlSearchParams } from "../../helpers";
 
 const SET_KEYWORD = "SET_KEYWORD";
 const SET_CITY = "SET_CITY";
@@ -51,7 +48,6 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
     const employmentTypes = useSelector(
         (state) => state.selectOptions.employmentTypes
     );
-    const [shouldWatchForChanges, setShouldWatchForChanges] = useState(false);
 
     const [filterState, dispatch] = useReducer(filterReducer, defaultState);
 
@@ -63,89 +59,91 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
         dispatch({ type: type, value: event.target.value });
     };
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (shouldWatchForChanges) {
-                updateFilters(filterState);
-            }
-            setShouldWatchForChanges(true);
-        }, 300);
+    const filterJobs = (e) => {
+        e.preventDefault();
+        updateFilters(filterState);
+    };
 
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [filterState]);
+    const canResetFilter =
+        filterState.keyword ||
+        filterState.city_id ||
+        filterState.category_id ||
+        filterState.employment_type_id;
 
     return (
         <Fragment>
-            <div className="single-filter">
-                <h6>Search by Keywords</h6>
-                <div className="form-group pre-icon">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                    <input
-                        type="text"
-                        value={filterState.keyword}
-                        onChange={setFilterValue.bind(null, SET_KEYWORD)}
-                        className="form-control"
-                        placeholder="Job title, keywords ..."
-                    />
+            <form onSubmit={filterJobs}>
+                <div className="single-filter">
+                    <h6>Search by Keywords</h6>
+                    <div className="form-group pre-icon">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            type="text"
+                            value={filterState.keyword}
+                            onChange={setFilterValue.bind(null, SET_KEYWORD)}
+                            className="form-control"
+                            placeholder="Job title, keywords ..."
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="single-filter">
-                <h6>Location</h6>
-                <div className="form-group pre-icon">
-                    <i className="fa-solid fa-location-dot"></i>
-                    <select
-                        className="form-select"
-                        value={filterState.city_id}
-                        onChange={setFilterValue.bind(null, SET_CITY)}
-                    >
-                        <option value="">Choose a city ...</option>
-                        {cities.map((city) => (
-                            <option value={city.value} key={city.value}>
-                                {city.label}
-                            </option>
-                        ))}
-                    </select>
+                <div className="single-filter">
+                    <h6>Location</h6>
+                    <div className="form-group pre-icon">
+                        <i className="fa-solid fa-location-dot"></i>
+                        <select
+                            className="form-select"
+                            value={filterState.city_id}
+                            onChange={setFilterValue.bind(null, SET_CITY)}
+                        >
+                            <option value="">Choose a city ...</option>
+                            {cities.map((city) => (
+                                <option value={city.value} key={city.value}>
+                                    {city.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div className="single-filter">
-                <h6>Category</h6>
-                <div className="form-group pre-icon">
-                    <i className="fa-solid fa-briefcase"></i>
-                    <select
-                        className="form-select"
-                        value={filterState.category_id}
-                        onChange={setFilterValue.bind(null, SET_CATEGORY)}
-                    >
-                        <option value="">Choose a category ...</option>
-                        {categories.map((category) => (
-                            <option value={category.value} key={category.value}>
-                                {category.label}
-                            </option>
-                        ))}
-                    </select>
+                <div className="single-filter">
+                    <h6>Category</h6>
+                    <div className="form-group pre-icon">
+                        <i className="fa-solid fa-briefcase"></i>
+                        <select
+                            className="form-select"
+                            value={filterState.category_id}
+                            onChange={setFilterValue.bind(null, SET_CATEGORY)}
+                        >
+                            <option value="">Choose a category ...</option>
+                            {categories.map((category) => (
+                                <option
+                                    value={category.value}
+                                    key={category.value}
+                                >
+                                    {category.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div className="single-filter">
-                <h6>Job type</h6>
-                <div className="form-group pre-icon">
-                    <i className="fa-solid fa-briefcase"></i>
-                    <select
-                        className="form-select"
-                        value={filterState.employment_type_id}
-                        onChange={setFilterValue.bind(null, SET_EMPLOYMENT)}
-                    >
-                        <option value="">Select job type</option>
-                        {employmentTypes.map((type) => (
-                            <option value={type.value} key={type.value}>
-                                {type.label}
-                            </option>
-                        ))}
-                    </select>
+                <div className="single-filter">
+                    <h6>Job type</h6>
+                    <div className="form-group pre-icon">
+                        <i className="fa-solid fa-briefcase"></i>
+                        <select
+                            className="form-select"
+                            value={filterState.employment_type_id}
+                            onChange={setFilterValue.bind(null, SET_EMPLOYMENT)}
+                        >
+                            <option value="">Select job type</option>
+                            {employmentTypes.map((type) => (
+                                <option value={type.value} key={type.value}>
+                                    {type.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-            </div>
-            {/* <div className="single-filter">
+                {/* <div className="single-filter">
                 <h6>Date posted</h6>
 
                 <div className="form-check">
@@ -267,9 +265,17 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
                     </label>
                 </div>
             </div> */}
-            <button className="btn btn-primary" onClick={resetSearch}>
-                Reset Search
-            </button>
+                <button className="btn btn-primary">Filter Jobs</button>
+                {canResetFilter && (
+                    <button
+                        className="btn btn-danger mt-4"
+                        type="button"
+                        onClick={resetSearch}
+                    >
+                        Reset Search
+                    </button>
+                )}
+            </form>
         </Fragment>
     );
 };

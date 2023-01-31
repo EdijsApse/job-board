@@ -48,3 +48,42 @@ export const updateCompanyDetails = (companyDetails) => {
             });
     };
 };
+
+export const getEmployers = (searchParams) => {
+    return (dispatch) => {
+        const params = new URLSearchParams();
+
+        for (let key in searchParams) {
+            if (searchParams[key]) {
+                params.append(key, searchParams[key]);
+            }
+        }
+
+        const queryString = params.toString();
+        let url = queryString ? `/employer?${queryString}` : "/employer";
+
+        dispatch(employerActions.setLoadingState({ isLoading: true }));
+
+        axios
+            .get(url)
+            .then((res) => {
+                const { data, meta } = res.data;
+                dispatch(
+                    employerActions.setListingDetails({
+                        items: data,
+                        meta: meta,
+                    })
+                );
+            })
+            .catch((err) => {
+                dispatch(
+                    alertActions.showWarningAlert({
+                        message: "Could't load list of employers!",
+                    })
+                );
+            })
+            .finally(() => {
+                dispatch(employerActions.setLoadingState({ isLoading: false }));
+            });
+    };
+};

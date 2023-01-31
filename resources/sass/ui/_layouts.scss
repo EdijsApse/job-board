@@ -26,6 +26,14 @@ $navigationHeight: 112.47px;
                         display: none;
                     }
                 }
+                a {
+                    color: $dark;
+                    text-decoration: none;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: $deep-blue;
+                    }
+                }
             }
         }
     }
@@ -176,68 +184,6 @@ $navigationHeight: 112.47px;
                     color: #fff;
                 }
             }
-        }
-    }
-}
-
-.view-page {
-    padding-top: $navigationHeight;
-    .view-page-header {
-        padding-top: $space-8 * 2;
-        padding-bottom: $space-8 * 2;
-        background-color: $pale-blue;
-        .view-page-title {
-            font-size: 1.7rem;
-        }
-    }
-    .view-page-main {
-        background-color: #fff;
-        padding-top: $space-6 * 2;
-        padding-bottom: $space-6 * 2;
-        .single-info-section {
-            margin-bottom: $space-6 * 2;
-            h3 {
-                font-size: 1.1rem;
-                margin-bottom: $space-4;
-            }
-            p {
-                color: $gray;
-                margin-bottom: 0;
-                font-size: 0.95rem;
-                line-height: 1.6rem;
-            }
-            ul {
-                list-style-type: disc;
-                margin: 0;
-                padding: 0;
-                li {
-                    color: $gray;
-                    font-size: 0.95rem;
-                    margin-bottom: $space-1;
-                    margin-left: 20px;
-                    line-height: 2.5rem;
-                    &::marker {
-                        color: $dark-gray;
-                    }
-                    &:last-of-type {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
-    }
-
-    .sidebar-card {
-        padding: $space-6 $space-8;
-        background-color: $pale-gray;
-        border-radius: $border-radius-sm;
-        margin-bottom: $space-8;
-        &:last-of-type {
-            margin-bottom: 0;
-        }
-        h3 {
-            font-size: 1.1rem;
-            margin-bottom: $space-6;
         }
     }
 }

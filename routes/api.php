@@ -62,6 +62,11 @@ Route::apiResource('/job', JobController::class)
     return response()->json(['message' => 'Resource was not found!'], 404);
 });
 
+Route::apiResource('/employer', CompanyController::class)
+->only(['index', 'show'])->missing(function () {
+    return response()->json(['message' => 'Resource was not found!'], 404);
+});
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/select-options', [PublicController::class, 'lists']);

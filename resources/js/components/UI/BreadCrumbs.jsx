@@ -1,8 +1,13 @@
-const BreadCrumbs = () => {
+import { NavLink } from "react-router-dom";
+
+const BreadCrumbs = ({ crumbs }) => {
     return (
         <ul className="breadcrumbs">
-            <li>Home</li>
-            <li>Jobs</li>
+            {crumbs.map((crumb) => (
+                <li key={crumb.link}>
+                    <NavLink to={crumb.link}>{crumb.title}</NavLink>
+                </li>
+            ))}
         </ul>
     );
 };

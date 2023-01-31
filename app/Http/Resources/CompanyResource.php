@@ -30,7 +30,8 @@ class CompanyResource extends JsonResource
             'category' => new CategoryResource($this->category),
             'company_size_id' => $this->company_size_id,
             'companySize' => new CompanySizeResource($this->companySize),
-            'logo' => $this->logo ? Storage::disk('public')->url($this->logo) : null
+            'logo' => $this->logo ? Storage::disk('public')->url($this->logo) : null,
+            'jobs_count' => $this->jobs()->count()
         ];
     }
 }

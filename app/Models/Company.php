@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +36,27 @@ class Company extends Model
     public function getJobRelatedFilesPath()
     {
         return $this->user->getCompanyFilesPath()."/jobs";
+    }
+
+    public function scopeFilter(Builder $query, $collectionOfInputs)
+    {
+        if ($collectionOfInputs->get('keyword')) {
+            $query->where('name', 'like', "%".$collectionOfInputs->get('keyword')."%");
+        }
+
+        if ($collectionOfInputs->get('city_id')) {
+            $query->where('city_id', $collectionOfInputs->get('city_id'));
+        }
+
+        if ($collectionOfInputs->get('category_id')) {
+            $query->where('category_id', $collectionOfInputs->get('category_id'));
+        }
+
+        if ($collectionOfInputs->get('company_size_id')) {
+            $query->where('company_size_id', $collectionOfInputs->get('company_size_id'));
+        }
+
+        return $query->paginate(20);
     }
 
     /**

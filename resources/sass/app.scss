@@ -1,20 +1,20 @@
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Fonts
-@import 'fonts';
+@import "fonts";
 
 // Mixins
-@import 'mixins';
+@import "mixins";
 
-@import './ui/index';
+@import "./ui/index";
 
-@import './components/index';
+@import "./components/index";
 
-@import './pages/index';
+@import "./pages/index";
 
 body {
     @include font-regular();
@@ -62,4 +62,10 @@ ul {
         margin-right: auto;
         display: block;
     }
+}
+
+.text-danger {
+    @include font-semibold();
+    color: $red;
+    margin-left: $space-2;
 }

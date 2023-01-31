@@ -1,0 +1,167 @@
+.view-page {
+    padding-top: $navigationHeight;
+    .view-page-header {
+        padding-top: $space-8 * 2;
+        padding-bottom: $space-8 * 2;
+        background-color: $pale-blue;
+        .view-page-title {
+            font-size: 1.7rem;
+        }
+        .view-page-header-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-col {
+            margin-bottom: 0;
+        }
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .actions {
+                display: flex;
+                .btn-primary {
+                    min-width: 200px;
+                    margin-right: $space-6;
+                }
+
+                .btn-secondary {
+                    padding-left: $space-6;
+                    padding-right: $space-6;
+                    i {
+                        position: relative;
+                        left: 1px;
+                    }
+                }
+            }
+        }
+    }
+    .view-page-main {
+        background-color: #fff;
+        padding-top: $space-6 * 2;
+        padding-bottom: $space-6 * 2;
+        .inner-col-wrapper {
+            padding-right: $space-2;
+        }
+        .single-info-section {
+            margin-bottom: $space-6 * 2;
+            h3 {
+                font-size: 1.1rem;
+                margin-bottom: $space-4;
+            }
+            p {
+                color: $gray;
+                margin-bottom: 0;
+                font-size: 0.95rem;
+                line-height: 1.6rem;
+            }
+            ul {
+                list-style-type: disc;
+                margin: 0;
+                padding: 0;
+                li {
+                    color: $gray;
+                    font-size: 0.95rem;
+                    margin-bottom: $space-1;
+                    margin-left: 20px;
+                    line-height: 2.5rem;
+                    &::marker {
+                        color: $dark-gray;
+                    }
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .sidebar-card {
+        padding: $space-6 $space-8;
+        background-color: $pale-gray;
+        border-radius: $border-radius-sm;
+        margin-bottom: $space-8;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: $space-6;
+        }
+        &.card-with-detail-icons {
+            .single-detail {
+                display: flex;
+                margin-bottom: $space-8;
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+                .icon {
+                    width: 30px;
+                    text-align: center;
+                    margin-right: $space-6;
+                    i {
+                        font-size: 1.6rem;
+                        color: $deep-blue;
+                    }
+                }
+                .info {
+                    font-size: 0.9rem;
+                    position: relative;
+                    top: -1px;
+                    h6 {
+                        margin-bottom: $space-2;
+                    }
+                    span {
+                        color: $gray;
+                    }
+                }
+            }
+        }
+        &.item-info-card {
+            .item-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: $space-6;
+                .image {
+                    @include circle(80px);
+                    border-radius: $border-radius-sm;
+                    margin-right: $space-4;
+                    background-color: $cloud-blue;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .header-details {
+                    h5 {
+                        font-size: 1.1rem;
+                        margin-bottom: $space-2;
+                    }
+                    a {
+                        text-decoration: none;
+                        color: $deep-blue;
+                        margin: 0;
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+            .single-detail {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: $space-6;
+                h6 {
+                    margin: 0;
+                    text-align: left;
+                }
+                p {
+                    font-size: 0.9rem;
+                    margin: 0;
+                    text-align: right;
+                    color: $gray;
+                }
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}
