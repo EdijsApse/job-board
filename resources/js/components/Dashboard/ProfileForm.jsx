@@ -11,6 +11,11 @@ const ProfileForm = () => {
     const isLoading = useSelector((state) => state.profile.isLoading);
     const errors = useSelector((state) => state.profile.errors);
 
+    const isCandidate = useSelector((state) => {
+        const user = state.auth.user;
+        return user && user.is_candidate;
+    });
+
     const userProfile = useSelector((state) => {
         const user = state.auth.user;
         return user && user.profile ? user.profile : {};
@@ -24,6 +29,7 @@ const ProfileForm = () => {
     const [phone, setPhone] = useState(userProfile.phone ?? "");
     const [gender, setGender] = useState(userProfile.gender ?? "");
     const [imageFile, setImageFile] = useState(null);
+    const [isPublic, setIsPublic] = useState(userProfile.is_public ?? false);
 
     const fileSelectedHandler = (file) => {
         setImageFile(file);
@@ -43,6 +49,11 @@ const ProfileForm = () => {
         formData.append("phone", phone);
         formData.append("gender", gender);
         formData.append("date_of_birth", dateOfBirth);
+
+        if (isCandidate) {
+            formData.append("is_public", isPublic ? 1 : 0);
+        }
+
         if (imageFile) {
             formData.append("image", imageFile);
         }
@@ -51,6 +62,10 @@ const ProfileForm = () => {
     };
 
     const genders = useSelector((state) => state.selectOptions.genders);
+
+    const toggleIsPublicHandler = (e) => {
+        setIsPublic(e.target.checked);
+    };
 
     return (
         <DashboardCard className="relative">
@@ -144,6 +159,34 @@ const ProfileForm = () => {
                         />
                     </div>
                 </div>
+                {isCandidate && (
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="form-check">
+                                <input
+                                    id="is_public"
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={isPublic}
+                                    checked={isPublic}
+                                    onChange={toggleIsPublicHandler}
+                                />
+                                <label
+                                    className="form-check-label"
+                                    htmlFor="is_public"
+                                >
+                                    Show my profile details in public search
+                                    results
+                                </label>
+                            </div>
+                            {errors.is_public && (
+                                <p className="input-error">
+                                    {errors.is_public}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                )}
                 <button className="btn btn-primary" type="submit">
                     Save Details
                 </button>

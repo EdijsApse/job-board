@@ -74,7 +74,7 @@ const Navigation = () => {
                             to="/dashboard/resume"
                             className="btn btn-primary"
                         >
-                            Create Resume
+                            Update Resume
                         </NavLink>
                     )}
                 </div>

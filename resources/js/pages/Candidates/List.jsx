@@ -1,5 +1,6 @@
 import Wrapper from "../../components/UI/Wrapper";
-import Filters from "../../components/Employer/Filters";
+import CandidateItem from "../../components/Candidate/ListItem";
+import Filters from "../../components/Candidate/Filters";
 import Pagination from "../../components/UI/Pagination";
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,17 +9,16 @@ import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getFiltersFromUrlSearchParams } from "../../helpers";
 import { useCallback } from "react";
-import { getEmployers } from "../../store/thunks/employer";
-import EmployerListItem from "../../components/Employer/ListItem";
+import { getCandidates } from "../../store/thunks/candidate";
 
-const EmployerList = () => {
-    const isLoading = useSelector((state) => state.employer.isLoading);
+const CandidatesList = () => {
+    const isLoading = useSelector((state) => state.candidates.isLoading);
 
-    const list = useSelector((state) => state.employer.list);
-    const currentPage = useSelector((state) => state.employer.currentPage);
-    const lastPage = useSelector((state) => state.employer.lastPage);
-    const itemsPerPage = useSelector((state) => state.employer.itemsPerPage);
-    const totalItems = useSelector((state) => state.employer.totalItems);
+    const list = useSelector((state) => state.candidates.list);
+    const currentPage = useSelector((state) => state.candidates.currentPage);
+    const lastPage = useSelector((state) => state.candidates.lastPage);
+    const itemsPerPage = useSelector((state) => state.candidates.itemsPerPage);
+    const totalItems = useSelector((state) => state.candidates.totalItems);
 
     const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const EmployerList = () => {
 
     useEffect(() => {
         if (!isLoading) {
-            dispatch(getEmployers(filters));
+            dispatch(getCandidates(filters));
         }
     }, [filters]);
 
@@ -63,15 +63,15 @@ const EmployerList = () => {
             link: "/",
         },
         {
-            title: "Employers",
-            link: "/employers",
+            title: "Candidates",
+            link: "/candidates",
         },
     ];
 
     return (
         <div className="page list-page">
             <div className="page-header">
-                <h1>Employers</h1>
+                <h1>Candidates</h1>
                 <BreadCrumbs crumbs={crumbs} />
             </div>
             <main className="page-main container-fluid">
@@ -103,11 +103,11 @@ const EmployerList = () => {
                                     No Jobs found!
                                 </h6>
                             )}
-                            <ul className="list-items employers-list">
-                                {list.map((employer) => (
-                                    <EmployerListItem
-                                        employer={employer}
-                                        key={employer.id}
+                            <ul className="list-items">
+                                {list.map((candidate) => (
+                                    <CandidateItem
+                                        candidate={candidate}
+                                        key={candidate.id}
                                     />
                                 ))}
                             </ul>
@@ -126,4 +126,4 @@ const EmployerList = () => {
     );
 };
 
-export default EmployerList;
+export default CandidatesList;

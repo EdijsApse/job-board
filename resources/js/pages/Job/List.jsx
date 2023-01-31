@@ -58,16 +58,19 @@ const JobList = () => {
         setSeachParams({ page: 1 });
     };
 
-    const crumbs = [{
-        title: 'Home',
-        link: '/'
-    }, {
-        title: 'Jobs',
-        link: '/jobs'
-    }];
+    const crumbs = [
+        {
+            title: "Home",
+            link: "/",
+        },
+        {
+            title: "Jobs",
+            link: "/jobs",
+        },
+    ];
 
     return (
-        <div className="page">
+        <div className="page list-page">
             <div className="page-header">
                 <h1>Jobs</h1>
                 <BreadCrumbs crumbs={crumbs} />
@@ -104,7 +107,7 @@ const JobList = () => {
                                     No Jobs found!
                                 </h6>
                             )}
-                            <ul>
+                            <ul className="list-items">
                                 {list.map((job) => (
                                     <Item
                                         key={job.id}

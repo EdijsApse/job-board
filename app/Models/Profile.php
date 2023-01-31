@@ -22,6 +22,7 @@ class Profile extends Model
         'gender',
         'date_of_birth',
         'image',
+        'is_public'
     ];
 
     /**

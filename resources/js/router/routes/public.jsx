@@ -10,6 +10,7 @@ import PrepareApp from "../middlewares/PrepareApp";
 import EmployerOnly from "../middlewares/EmployerOnly";
 import CompanyOnly from "../middlewares/CompanyOnly";
 import EmployerList from "../../pages/Employer/List";
+import CandidateList from "../../pages/Candidates/List";
 
 export default {
     path: "/",
@@ -49,6 +50,10 @@ export default {
         {
             path: "employers/:id",
             element: <EmployerView />,
+        },
+        {
+            path: "candidates",
+            element: <CandidateList />,
         },
         {
             path: "404",

@@ -39,16 +39,6 @@ $navigationHeight: 112.47px;
     }
     .page-main {
         margin-bottom: $space-8 + $space-4;
-        .employers-list {
-            .single-employer-card {
-                &:hover {
-                    .badge {
-                        background-color: $deep-blue;
-                        color: #FFF;
-                    }
-                }
-            }
-        }
     }
     .page-filters {
         background-color: $pale-gray;
@@ -193,6 +183,27 @@ $navigationHeight: 112.47px;
                     background-color: $deep-blue;
                     color: #fff;
                 }
+            }
+        }
+    }
+}
+
+.list-page {
+    .list-items {
+        &.employers-list {
+            .single-employer-card {
+                &:hover {
+                    .badge {
+                        background-color: $deep-blue;
+                        color: #FFF;
+                    }
+                }
+            }
+        }
+        li {
+            margin-bottom: $space-6;
+            &:last-of-type {
+                margin-bottom: 0;
             }
         }
     }

@@ -2,8 +2,9 @@
     .single-employer-card {
         .employer-logo {
             @include circle(100px);
-            overflow: hidden;
             margin-right: $space-4;
+            border-radius: $border-radius-sm;
+            background-color: $cloud-blue;
             img {
                 width: 100%;
                 height: 100%;

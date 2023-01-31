@@ -18,6 +18,7 @@ class BasicResumeDetailsResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'category_id' => $this->category_id,
+            'category' => new CategoryResource($this->category),
             'jobtitle' => $this->jobtitle,
             'skills' => $this->skills,
             'experience' => $this->experience,

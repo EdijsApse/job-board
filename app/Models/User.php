@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,6 +50,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'user_type' => 'integer'
     ];
+
+    public function scopeFilterPublicCandidates(Builder $builder, $searchParams)
+    {
+        $builder
+        ->where('user_type', self::TYPE_CANDIDATE)
+        ->whereHas('profile', function(Builder $builder)  {
+            $builder->where('is_public', true);
+        });
+
+        if ($searchParams->get('keyword') || $searchParams->get('category_id')) {
+            $builder->whereHas('basicResumeDetails', function (Builder $builder) use ($searchParams) {
+                if ($searchParams->get('keyword')) {
+                    $builder->where('jobtitle', 'like', '%'.$searchParams->get('keyword').'%');
+                }
+
+                if ($searchParams->get('category_id')) {
+                    $builder->where('category_id', $searchParams->get('category_id'));
+                }
+            });
+        }
+        
+        return $builder->paginate(20);
+    }
 
     /**
      * Determines if user is candidate

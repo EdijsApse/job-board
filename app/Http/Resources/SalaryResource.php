@@ -18,7 +18,7 @@ class SalaryResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'type_id' => $this->type_id,
-            'type' => new SalaryResource($this->type),
+            'type' => new SalaryTypeResource($this->type),
             'min_salary' => $this->min_salary,
             'max_salary' => $this->max_salary,
             'notes' => $this->notes

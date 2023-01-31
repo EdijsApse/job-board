@@ -31,4 +31,13 @@ class BasicResumeDetails extends Model
     protected $casts = [
         'skills' => 'array'
     ];
+
+    /**
+     * Get category
+     * 
+    */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

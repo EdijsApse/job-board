@@ -29,6 +29,7 @@ class ProfileController extends Controller
             'image' => 'nullable|image',
             'date_of_birth' => 'required|date',
             'phone' => 'required',
+            'is_public' => 'nullable|boolean'
         ]);
 
         $profileImagePath = null;
@@ -44,7 +45,8 @@ class ProfileController extends Controller
             'gender' => $validatedData['gender'],
             'date_of_birth' => $validatedData['date_of_birth'],
             'phone' => $validatedData['phone'],
-            'image' => $profileImagePath
+            'image' => $profileImagePath,
+            'is_public' => $validatedData['is_public']
         ]
         );
 

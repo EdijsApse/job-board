@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
@@ -63,6 +64,11 @@ Route::apiResource('/job', JobController::class)
 });
 
 Route::apiResource('/employer', CompanyController::class)
+->only(['index', 'show'])->missing(function () {
+    return response()->json(['message' => 'Resource was not found!'], 404);
+});
+
+Route::apiResource('/candidate', CandidateController::class)
 ->only(['index', 'show'])->missing(function () {
     return response()->json(['message' => 'Resource was not found!'], 404);
 });
