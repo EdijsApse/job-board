@@ -168,36 +168,34 @@ const JobView = () => {
                 <div className="row">
                     <div className="col-8">
                         <div className="inner-col-wrapper">
-                            <div className="job-info">
-                                <div className="single-info-section">
-                                    <h3>Job Description</h3>
-                                    <p>{job.description}</p>
-                                </div>
-                                {job.responsibilities && (
-                                    <div className="single-info-section">
-                                        <h3>Key Responsibilities</h3>
-                                        <ul>
-                                            {job.responsibilities.map(
-                                                (resp, index) => (
-                                                    <li key={index}>{resp}</li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                )}
-                                {job.requirements && (
-                                    <div className="single-info-section">
-                                        <h3>Requirements</h3>
-                                        <ul>
-                                            {job.requirements.map(
-                                                (exp, index) => (
-                                                    <li key={index}>{exp}</li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                )}
+                            <div className="single-info-section">
+                                <h3>Job Description</h3>
+                                <p>{job.description}</p>
                             </div>
+                            {job.responsibilities && (
+                                <div className="single-info-section">
+                                    <h3>Key Responsibilities</h3>
+                                    <ul>
+                                        {job.responsibilities.map(
+                                            (resp, index) => (
+                                                <li key={index}>{resp}</li>
+                                            )
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
+                            {job.requirements && (
+                                <div className="single-info-section">
+                                    <h3>Requirements</h3>
+                                    <ul>
+                                        {job.requirements.map(
+                                            (exp, index) => (
+                                                <li key={index}>{exp}</li>
+                                            )
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
                             <div className="related-items-section">
                                 <h4>Related jobs</h4>
                                 <ul>

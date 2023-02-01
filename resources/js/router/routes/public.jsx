@@ -11,6 +11,7 @@ import EmployerOnly from "../middlewares/EmployerOnly";
 import CompanyOnly from "../middlewares/CompanyOnly";
 import EmployerList from "../../pages/Employer/List";
 import CandidateList from "../../pages/Candidates/List";
+import CandidateView from "../../pages/Candidates/View";
 
 export default {
     path: "/",
@@ -54,6 +55,10 @@ export default {
         {
             path: "candidates",
             element: <CandidateList />,
+        },
+        {
+            path: "candidates/:id",
+            element: <CandidateView />,
         },
         {
             path: "404",

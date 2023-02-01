@@ -1,0 +1,134 @@
+.view-page {
+    &.single-candidate-page {
+        .left-col {
+            .single-candidate-card {
+                .candidate-info {
+                    align-items: center;
+                    .candidate-image {
+                        @include circle(100px);
+                    }
+                    .candidate-details {
+                        .candidate-jobtitle {
+                            font-size: 1.1rem;
+                        }
+                        .details-list {
+                            .single-detail {
+                                i {
+                                    font-size: 1.1rem;
+                                }
+                                span {
+                                    font-size: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .view-page-main {
+            .single-info-section {
+                .resume-section-list {
+                    margin-top: $space-6;
+                    &.education-list {
+                        .icon {
+                            background-color: rgba($danger, 0.2);
+                            color: $danger;
+                        }
+                        li {
+                            &::before {
+                                border-color: rgba($danger, 0.2);
+                            }
+                        }
+                        .section-color {
+                            color: $danger;
+                        }
+                    }
+                    &.experience-list {
+                        .icon {
+                            background-color: rgba($deep-blue, 0.2);
+                            color: $deep-blue;
+                        }
+                        li {
+                            &::before {
+                                border-color: rgba($deep-blue, 0.2);
+                            }
+                        }
+                        .section-color {
+                            color: $deep-blue;
+                        }
+                    }
+                    &.language-list {
+                        .icon {
+                            background-color: rgba($orange, 0.2);
+                            color: $orange;
+                        }
+                        li {
+                            &::before {
+                                border-color: rgba($orange, 0.2);
+                            }
+                        }
+                        .section-color {
+                            color: $orange;
+                        }
+                    }
+                    li {
+                        position: relative;
+                        display: flex;
+                        margin-left: 0;
+                        margin-bottom: 0;
+                        &:before {
+                            position: absolute;
+                            display: block;
+                            left: 16px;
+                            top: 52px;
+                            height: calc(100% - 55px);
+                            content: "";
+                            border-left: 2px dashed #fff;
+                        }
+                        .icon {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 35px;
+                            height: 35px;
+                            border-radius: 35px;
+                            font-size: 0.8rem;
+                            margin-right: $space-6;
+                            margin-top: 7px;
+                            i {
+                                position: relative;
+                                top: 1px;
+                            }
+                        }
+                        .list-item-detail {
+                            padding-bottom: $space-4;
+                            .title {
+                                color: $dark;
+                                font-size: 1rem;
+                                margin-bottom: $space-2;
+                                span {
+                                    @include font-regular();
+                                    margin-left: $space-4;
+                                    font-size: 0.95rem;
+                                }
+                            }
+                            .subtitle {
+                                font-size: 0.9rem;
+                                margin-bottom: 0;
+                                @include font-regular();
+                            }
+                            p {
+                                color: $gray;
+                                font-size: 0.8rem;
+                                margin-top: $space-4;
+                            }
+                        }
+                        .section-color {
+                            color: $dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

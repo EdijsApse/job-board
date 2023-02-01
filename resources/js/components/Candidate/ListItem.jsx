@@ -1,7 +1,6 @@
 import Card from "../UI/Card";
 import placeholder from "../../components/assets/test-logo.png";
 import { NavLink } from "react-router-dom";
-import { Fragment } from "react";
 
 const ListItem = ({ candidate }) => {
     const { profile, basic_resume_details, salary } = candidate;

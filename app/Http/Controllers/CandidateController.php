@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CandidateCollection;
+use App\Http\Resources\CandidateResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,10 @@ class CandidateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $candidate)
     {
-        //
+        return response()->json([
+            'candidate' => new CandidateResource($candidate)
+        ]);
     }   
 }

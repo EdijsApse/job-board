@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,6 +44,11 @@ class Profile extends Model
             0 => 'Male',
             1 => 'Female'
         ];
+    }
+
+    public function getAge()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->date_of_birth)->age;
     }
 
     /**

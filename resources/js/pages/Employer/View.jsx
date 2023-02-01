@@ -100,11 +100,9 @@ const EmplyerView = () => {
                 <div className="row">
                     <div className="col-8">
                         <div className="inner-col-wrapper">
-                            <div className="job-info">
-                                <div className="single-info-section">
-                                    <h3>About company</h3>
-                                    <p>{employer.about}</p>
-                                </div>
+                            <div className="single-info-section">
+                                <h3>About company</h3>
+                                <p>{employer.about}</p>
                             </div>
                             {employer.last_jobs.length > 0 && (
                                 <div className="related-items-section">
