@@ -21,6 +21,10 @@
                     cursor: pointer;
                     z-index: 1;
                 }
+                .modal-title {
+                    font-size: 1.5rem;
+                    margin-bottom: $space-6;
+                }
             }
         }
     }

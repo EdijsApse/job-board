@@ -9,7 +9,7 @@ const ForgotPasswordModal = () => {
     };
     return (
         <Fragment>
-            <h2>Send reset password link</h2>
+            <h2 className="modal-title">Send reset password link</h2>
             <form className="forgot-password-form">
                 <div className="form-group">
                     <div className="info-text">

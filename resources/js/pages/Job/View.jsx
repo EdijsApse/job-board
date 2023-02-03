@@ -12,6 +12,8 @@ import { alertActions } from "../../store/slices/alert";
 import ViewPage from "../../components/UI/ViewPage";
 import OverviewSidebarCard from "../../components/Job/OverviewSidebarCard";
 import CompanyInfoSidebarCard from "../../components/Employer/InfoSidebarCard";
+import ApplyModal from "../../components/Job/ApplyModal";
+import ApplyButton from "../../components/Job/ApplyButton";
 
 const related_jobs = [
     {
@@ -157,7 +159,7 @@ const JobView = () => {
                         </span>
                     </p>
                     <div className="actions">
-                        <button className="btn btn-primary">Apply Now</button>
+                        <ApplyButton job={job} />
                         <button className="btn btn-secondary">
                             <i className="fa-regular fa-bookmark"></i>
                         </button>

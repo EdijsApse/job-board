@@ -34,7 +34,7 @@ const LoginModalBody = () => {
 
     return (
         <Fragment>
-            <h2>Login to WeWork</h2>
+            <h2 className="modal-title">Login to WeWork</h2>
             {isLoading && <LoadingSpinner />}
             <form onSubmit={loginFormHandler}>
                 <BaseFormInput

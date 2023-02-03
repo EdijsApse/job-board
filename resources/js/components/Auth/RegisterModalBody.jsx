@@ -53,7 +53,7 @@ const RegisterModalBody = () => {
 
     return (
         <Fragment>
-            <h2>Create a free WeWork account</h2>
+            <h2 className="modal-title">Create a free WeWork account</h2>
             {isLoading && <LoadingSpinner />}
             <div className="account-type-wrapper">
                 <UserTypeSelect
