@@ -12,7 +12,6 @@ import { alertActions } from "../../store/slices/alert";
 import ViewPage from "../../components/UI/ViewPage";
 import OverviewSidebarCard from "../../components/Job/OverviewSidebarCard";
 import CompanyInfoSidebarCard from "../../components/Employer/InfoSidebarCard";
-import ApplyModal from "../../components/Job/ApplyModal";
 import ApplyButton from "../../components/Job/ApplyButton";
 
 const related_jobs = [
@@ -96,9 +95,9 @@ const JobView = () => {
 
     if (isLoading) {
         return (
-            <div className="view-page single-job-page min-h-50 relative">
+            <ViewPage className="single-job-page min-h-50 relative">
                 <LoadingSpinner />
-            </div>
+            </ViewPage>
         );
     }
 

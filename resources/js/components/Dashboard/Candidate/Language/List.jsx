@@ -5,6 +5,7 @@ import {
     deleteLanguage,
     getResumeLanguages,
 } from "../../../../store/thunks/resume";
+import Fade from "../../../Animations/Fade";
 import DashboardCard from "../../../UI/DashboardCard";
 import LoadingSpinner from "../../../UI/LoadingSpinner";
 import Item from "./Item";
@@ -40,7 +41,9 @@ const List = () => {
 
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="resume-section-list">
                 {languages.length === 0 && <h3>No resume languages added</h3>}
                 {languages.map((lang) => (

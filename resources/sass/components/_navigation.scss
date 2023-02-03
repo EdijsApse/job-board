@@ -32,8 +32,11 @@
         }
     }
     .auth-buttons {
-        .btn-secondary {
+        .btn {
             margin-right: $space-6;
+            &:last-child {
+                margin-right: 0;
+            }
         }
         .btn-primary {
             min-width: 8rem;

@@ -4,6 +4,7 @@ import {
     getResumeBasicDetails,
     updateResumeBasicDetails,
 } from "../../../store/thunks/resume";
+import Fade from "../../Animations/Fade";
 import BaseFormInput from "../../UI/BaseFormInput";
 import BaseFormSelect from "../../UI/BaseFormSelect";
 import BaseTextareaInput from "../../UI/BaseTextareaInput";
@@ -72,7 +73,9 @@ const BasicDetailsForm = () => {
     }, []);
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <form
                 className="dashboard-form"
                 onSubmit={submitBasicDetailsHandler}

@@ -7,6 +7,7 @@ import { alertActions } from "../../../../store/slices/alert";
 import { axiosErrorResponseHandler } from "../../../../helpers";
 import { resumeActions } from "../../../../store/slices/resume";
 import LoadingSpinner from "../../../UI/LoadingSpinner";
+import Fade from "../../../Animations/Fade";
 
 const Form = ({ experience, onCloseForm }) => {
     const { temp_id, id } = experience;
@@ -113,7 +114,9 @@ const Form = ({ experience, onCloseForm }) => {
 
     return (
         <form className="dashboard-form" onSubmit={onSaveExperience}>
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="row">
                 <div className="col-6">
                     <BaseFormInput

@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slices/auth";
 import { login } from "../../store/thunks/auth";
+import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
@@ -35,7 +36,9 @@ const LoginModalBody = () => {
     return (
         <Fragment>
             <h2 className="modal-title">Login to WeWork</h2>
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <form onSubmit={loginFormHandler}>
                 <BaseFormInput
                     id="email"

@@ -7,6 +7,7 @@ import { axiosErrorResponseHandler } from "../../../../helpers";
 import { resumeActions } from "../../../../store/slices/resume";
 import LoadingSpinner from "../../../UI/LoadingSpinner";
 import BaseFormSelect from "../../../UI/BaseFormSelect";
+import Fade from "../../../Animations/Fade";
 
 const Form = ({ language, onCloseForm }) => {
     const languages = useSelector((state) => state.selectOptions.languages);
@@ -119,7 +120,9 @@ const Form = ({ language, onCloseForm }) => {
 
     return (
         <form className="dashboard-form" onSubmit={onSaveHandler}>
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="row">
                 <div className="col-6">
                     <BaseFormSelect

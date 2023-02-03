@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileDetails } from "../../store/thunks/profile";
+import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
 import BaseFormSelect from "../UI/BaseFormSelect";
 import DashboardCard from "../UI/DashboardCard";
@@ -69,7 +70,9 @@ const ProfileForm = () => {
 
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <form
                 className="dashboard-form"
                 onSubmit={submitProfileDetailsHandler}

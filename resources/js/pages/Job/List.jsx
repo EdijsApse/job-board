@@ -11,6 +11,7 @@ import { getJobs } from "../../store/thunks/job";
 import { useSearchParams } from "react-router-dom";
 import { getFiltersFromUrlSearchParams } from "../../helpers";
 import { useCallback } from "react";
+import Fade from "../../components/Animations/Fade";
 
 const JobList = () => {
     const isLoading = useSelector((state) => state.job.isLoading);
@@ -88,7 +89,9 @@ const JobList = () => {
                             </div>
                         </div>
                         <div className="col-8 relative">
-                            {isLoading && <LoadingSpinner />}
+                            <Fade isVisible={isLoading}>
+                                <LoadingSpinner />
+                            </Fade>
                             <div className="sort-container">
                                 <div className="search-result-details">
                                     <span>

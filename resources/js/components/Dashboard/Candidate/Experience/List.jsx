@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resumeActions } from "../../../../store/slices/resume";
 import { deleteExperience, getExperiences } from "../../../../store/thunks/resume";
+import Fade from "../../../Animations/Fade";
 import DashboardCard from "../../../UI/DashboardCard";
 import LoadingSpinner from "../../../UI/LoadingSpinner";
 import Item from "./Item";
@@ -39,7 +40,9 @@ const List = () => {
 
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="resume-section-list">
                 {experiences.length === 0 && <h3>No experiences added</h3>}
                 {experiences.map((exp) => (

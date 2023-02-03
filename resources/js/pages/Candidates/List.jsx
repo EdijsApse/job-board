@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom";
 import { getFiltersFromUrlSearchParams } from "../../helpers";
 import { useCallback } from "react";
 import { getCandidates } from "../../store/thunks/candidate";
+import Fade from "../../components/Animations/Fade";
 
 const CandidatesList = () => {
     const isLoading = useSelector((state) => state.candidates.isLoading);
@@ -87,7 +88,9 @@ const CandidatesList = () => {
                             </div>
                         </div>
                         <div className="col-8 relative">
-                            {isLoading && <LoadingSpinner />}
+                            <Fade isVisible={isLoading}>
+                                <LoadingSpinner />
+                            </Fade>
                             <div className="sort-container">
                                 <div className="search-result-details">
                                     <span>

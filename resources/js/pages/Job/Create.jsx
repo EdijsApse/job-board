@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { createJob } from "../../store/thunks/job";
 import RemovableList from "../../components/UI/RemovableList";
+import Fade from "../../components/Animations/Fade";
 
 const CreateJob = () => {
     const employmentTypeOptions = useSelector(
@@ -128,7 +129,9 @@ const CreateJob = () => {
             </div>
             <main className="page-main container-fluid">
                 <Wrapper className="job-form-section relative">
-                    {isLoading && <LoadingSpinner />}
+                    <Fade isVisible={isLoading}>
+                        <LoadingSpinner />
+                    </Fade>
                     <h2>Post Job</h2>
                     <form onSubmit={submitJobHandler}>
                         <div className="row">

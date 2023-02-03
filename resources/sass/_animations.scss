@@ -15,3 +15,23 @@
     opacity: 0;
     transition: opacity 0.3s ease-out;
 }
+
+.slide-down-enter {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.slide-down-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all 0.3s ease-out;
+}
+
+.slide-down-exit {
+    opacity: 1;
+}
+
+.slide-down-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}

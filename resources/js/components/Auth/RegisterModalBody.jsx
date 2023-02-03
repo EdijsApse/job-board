@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slices/auth";
 import { register } from "../../store/thunks/auth";
+import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import UserTypeSelect from "./UserTypeSelect";
@@ -54,7 +55,9 @@ const RegisterModalBody = () => {
     return (
         <Fragment>
             <h2 className="modal-title">Create a free WeWork account</h2>
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="account-type-wrapper">
                 <UserTypeSelect
                     selectType={typeSelectHandler}

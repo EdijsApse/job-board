@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Fade from "../../../components/Animations/Fade";
 import BaseFormInput from "../../../components/UI/BaseFormInput";
 import BaseFormSelect from "../../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../../components/UI/BaseTextareaInput";
@@ -84,7 +85,9 @@ const Details = () => {
 
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <form
                 className="dashboard-form"
                 onSubmit={submitCompanyDetailsHandler}

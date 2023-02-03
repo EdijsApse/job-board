@@ -10,6 +10,7 @@ import { getFiltersFromUrlSearchParams } from "../../helpers";
 import { useCallback } from "react";
 import { getEmployers } from "../../store/thunks/employer";
 import EmployerListItem from "../../components/Employer/ListItem";
+import Fade from "../../components/Animations/Fade";
 
 const EmployerList = () => {
     const isLoading = useSelector((state) => state.employer.isLoading);
@@ -87,7 +88,9 @@ const EmployerList = () => {
                             </div>
                         </div>
                         <div className="col-8 relative">
-                            {isLoading && <LoadingSpinner />}
+                            <Fade isVisible={isLoading}>
+                                <LoadingSpinner />
+                            </Fade>
                             <div className="sort-container">
                                 <div className="search-result-details">
                                     <span>

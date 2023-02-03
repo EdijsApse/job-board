@@ -4,6 +4,7 @@ import {
     getSalaryDetails,
     updateSalaryDetails,
 } from "../../../store/thunks/resume";
+import Fade from "../../Animations/Fade";
 import BaseFormInput from "../../UI/BaseFormInput";
 import BaseFormSelect from "../../UI/BaseFormSelect";
 import BaseTextareaInput from "../../UI/BaseTextareaInput";
@@ -50,7 +51,9 @@ const SalaryForm = () => {
 
     return (
         <DashboardCard className="relative">
-            {isLoading && <LoadingSpinner />}
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <form className="dashboard-form" onSubmit={submitSalaryHandler}>
                 <div className="row">
                     <div className="col-6">
