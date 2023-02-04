@@ -121,11 +121,23 @@ const CreateJob = () => {
         );
     };
 
+    const crumbs = [
+        {
+            link: "/",
+            title: "Home",
+        },
+        { link: "/jobs", title: "Jobs" },
+        {
+            link: "/jobs/create",
+            title: "Create",
+        },
+    ];
+
     return (
         <div className="page create-job-page">
             <div className="page-header">
                 <h1>Create Job</h1>
-                <BreadCrumbs />
+                <BreadCrumbs crumbs={crumbs} />
             </div>
             <main className="page-main container-fluid">
                 <Wrapper className="job-form-section relative">

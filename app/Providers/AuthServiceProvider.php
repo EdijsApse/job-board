@@ -57,5 +57,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-resume-language', function (User $user, ResumeLanguage $resumeLanguage) {
             return $resumeLanguage->user_id === $user->id;
         });
+
+        Gate::define('apply-for-job', function (User $user) {
+            return $user->isCandidate();
+        });
     }
 }
