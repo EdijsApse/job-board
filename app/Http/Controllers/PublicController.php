@@ -15,6 +15,7 @@ use App\Models\City;
 use App\Models\CompanySize;
 use App\Models\Country;
 use App\Models\EmploymentType;
+use App\Models\Job;
 use App\Models\Language;
 use App\Models\LanguageLevel;
 use App\Models\Profile;
@@ -46,6 +47,21 @@ class PublicController extends Controller
             'languages' => LanguageResource::collection(Language::get()),
             'language_levels' => LanguageLevelResource::collection(LanguageLevel::get()),
             'employment_types' => EmploymentTypeResource::collection(EmploymentType::get())
+        ]);
+    }
+
+    /**
+     * Display multiple resources which are needed for landing sections.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLandingData()
+    {
+        $categories = Category::getLandingData();
+
+        return response()->json([
+            'categories' => $categories,
+            'job_openings_count' => Job::count()
         ]);
     }
 }

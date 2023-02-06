@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             SalaryTypeSeeder::class,
             LanguageSeeder::class,
             LanguageLevelSeeder::class,
-            EmploymentTypeSeeder::class
+            EmploymentTypeSeeder::class,
+            SettingSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

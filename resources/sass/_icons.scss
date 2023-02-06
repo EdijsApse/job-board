@@ -1,0 +1,48 @@
+.custom-icon {
+    &::before {
+        display: inline-block;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font: var(--fa-font-solid);
+    }
+    &.architecture_and_construction {
+        &::before {
+            content: "\f0ad";
+        }
+    }
+    &.business_and_finance {
+        &::before {
+            content: "\f0b1";
+        }
+    }
+    &.education_and_training {
+        &::before {
+            content: "\f19d";
+        }
+    }
+    &.health_science {
+        &::before {
+            content: "\f479";
+        }
+    }
+    &.information_technology {
+        &::before {
+            content: "\f5fc";
+        }
+    }
+    &.marketing {
+        &::before {
+            content: "\e473";
+        }
+    }
+    &.law__public_safety__corrections__and_security {
+        &::before {
+            content: "\f24e";
+        }
+    }
+    &.government_and_public_administration {
+        &::before {
+            content: "\f19c";
+        }
+    }
+}

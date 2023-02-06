@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Education and Training'],
             ['name' => 'Government and Public Administration'],
             ['name' => 'Health Science'],
-            ['name' => 'Information Technology '],
+            ['name' => 'Information Technology'],
             ['name' => 'Law, Public Safety, Corrections, and Security'],
             ['name' => 'Marketing'],
             ['name' => 'Science, Technology, Engineering, and Math']

@@ -5,9 +5,15 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-column-gap: $space-6;
         margin-top: $space-6 * 2;
-        .single-popular-category {
-            padding: $space-8 + $space-4 $space-4;
+        .custom-card {
+            padding: 0;
             margin-bottom: $space-6;
+        }
+        .single-popular-category {
+            display: block;
+            padding: $space-8 + $space-4 $space-4;
+            text-decoration: none;
+            color: $dark;
             cursor: pointer;
             .category-icon {
                 @include circle(70px);
