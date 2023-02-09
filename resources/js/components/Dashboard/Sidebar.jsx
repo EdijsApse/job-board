@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import profileImage from "../assets/test-logo.png";
+import profileImage from "../assets/placeholder-image.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 import SidebarResumeDropdowns from "./Candidate/SidebarResumeDropdowns";
 

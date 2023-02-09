@@ -1,54 +1,16 @@
 import Wrapper from "../UI/Wrapper";
 import Carousel from "../UI/Carousel";
-import logo from "../assets/test-logo.png";
 import SingleTopCompany from "./SingleTopCompany";
-
-const tempCompanies = [
-    {
-        id: 1,
-        title: "Upwork",
-        logo: logo,
-        location: "New York",
-        positions: 1,
-    },
-    {
-        id: 2,
-        title: "Invision",
-        logo: logo,
-        location: "Miami",
-        positions: 3,
-    },
-    {
-        id: 3,
-        title: "Stripe",
-        logo: logo,
-        location: "Los Angeles",
-        positions: 1,
-    },
-    {
-        id: 4,
-        title: "Figma",
-        logo: logo,
-        location: "New York",
-        positions: 1,
-    },
-    {
-        id: 5,
-        title: "Employer",
-        logo: logo,
-        location: "New York",
-        positions: 1,
-    },
-    {
-        id: 6,
-        title: "Udemy",
-        logo: logo,
-        location: "New York",
-        positions: 1,
-    },
-];
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const TopCompanies = () => {
+    const companies = useSelector((state) => state.landing.featuredCompanies);
+
+    if (!companies.length) {
+        return;
+    }
+
     return (
         <Wrapper className={"landing-section top-companies"}>
             <div className="section-header">
@@ -60,12 +22,12 @@ const TopCompanies = () => {
                     </p>
                 </div>
                 <div className="right-col">
-                    <a href="/">Browse all companies</a>
+                    <NavLink to="/employers">Browse all companies</NavLink>
                 </div>
             </div>
             <div className="top-companies-carousel">
                 <Carousel>
-                    {tempCompanies.map((company) => (
+                    {companies.map((company) => (
                         <SingleTopCompany key={company.id} company={company} />
                     ))}
                 </Carousel>

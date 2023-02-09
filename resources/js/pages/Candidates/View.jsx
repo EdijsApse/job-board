@@ -1,4 +1,4 @@
-import placeholderImage from "../../components/assets/test-logo.png";
+import placeholderImage from "../../components/assets/placeholder-image.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

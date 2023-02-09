@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useCallback } from "react";
 import { useReducer, useRef } from "react";
-import imagePlaceholder from "../assets/test-logo.png";
+import imagePlaceholder from "../assets/placeholder-image.png";
 
 const SET_FILE_SELECTED = "SET_FILE_SELECTED";
 const RESET_FILE_INPUT_STATE = "RESET_FILE_INPUT_STATE";

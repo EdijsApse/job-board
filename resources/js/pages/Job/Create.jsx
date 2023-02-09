@@ -5,7 +5,7 @@ import { useState } from "react";
 import BaseFormSelect from "../../components/UI/BaseFormSelect";
 import BaseTextareaInput from "../../components/UI/BaseTextareaInput";
 import ImagePicker from "../../components/UI/ImagePicker";
-import logo from "../../components/assets/test-logo.png";
+import logo from "../../components/assets/placeholder-image.png";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { createJob } from "../../store/thunks/job";

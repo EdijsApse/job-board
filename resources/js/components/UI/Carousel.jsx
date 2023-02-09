@@ -54,6 +54,7 @@ const Carousel = ({ children }) => {
             onRequestChange={setActiveSlideIndex}
             containerProps={carouselContainerProps}
             itemsToShow={4}
+            infinite={false}
             itemsToScroll={1}
             backwardBtnProps={carouselButtonProps}
             forwardBtnProps={carouselButtonProps}

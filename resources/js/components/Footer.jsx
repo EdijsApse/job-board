@@ -31,20 +31,13 @@ const Footer = () => {
                                 <NavLink to="/jobs">Jobs</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/candidates">Candidates</NavLink>
+                                <NavLink to="/employers">Employers</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/candidate-dashboard">
-                                    Candidate Dashboard
-                                </NavLink>
+                                <NavLink to="/dashboard/resume">Resume</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/job-alerts">Job Alerts</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/my-bookmarks">
-                                    My Bookmarks
-                                </NavLink>
                             </li>
                         </ul>
                     </div>
@@ -52,62 +45,18 @@ const Footer = () => {
                         <h6>For Employers</h6>
                         <ul>
                             <li>
-                                <NavLink to="/employers">All Employers</NavLink>
+                                <NavLink to="/candidates">Candidates</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/employer-dashboard">
-                                    Employer Dashboard
+                                <NavLink to="/dashboard/company">
+                                    Company Details
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="/jobs/create">Submit Job</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/pricings">Job Packages</NavLink>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="footer-col">
-                        <h6>About Us</h6>
-                        <ul>
-                            <li>
-                                <NavLink to="/contact">Contact Us</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/about">About Us</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/terms">Terms</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/packages">Packages</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/faq">FAQ</NavLink>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="footer-col">
-                        <h6>Helpful Resources</h6>
-                        <ul>
-                            <li>
-                                <NavLink to="/site-map">Site Map</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/terms">Terms of Use</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/privacy">Privacy Center</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/security">
-                                    Security Center
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/accessibility">
-                                    Accessibility Center
-                                </NavLink>
+                                <NavLink to="/dashboard">Dashboard</NavLink>
                             </li>
                         </ul>
                     </div>

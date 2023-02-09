@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Badge from "../UI/Badge";
 import Card from "../UI/Card";
-import tempLogo from "../assets/test-logo.png";
+import tempLogo from "../assets/placeholder-image.png";
 
 const Item = ({
     job,

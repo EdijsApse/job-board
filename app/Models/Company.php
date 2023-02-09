@@ -38,6 +38,15 @@ class Company extends Model
         return $this->user->getCompanyFilesPath()."/jobs";
     }
 
+
+    /**
+     * Gets featured companies for landing page
+    */
+    public static function featuredCompanies()
+    {
+        return self::orderBy('created_at', 'desc')->limit(6)->get();
+    }
+
     public function scopeFilter(Builder $query, $collectionOfInputs)
     {
         if ($collectionOfInputs->get('keyword')) {

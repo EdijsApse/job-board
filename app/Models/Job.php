@@ -63,6 +63,15 @@ class Job extends Model
     }
 
 
+    /**
+     * Gets featured jobs for landing page
+    */
+    public static function featuredJobs()
+    {
+        return self::where('is_featured', true)->orderBy('created_at', 'desc')->limit(3)->get();
+    }
+
+
     public function scopeFilter(Builder $query, $collectionOfInputs)
     {
 

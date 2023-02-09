@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import placeholderImage from "../assets/test-logo.png";
+import placeholderImage from "../assets/placeholder-image.png";
 
 const InfoSidebarCard = ({ company }) => {
     

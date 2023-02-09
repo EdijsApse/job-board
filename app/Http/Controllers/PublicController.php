@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\CompanyCollection;
 use App\Http\Resources\CompanySizeResource;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\EmploymentTypeResource;
+use App\Http\Resources\JobCollection;
 use App\Http\Resources\LanguageLevelResource;
 use App\Http\Resources\LanguageResource;
 use App\Http\Resources\SalaryTypeResource;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Company;
 use App\Models\CompanySize;
 use App\Models\Country;
 use App\Models\EmploymentType;
@@ -58,10 +61,14 @@ class PublicController extends Controller
     public function getLandingData()
     {
         $categories = Category::getLandingData();
+        $featured_jobs = Job::featuredJobs();
+        $featured_companies = Company::featuredCompanies();
 
         return response()->json([
             'categories' => $categories,
-            'job_openings_count' => Job::count()
+            'job_openings_count' => Job::count(),
+            'featured_jobs' => new JobCollection($featured_jobs),
+            'featured_companies' => new CompanyCollection($featured_companies)
         ]);
     }
 }

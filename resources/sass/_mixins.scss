@@ -5,6 +5,10 @@
 @mixin circle($radius) {
     width: $radius;
     height: $radius;
+    min-width: $radius;
+    min-height: $radius;
+    max-width: $radius;
+    max-height: $radius;
     border-radius: $radius;
 }
 

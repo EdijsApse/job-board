@@ -1,4 +1,4 @@
-import placeholderImage from "../../components/assets/test-logo.png";
+import placeholderImage from "../../components/assets/placeholder-image.png";
 import Badge from "../../components/UI/Badge";
 import SingleJobCard from "../../components/Job/Item";
 import { useNavigate, useParams } from "react-router-dom";

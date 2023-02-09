@@ -53,6 +53,10 @@ ul {
     position: relative;
 }
 
+.min-h-screen-height {
+    min-height: 100vh;
+}
+
 .no-list-items-title {
     font-size: 2rem;
     text-align: center;
