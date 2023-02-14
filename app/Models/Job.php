@@ -95,6 +95,14 @@ class Job extends Model
     }
 
     /**
+     * Gets 3 related jobs for given job
+     */
+    public function relatedJobs()
+    {
+        return Job::where('id', '!=', $this->id)->where('category_id', $this->category_id)->limit(3)->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
      * Gets Company who posted job
      */
     public function company()

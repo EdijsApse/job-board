@@ -75,7 +75,8 @@ class JobController extends Controller
     public function show(Job $job)
     {
         return response()->json([
-            'job' => new JobResource($job)
+            'related_jobs' => JobResource::collection($job->relatedJobs()),
+            'job' => new JobResource($job),
         ]);
     }
 
