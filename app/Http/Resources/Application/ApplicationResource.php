@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Application;
 
+use App\Http\Resources\JobResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApplicationResource extends JsonResource
@@ -23,6 +24,6 @@ class ApplicationResource extends JsonResource
             'cover_letter' => $this->cover_letter,
             'status' => $this->status,
             'status_name' => $this->getStatusName()
-        ]
+        ];
     }
 }

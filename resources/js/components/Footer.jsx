@@ -64,7 +64,9 @@ const Footer = () => {
             </Wrapper>
             <div className="bottom-row-wrapper">
                 <Wrapper className={"bottom-row"}>
-                    <p>© 2021 Superio. All Right Reserved.</p>
+                    <p>
+                        © {new Date().getFullYear()} WeWork. All Right Reserved.
+                    </p>
                     <div className="socials">
                         <a href="">
                             <i className="fa-brands fa-facebook-f"></i>

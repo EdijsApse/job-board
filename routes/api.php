@@ -13,6 +13,7 @@ use App\Http\Controllers\Resume\LanguageController;
 use App\Http\Controllers\Resume\SalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
             return response()->json(['message' => 'Resource was not found!'], 404);
         });
 
-    Route::apiResource('/application', ApplicationController::class)->only(['store']);
+        Route::apiResource('/application', ApplicationController::class)->only(['store']);
+
+        Route::get('/candidate-dashboard', [DashboardController::class, 'candidate']);
+
 });
 
 Route::apiResource('/job', JobController::class)

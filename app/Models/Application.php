@@ -51,6 +51,16 @@ class Application extends Model
     }
 
     /**
+     * Returns query for pending applications for given user
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public static function getPendingApplications(User $user)
+    {
+        return $user->applications()->where('status', self::TYPE_PENDING);
+    }
+
+    /**
      * Get user who created application
      * 
     */

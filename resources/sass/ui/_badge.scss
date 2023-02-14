@@ -14,4 +14,8 @@
         color: $green;
         background-color: $bright-green;
     }
+    &.pending {
+        color: #fff;
+        background-color: #27ceb4;
+    }
 }

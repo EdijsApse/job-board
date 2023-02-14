@@ -1,0 +1,23 @@
+.dashboard {
+    .application-statistics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: $space-6;
+        margin-bottom: $space-8;
+        margin-left: -$space-2;
+        margin-right: -$space-2;
+        .dashboard-stats-card {
+            margin-left: $space-2;
+            margin-right: $space-2;
+        }
+    }
+    .applications-list {
+        margin-top: $space-6;
+        .single-application-card {
+            margin-bottom: $space-6;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

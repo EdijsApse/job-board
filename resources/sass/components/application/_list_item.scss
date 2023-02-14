@@ -1,0 +1,67 @@
+.single-application-card {
+    position: relative;
+    text-align: left;
+    .application-header {
+        display: flex;
+        .application-image {
+            @include circle(50px);
+            background-color: $bright-gray;
+            border-radius: $border-radius-sm;
+            margin-right: $space-4;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .application-info {
+            .title-wrapper {
+                display: flex;
+                align-items: center;
+                .application-link {
+                    @include font-semibold();
+                    text-decoration: none;
+                    color: $dark;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: $deep-blue;
+                    }
+                }
+                .badge {
+                    margin-left: $space-4;
+                    font-size: 0.7rem;
+                    border-radius: 5px;
+                    @include font-semibold();
+                    padding: 5px $space-2;
+                }
+            }
+        }
+    }
+    .application-badges {
+        margin-top: $space-4;
+        .badge {
+            margin-right: $space-4;
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+    .cover-letter {
+        color: $gray;
+        font-size: 0.9rem;
+        margin-bottom: 0;
+        max-width: 450px;
+        &::before {
+            content: "";
+            display: block;
+            width: 10rem;
+            height: 2px;
+            background-color: rgba($bright-gray, 0.6);
+            margin-bottom: $space-2;
+            margin-top: $space-4;
+        }
+    }
+}

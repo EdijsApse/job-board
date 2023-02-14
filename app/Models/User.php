@@ -191,4 +191,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(ResumeLanguage::class);
     }
+
+    /**
+     * Get user applications
+     * 
+    */
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

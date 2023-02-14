@@ -1,0 +1,39 @@
+.dashboard-stats-card {
+    display: flex;
+    justify-content: space-between;
+    @include medium-shadow();
+    &.blue {
+        .icon {
+            background-color: rgba($deep-blue, 0.1);
+            color: $deep-blue;
+        }
+        .count {
+            color: $deep-blue;
+        }
+    }
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        padding: $space-6;
+        border-radius: $border-radius-sm;
+        i {
+            font-size: 1.6rem;
+        }
+    }
+    .stats-info {
+        text-align: right;
+        margin-left: $space-2;
+        .count {
+            font-size: 2rem;
+            margin-bottom: $space-2;
+        }
+        .title {
+            font-size: 0.9rem;
+            @include font-regular();
+            margin-bottom: 0;
+        }
+    }
+}

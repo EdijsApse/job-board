@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Application;
-use App\Http\Resources\ApplicationResource;
 use Illuminate\Support\Facades\Gate;
 
 class ApplicationController extends Controller
