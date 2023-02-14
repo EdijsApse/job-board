@@ -11,11 +11,13 @@ import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { createJob } from "../../store/thunks/job";
 import RemovableList from "../../components/UI/RemovableList";
 import Fade from "../../components/Animations/Fade";
+import { useNavigate } from "react-router-dom";
 
 const CreateJob = () => {
     const employmentTypeOptions = useSelector(
         (state) => state.selectOptions.employmentTypes
     );
+    const navigate = useNavigate();
     const cityOptions = useSelector((state) => state.selectOptions.cities);
     const categoryOptions = useSelector(
         (state) => state.selectOptions.categories
@@ -88,7 +90,11 @@ const CreateJob = () => {
             jobData.append("requirements[]", req);
         });
 
-        dispatch(createJob(jobData));
+        dispatch(
+            createJob(jobData, (jobId) => {
+                navigate(`/jobs/${jobId}`);
+            })
+        );
     };
 
     const addRequirementHandler = () => {

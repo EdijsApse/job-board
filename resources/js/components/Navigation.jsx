@@ -66,7 +66,7 @@ const Navigation = () => {
                     )}
                     {isEmployer && (
                         <NavLink to="/jobs/create" className="btn btn-primary">
-                            Job Post
+                            Post a Job
                         </NavLink>
                     )}
                     {isCandidate && (

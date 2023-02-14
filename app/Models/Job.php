@@ -91,7 +91,7 @@ class Job extends Model
             $query->where('employment_type_id', $collectionOfInputs->get('employment_type_id'));
         }
 
-        return $query->paginate(20);
+        return $query->orderBy('created_at', 'desc')->paginate(20);
     }
 
     /**

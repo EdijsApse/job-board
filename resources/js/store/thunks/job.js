@@ -37,7 +37,7 @@ export const getJobs = (searchParams) => {
     };
 };
 
-export const createJob = (jobDetails) => {
+export const createJob = (jobDetails, successCallback) => {
     return (dispatch) => {
         dispatch(jobActions.setLoadingState({ isLoading: true }));
         dispatch(jobActions.setFormErrors({ errors: {} }));
@@ -47,6 +47,7 @@ export const createJob = (jobDetails) => {
                 const { job, success, message } = res.data;
                 if (success) {
                     dispatch(alertActions.showSuccessAlert({ message }));
+                    successCallback(job.id);
                 }
             })
             .catch((error) => {

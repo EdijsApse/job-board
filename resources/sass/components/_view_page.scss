@@ -20,11 +20,16 @@
             justify-content: center;
             .actions {
                 display: flex;
+                justify-content: flex-end;
+                .btn {
+                    margin-right: $space-6;
+                    &:last-of-type {
+                        margin-right: 0
+                    }
+                }
                 .btn-primary {
                     min-width: 200px;
-                    margin-right: $space-6;
                 }
-
                 .btn-secondary {
                     padding-left: $space-6;
                     padding-right: $space-6;

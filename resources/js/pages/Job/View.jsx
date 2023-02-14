@@ -2,8 +2,8 @@ import placeholderImage from "../../components/assets/placeholder-image.png";
 import Badge from "../../components/UI/Badge";
 import SingleJobCard from "../../components/Job/Item";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { useCallback } from "react";
 import axios from "../../axios";
@@ -62,6 +62,25 @@ const JobView = () => {
     const { id } = useParams();
     const [job, setJob] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const isEmployer = useSelector((state) => {
+        const user = state.auth.user;
+        return user.is_employer;
+    });
+    const canUpdateJob = useSelector((state) => {
+        const user = state.auth.user;
+        if (!user) {
+            return false;
+        }
+        if (!user.company) {
+            return false;
+        }
+        if (!job) {
+            return false;
+        }
+
+        return user.company.id === job.company.id;
+    });
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -151,17 +170,26 @@ const JobView = () => {
                     </div>
                 </div>
                 <div className="right-col">
-                    <p className="text-right">
+                    <p className="text-right mb-0">
                         Application ends:
                         <span className="text-danger">
                             {job.expiration_date}
                         </span>
                     </p>
-                    <div className="actions">
-                        <ApplyButton job={job} />
-                        <button className="btn btn-secondary">
-                            <i className="fa-regular fa-bookmark"></i>
-                        </button>
+                    <div className="actions mt-4">
+                        {!isEmployer && (
+                            <Fragment>
+                                <ApplyButton job={job} />
+                                <button className="btn btn-secondary">
+                                    <i className="fa-regular fa-bookmark"></i>
+                                </button>
+                            </Fragment>
+                        )}
+                        {canUpdateJob && (
+                            <button className="btn btn-primary">
+                                Update Job
+                            </button>
+                        )}
                     </div>
                 </div>
             </ViewPage.Header>
@@ -189,11 +217,9 @@ const JobView = () => {
                                 <div className="single-info-section">
                                     <h3>Requirements</h3>
                                     <ul>
-                                        {job.requirements.map(
-                                            (exp, index) => (
-                                                <li key={index}>{exp}</li>
-                                            )
-                                        )}
+                                        {job.requirements.map((exp, index) => (
+                                            <li key={index}>{exp}</li>
+                                        ))}
                                     </ul>
                                 </div>
                             )}

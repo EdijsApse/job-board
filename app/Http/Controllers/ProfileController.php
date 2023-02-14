@@ -46,7 +46,7 @@ class ProfileController extends Controller
             'date_of_birth' => $validatedData['date_of_birth'],
             'phone' => $validatedData['phone'],
             'image' => $profileImagePath,
-            'is_public' => $validatedData['is_public']
+            'is_public' => $validatedData['is_public'] ?? false
         ]
         );
 
