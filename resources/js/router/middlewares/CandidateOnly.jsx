@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
+import useUser from "../../hooks/use-user";
 import { alertActions } from "../../store/slices/alert";
 
 const CandidateOnly = ({ children }) => {
-    const isCandidate = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_candidate;
-    });
-
+    const { isCandidate } = useUser();
     const dispatch = useDispatch();
 
     useEffect(() => {

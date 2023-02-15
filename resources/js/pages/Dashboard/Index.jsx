@@ -1,17 +1,9 @@
-import { useSelector } from "react-redux";
 import CandidateDashboard from "../../components/Dashboard/Candidate/Dashboard";
 import EmployerDashboard from "../../components/Dashboard/Employer/Dashboard";
+import useUser from "../../hooks/use-user";
 
 const DashboardIndex = () => {
-    const isCandidate = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_candidate;
-    });
-
-    const isEmployer = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_employer;
-    });
+    const {isCandidate, isEmployer} = useUser();
 
     if (isEmployer) {
         return <EmployerDashboard />;

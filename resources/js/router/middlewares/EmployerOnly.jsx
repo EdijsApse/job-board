@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
+import useUser from "../../hooks/use-user";
 import { alertActions } from "../../store/slices/alert";
 
 const EmployerOnly = ({ children }) => {
-    const isEmployer = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_employer;
-    });
-
+    const { isEmployer } = useUser();
     const dispatch = useDispatch();
 
     useEffect(() => {

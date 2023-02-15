@@ -3,7 +3,7 @@ import Badge from "../../components/UI/Badge";
 import SingleJobCard from "../../components/Job/Item";
 import { useNavigate, useParams } from "react-router-dom";
 import { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { useCallback } from "react";
 import axios from "../../axios";
@@ -14,22 +14,17 @@ import OverviewSidebarCard from "../../components/Job/OverviewSidebarCard";
 import CompanyInfoSidebarCard from "../../components/Employer/InfoSidebarCard";
 import ApplyButton from "../../components/Job/ApplyButton";
 import { authActions } from "../../store/slices/auth";
+import useUser from "../../hooks/use-user";
 
 const JobView = () => {
     const { id } = useParams();
     const [job, setJob] = useState(null);
     const [relatedJobs, setRelatedJobs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { isCandidate, company, user } = useUser();
 
-    const user = useSelector((state) => state.auth.user);
-
-    const canApplyForJob = user && user.is_candidate;
     const canUpdateJob =
-        user &&
-        user.company &&
-        job &&
-        job.company &&
-        user.company.id === job.company.id;
+        company && job && job.company && company.id === job.company.id;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -128,7 +123,7 @@ const JobView = () => {
                         </span>
                     </p>
                     <div className="actions mt-4">
-                        {canApplyForJob && (
+                        {isCandidate && (
                             <Fragment>
                                 <ApplyButton job={job} />
                             </Fragment>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useUser from "../../hooks/use-user";
 import { updateProfileDetails } from "../../store/thunks/profile";
 import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
@@ -12,15 +13,9 @@ const ProfileForm = () => {
     const isLoading = useSelector((state) => state.profile.isLoading);
     const errors = useSelector((state) => state.profile.errors);
 
-    const isCandidate = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_candidate;
-    });
-
-    const userProfile = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.profile ? user.profile : {};
-    });
+    const {isCandidate, user} = useUser();
+    
+    const userProfile = user && user.profile ? user.profile : {};
 
     const [name, setName] = useState(userProfile.name ?? "");
     const [surname, setSurname] = useState(userProfile.surname ?? "");

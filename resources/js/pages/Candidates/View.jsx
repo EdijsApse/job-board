@@ -13,6 +13,7 @@ import ExperienceList from "../../components/Candidate/ExperienceList";
 import LanguageList from "../../components/Candidate/LanguageList";
 import OverviewSidebarCard from "../../components/Candidate/OverviewSidebarCard";
 import OfferButton from "../../components/Candidate/OfferButton";
+import useUser from "../../hooks/use-user";
 
 const CandidateView = () => {
     const { id } = useParams();
@@ -20,11 +21,7 @@ const CandidateView = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const isEmployer = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.is_employer;
-    });
+    const { isEmployer } = useUser();
 
     const getCandidate = useCallback(() => {
         setIsLoading(true);

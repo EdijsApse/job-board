@@ -4,9 +4,10 @@ import Modal from "../UI/Modal";
 import axios from "../../axios";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import Fade from "../Animations/Fade";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { alertActions } from "../../store/slices/alert";
 import { axiosErrorResponseHandler } from "../../helpers";
+import useUser from "../../hooks/use-user";
 
 const OfferModal = ({ onCloseHandler, candidateId }) => {
     const [errors, setErrors] = useState({});
@@ -14,20 +15,8 @@ const OfferModal = ({ onCloseHandler, candidateId }) => {
     const [jobId, setJobId] = useState("");
     const dispatch = useDispatch();
 
-    const jobsList = useSelector((state) => {
-        const user = state.auth.user;
-
-        if (!user) {
-            return [];
-        }
-        const company = user.company;
-
-        if (!company) {
-            return [];
-        }
-
-        return company.offerable_jobs;
-    });
+    const { company } = useUser();
+    const jobsList = company ? company.offerable_jobs : [];
 
     const onSubmitHandler = (e) => {
         e.preventDefault();

@@ -1,27 +1,24 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
+import useUser from "../../hooks/use-user";
 import { alertActions } from "../../store/slices/alert";
 
 const CompanyOnly = ({ children }) => {
-    const hasCompany = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.company;
-    });
-
+    const { company } = useUser();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!hasCompany) {
+        if (!company) {
             dispatch(
                 alertActions.showWarningAlert({
                     message: "Add Company Details, before posting jobs!",
                 })
             );
         }
-    }, [hasCompany]);
+    }, [company]);
 
-    if (!hasCompany) {
+    if (!company) {
         return <Navigate to="/dashboard/company" />;
     }
 

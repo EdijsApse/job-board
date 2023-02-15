@@ -7,13 +7,12 @@ import BaseTextareaInput from "../../../components/UI/BaseTextareaInput";
 import DashboardCard from "../../../components/UI/DashboardCard";
 import ImagePicker from "../../../components/UI/ImagePicker";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
+import useUser from "../../../hooks/use-user";
 import { updateCompanyDetails } from "../../../store/thunks/employer";
 
 const Details = () => {
-    const userCompany = useSelector((state) => {
-        const user = state.auth.user;
-        return user && user.company ? user.company : {};
-    });
+    const { company } = useUser();
+    const userCompany = company || {};
 
     const dispatch = useDispatch();
 

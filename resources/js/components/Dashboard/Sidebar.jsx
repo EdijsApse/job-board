@@ -1,28 +1,15 @@
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import useUser from "../../hooks/use-user";
 import profileImage from "../assets/placeholder-image.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 import SidebarResumeDropdowns from "./Candidate/SidebarResumeDropdowns";
 
 const Sidebar = () => {
-    const user = useSelector((state) => {
-        return state.auth.user;
-    });
-
-    const isEmployer = user && user.is_employer;
-    const isCandidate = user && user.is_candidate;
-
-    let profile = null;
-    let imgSrc = profileImage;
+    const { user, isEmployer, isCandidate } = useUser();
+    
+    const profile = user && user.profile ? user.profile : null;
+    let imgSrc = profile && profile.image ? profile.image : profileImage;
     const userType = user ? user.user_type_name : "";
-
-    if (user && user.profile) {
-        profile = user.profile;
-    }
-
-    if (profile && profile.image) {
-        imgSrc = profile.image;
-    }
 
     return (
         <aside className="sidebar">

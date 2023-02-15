@@ -1,12 +1,11 @@
 import Logo from "./assets/logo.png";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "../store/slices/auth";
+import useUser from "../hooks/use-user";
 
 const Navigation = () => {
-    const user = useSelector((state) => state.auth.user);
-    const isEmployer = user && user.is_employer;
-    const isCandidate = user && user.is_candidate;
+    const { user, isEmployer, isCandidate } = useUser();
     const authDispatch = useDispatch();
 
     const showAuthModalHandler = () => {
