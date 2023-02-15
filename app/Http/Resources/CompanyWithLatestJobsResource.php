@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Job;
 
-class CompanyWithJobsResource extends CompanyResource
+class CompanyWithLatestJobsResource extends CompanyResource
 {
     /**
      * Transform the resource into an array.
@@ -14,8 +14,11 @@ class CompanyWithJobsResource extends CompanyResource
      */
     public function toArray($request)
     {
-        return array_merge(parent::toArray($request), [
-            'last_jobs' => JobResource::collection(Job::where('company_id', $this->id)->orderBy('created_at', 'desc')->limit(5)->get())
-        ]);
+        return array_merge(
+            [
+                'last_jobs' => JobResource::collection(Job::where('company_id', $this->id)->orderBy('created_at', 'desc')->limit(5)->get())
+            ],
+            parent::toArray($request)
+        );
     }
 }

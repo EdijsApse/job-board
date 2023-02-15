@@ -1,13 +1,15 @@
 const BaseFormSelect = ({
     id,
     labelName,
-    labelClassName="",
+    labelClassName = "",
     selected,
     selectValue,
     isRequired = false,
     options,
     inputErrorMessage,
     placeholder,
+    optionLabelName = "label",
+    optionValueName = "value",
 }) => {
     const onSelectHandler = (e) => {
         selectValue(e.target.value);
@@ -26,8 +28,11 @@ const BaseFormSelect = ({
             >
                 <option>{placeholder}</option>
                 {options.map((option) => (
-                    <option value={option.value} key={option.value}>
-                        {option.label}
+                    <option
+                        value={option[optionValueName]}
+                        key={option[optionValueName]}
+                    >
+                        {option[optionLabelName]}
                     </option>
                 ))}
             </select>

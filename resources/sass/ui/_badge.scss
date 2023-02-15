@@ -18,4 +18,20 @@
         color: #fff;
         background-color: #27ceb4;
     }
+    &.rejected {
+        color: #fff;
+        background-color: $red;
+    }
+    &.canceled {
+        color: #fff;
+        background-color: $orange;
+    }
+    &.approved {
+        color: #fff;
+        background-color: $deep-blue;
+    }
+    &.unknown {
+        color: #fff;
+        background-color: $gray;
+    }
 }

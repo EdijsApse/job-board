@@ -2,20 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\ApplicationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
     use HasFactory;
-
-    /**
-     * Statuses
-     */
-    CONST TYPE_PENDING = 0;
-    CONST TYPE_APPROVED = 1;
-    CONST TYPE_REJECTED = 2;
-    CONST TYPE_CANCELED = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -30,34 +23,13 @@ class Application extends Model
     ];
 
     /**
-     * Get all statuses of application
-     */
-    public static function getStatuses()
-    {
-        return [
-            self::TYPE_PENDING => 'Pending',
-            self::TYPE_APPROVED => 'Approved',
-            self::TYPE_REJECTED => 'Rejected',
-            self::TYPE_CANCELED => 'Canceled',
-        ];
-    }
-
-    /**
-     * Get status of application
-     */
-    public function getStatusName()
-    {
-        return self::getStatuses()[$this->status];
-    }
-
-    /**
      * Returns query for pending applications for given user
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
     */
     public static function getPendingApplications(User $user)
     {
-        return $user->applications()->where('status', self::TYPE_PENDING);
+        return $user->applications()->where('status', ApplicationStatus::Pending->value);
     }
 
     /**

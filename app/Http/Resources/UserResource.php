@@ -2,9 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CompanyResource;
 
 class UserResource extends JsonResource
 {
@@ -23,7 +21,7 @@ class UserResource extends JsonResource
             'user_type_name' => $this->getUserTypeName(),
             'is_employer' => $this->isEmployer(),
             'is_candidate' => $this->isCandidate(),
-            'company' => new CompanyResource($this->company),
+            'company' => new CompanyWithOfferableJobsResource($this->company),
             'profile' => new ProfileResource($this->profile)
         ];
     }

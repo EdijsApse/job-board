@@ -1,7 +1,7 @@
 import placeholderImage from "../../components/assets/placeholder-image.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { useCallback } from "react";
 import axios from "../../axios";
@@ -12,6 +12,7 @@ import EducationList from "../../components/Candidate/EducationList";
 import ExperienceList from "../../components/Candidate/ExperienceList";
 import LanguageList from "../../components/Candidate/LanguageList";
 import OverviewSidebarCard from "../../components/Candidate/OverviewSidebarCard";
+import OfferButton from "../../components/Candidate/OfferButton";
 
 const CandidateView = () => {
     const { id } = useParams();
@@ -19,6 +20,11 @@ const CandidateView = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const isEmployer = useSelector((state) => {
+        const user = state.auth.user;
+        return user && user.is_employer;
+    });
 
     const getCandidate = useCallback(() => {
         setIsLoading(true);
@@ -119,14 +125,16 @@ const CandidateView = () => {
                         </div>
                     </div>
                 </div>
-                <div className="right-col">
-                    <div className="actions">
-                        <button className="btn btn-primary">
-                            Send private message
-                        </button>
-                        <button className="btn btn-primary">Offer Job</button>
+                {isEmployer && (
+                    <div className="right-col">
+                        <div className="actions">
+                            <button className="btn btn-primary">
+                                Send private message
+                            </button>
+                            <OfferButton candidateId={id} />
+                        </div>
                     </div>
-                </div>
+                )}
             </ViewPage.Header>
             <ViewPage.Main>
                 <div className="row">
@@ -143,19 +151,25 @@ const CandidateView = () => {
                                     <h3>Educations</h3>
                                     <EducationList educations={educations} />
                                 </div>
-                            ) : ''}
+                            ) : (
+                                ""
+                            )}
                             {experiences.length ? (
                                 <div className="single-info-section">
                                     <h3>Experiences</h3>
                                     <ExperienceList experiences={experiences} />
                                 </div>
-                            ) : ''}
+                            ) : (
+                                ""
+                            )}
                             {languages.length ? (
                                 <div className="single-info-section">
                                     <h3>Languages</h3>
                                     <LanguageList languages={languages} />
                                 </div>
-                            ) : ''}
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
 

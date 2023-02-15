@@ -14,6 +14,7 @@ use App\Http\Controllers\Resume\SalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
         });
 
         Route::apiResource('/application', ApplicationController::class)->only(['store']);
+
+        Route::apiResource('/offer', OfferController::class)->only(['store']);
 
         Route::get('/candidate-dashboard', [DashboardController::class, 'candidate']);
 

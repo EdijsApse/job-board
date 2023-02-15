@@ -61,5 +61,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('apply-for-job', function (User $user) {
             return $user->isCandidate();
         });
+
+        Gate::define('offer-job', function (User $user) {
+            return $user->isEmployer();
+        });
     }
 }

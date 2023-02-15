@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ApplicationStatus;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use Illuminate\Support\Facades\Gate;
@@ -46,9 +47,9 @@ class ApplicationController extends Controller
             ]);
         }
 
-        $application = Application::create(array_merge($validated, [
+        Application::create(array_merge($validated, [
             'user_id' => $user->id,
-            'status' => Application::TYPE_PENDING
+            'status' => ApplicationStatus::Pending
         ]));
 
         return response()->json([

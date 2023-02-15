@@ -74,6 +74,13 @@ class User extends Authenticatable
         return $builder->paginate(20);
     }
 
+    public function scopeCandidate(Builder $builder)
+    {
+        $builder->where('user_type', self::TYPE_CANDIDATE);
+
+        return $builder;
+    }
+
     /**
      * Determines if user is candidate
      * @return boolean

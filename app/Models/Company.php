@@ -69,6 +69,14 @@ class Company extends Model
     }
 
     /**
+     * Gets list of Jobs that can be offered to candidate
+     */
+    public function getOfferableJobsList()
+    {
+        return $this->jobs()->get();
+    }
+
+    /**
      * Get the country.
      */
     public function country()
