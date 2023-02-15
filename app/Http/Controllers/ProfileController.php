@@ -32,22 +32,22 @@ class ProfileController extends Controller
             'is_public' => 'nullable|boolean'
         ]);
 
-        $profileImagePath = null;
-        if ($request->hasFile('image')) {
-            $profileImagePath = $request->file('image')->store($user->getProfileFilesPath(), 'public');
-        }
-
-        Profile::updateOrCreate(
-        ['user_id' => $user->id],
-        [
+        $data = [
             'name' => $validatedData['name'],
             'surname' => $validatedData['surname'],
             'gender' => $validatedData['gender'],
             'date_of_birth' => $validatedData['date_of_birth'],
             'phone' => $validatedData['phone'],
-            'image' => $profileImagePath,
             'is_public' => $validatedData['is_public'] ?? false
-        ]
+        ];
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store($user->getProfileFilesPath(), 'public');
+        }
+
+        Profile::updateOrCreate(
+            ['user_id' => $user->id],
+            $data
         );
 
         return response()->json([

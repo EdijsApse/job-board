@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ApplicationStatus;
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\Offer;
 use Illuminate\Support\Facades\Gate;
 
 class ApplicationController extends Controller
@@ -44,6 +45,19 @@ class ApplicationController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Application already created for this Job opening!'
+            ]);
+        }
+
+        $offerExists = Offer::where([
+            'job_id' => $validated['job_id'],
+            'candidate_id' => $user->id,
+            'status' => ApplicationStatus::Pending
+        ])->first();
+
+        if ($offerExists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have pending offer for this position!',
             ]);
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ApplicationStatus;
+use App\Models\Application;
 use App\Models\Job;
 use App\Models\Offer;
 use App\Models\User;
@@ -78,6 +79,19 @@ class OfferController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Offer already created for this Candidate!'
+            ]);
+        }
+
+        $existingApplication = Application::where([
+            'job_id' => $validated['job_id'],
+            'user_id' => $validated['candidate_id'],
+            'status' => ApplicationStatus::Pending
+        ])->first();
+
+        if ($existingApplication) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have pending application from this candidate for this job opening!'
             ]);
         }
 

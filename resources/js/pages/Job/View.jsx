@@ -13,30 +13,23 @@ import ViewPage from "../../components/UI/ViewPage";
 import OverviewSidebarCard from "../../components/Job/OverviewSidebarCard";
 import CompanyInfoSidebarCard from "../../components/Employer/InfoSidebarCard";
 import ApplyButton from "../../components/Job/ApplyButton";
+import { authActions } from "../../store/slices/auth";
 
 const JobView = () => {
     const { id } = useParams();
     const [job, setJob] = useState(null);
     const [relatedJobs, setRelatedJobs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const isEmployer = useSelector((state) => {
-        const user = state.auth.user;
-        return user.is_employer;
-    });
-    const canUpdateJob = useSelector((state) => {
-        const user = state.auth.user;
-        if (!user) {
-            return false;
-        }
-        if (!user.company) {
-            return false;
-        }
-        if (!job) {
-            return false;
-        }
 
-        return user.company.id === job.company.id;
-    });
+    const user = useSelector((state) => state.auth.user);
+
+    const canApplyForJob = user && user.is_candidate;
+    const canUpdateJob =
+        user &&
+        user.company &&
+        job &&
+        job.company &&
+        user.company.id === job.company.id;
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -128,18 +121,27 @@ const JobView = () => {
                     </div>
                 </div>
                 <div className="right-col">
-                    <p className="text-right mb-0">
+                    <p className="text-end mb-0">
                         Application ends:
                         <span className="text-danger">
                             {job.expiration_date}
                         </span>
                     </p>
                     <div className="actions mt-4">
-                        {!isEmployer && (
+                        {canApplyForJob && (
                             <Fragment>
                                 <ApplyButton job={job} />
-                                <button className="btn btn-secondary">
-                                    <i className="fa-regular fa-bookmark"></i>
+                            </Fragment>
+                        )}
+                        {!user && (
+                            <Fragment>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => {
+                                        dispatch(authActions.showLoginModal());
+                                    }}
+                                >
+                                    Login to apply
                                 </button>
                             </Fragment>
                         )}
@@ -148,6 +150,9 @@ const JobView = () => {
                                 Update Job
                             </button>
                         )}
+                        <button className="btn btn-secondary">
+                            <i className="fa-regular fa-bookmark"></i>
+                        </button>
                     </div>
                 </div>
             </ViewPage.Header>
