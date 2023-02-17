@@ -24,7 +24,7 @@ class OfferResource extends JsonResource
             'job_id' => $this->job_id,
             'job' => new JobResource($this->job),
             'candidate_id' => $this->candidate_id,
-            'candidate' => new CandidateResource($this->candidate_id),
+            'candidate' => new CandidateResource($this->candidate),
         ];
     }
 }

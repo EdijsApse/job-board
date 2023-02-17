@@ -37,7 +37,7 @@ const Dashboard = () => {
                     <DasboardStatsCard
                         className="blue"
                         title="Pending Applications"
-                        count={candidateDashboard.pendingApplications}
+                        count={candidateDashboard.pendingApplicationsCount}
                     >
                         <i className="fa-solid fa-briefcase"></i>
                     </DasboardStatsCard>

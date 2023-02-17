@@ -4,8 +4,14 @@ const initialState = {
     isLoading: false,
     isLoaded: false,
     candidateDashboard: {
-        pending_applications: 0,
+        pendingApplicationsCount: 0,
+        pendingApplications: [],
+    },
+    employerDashboard: {
+        pendingApplicationsCount: 0,
+        pendingOffersCount: 0,
         applications: [],
+        offers: [],
     },
 };
 
@@ -18,9 +24,24 @@ const dashboardSlice = createSlice({
             state.isLoading = isLoading;
         },
         setCandidateDashboard(state, { payload }) {
-            const { applications, pending_applications } = payload;
-            state.candidateDashboard.pendingApplications = pending_applications;
+            const { applications, pending_applications_count } = payload;
+            state.candidateDashboard.pendingApplicationsCount =
+                pending_applications_count;
             state.candidateDashboard.applications = applications;
+            state.isLoaded = true;
+        },
+        setEmployerDashboard(state, { payload }) {
+            const {
+                applications,
+                offers,
+                pending_applications_count,
+                pending_offers_count,
+            } = payload;
+            state.employerDashboard.applications = applications;
+            state.employerDashboard.offers = offers;
+            state.employerDashboard.pendingApplicationsCount =
+                pending_applications_count;
+            state.employerDashboard.pendingOffersCount = pending_offers_count;
             state.isLoaded = true;
         },
     },

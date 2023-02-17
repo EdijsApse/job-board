@@ -56,15 +56,17 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('/job', JobController::class)
-        ->only(['update', 'store'])->missing(function () {
-            return response()->json(['message' => 'Resource was not found!'], 404);
-        });
+    ->only(['update', 'store'])->missing(function () {
+        return response()->json(['message' => 'Resource was not found!'], 404);
+    });
 
-        Route::apiResource('/application', ApplicationController::class)->only(['store']);
+    Route::apiResource('/application', ApplicationController::class)->only(['store']);
 
-        Route::apiResource('/offer', OfferController::class)->only(['store']);
+    Route::apiResource('/offer', OfferController::class)->only(['store']);
 
-        Route::get('/candidate-dashboard', [DashboardController::class, 'candidate']);
+    Route::get('/candidate-dashboard', [DashboardController::class, 'candidate']);
+
+    Route::get('/employer-dashboard', [DashboardController::class, 'employer']);
 
 });
 

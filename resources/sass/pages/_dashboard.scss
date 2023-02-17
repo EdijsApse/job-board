@@ -20,4 +20,21 @@
             }
         }
     }
+    .offers-list {
+        margin-top: $space-6;
+        .single-offer-card {
+            margin-bottom: $space-6;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .employer-listings {
+        .dashboard-card {
+            margin-bottom: $space-8;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
 }

@@ -8,13 +8,28 @@ export const loadCandidateDashboard = () => {
         axios
             .get("/candidate-dashboard")
             .then((response) => {
-                const { applications, pending_applications } = response.data;
+                dispatch(dashboardAction.setCandidateDashboard(response.data));
+            })
+            .catch((err) => {
                 dispatch(
-                    dashboardAction.setCandidateDashboard({
-                        applications,
-                        pending_applications,
+                    alertActions.showWarningAlert({
+                        message: "Oooops, something went wrong...",
                     })
                 );
+            })
+            .finally(() => {
+                dispatch(dashboardAction.setIsLoading({ isLoading: false }));
+            });
+    };
+};
+
+export const loadEmployerDashboard = () => {
+    return (dispatch) => {
+        dispatch(dashboardAction.setIsLoading({ isLoading: true }));
+        axios
+            .get("/employer-dashboard")
+            .then((response) => {
+                dispatch(dashboardAction.setEmployerDashboard(response.data));
             })
             .catch((err) => {
                 dispatch(

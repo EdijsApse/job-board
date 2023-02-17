@@ -11,6 +11,15 @@
             color: $deep-blue;
         }
     }
+    &.green {
+        .icon {
+            background-color: rgba($green, 0.1);
+            color: $green;
+        }
+        .count {
+            color: $green;
+        }
+    }
     .icon {
         display: flex;
         justify-content: center;
