@@ -16,7 +16,7 @@
     }
     &.pending {
         color: #fff;
-        background-color: #27ceb4;
+        background-color: $pending-color;
     }
     &.rejected {
         color: #fff;

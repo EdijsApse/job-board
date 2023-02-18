@@ -207,4 +207,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Application::class);
     }
+
+    /**
+     * Get user offers
+     * 
+    */
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 }

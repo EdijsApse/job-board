@@ -9,6 +9,7 @@ import jobSlice from "./slices/job";
 import candidatSlice from "./slices/candidate";
 import landingSlice from "./slices/landing";
 import dashboardSlice from "./slices/dashboard";
+import employerOffersSlice from "./slices/offers/employer";
 
 const store = configureStore({
     reducer: {
@@ -21,7 +22,8 @@ const store = configureStore({
         job: jobSlice,
         candidates: candidatSlice,
         landing: landingSlice,
-        dashboard: dashboardSlice
+        dashboard: dashboardSlice,
+        employerOffers: employerOffersSlice
     },
 });
 

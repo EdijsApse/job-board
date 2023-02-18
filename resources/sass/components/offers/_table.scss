@@ -1,0 +1,28 @@
+.offers-table-wrapper {
+    .table {
+        .job-cell {
+            display: flex;
+            .image {
+                @include circle(55px);
+                margin-right: $space-4;
+                overflow: hidden;
+                border-radius: $border-radius-sm;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .details {
+                padding-top: $space-1;
+                .details-list {
+                    .single-detail {
+                        span {
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

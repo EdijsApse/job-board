@@ -25,6 +25,7 @@ class OfferResource extends JsonResource
             'job' => new JobResource($this->job),
             'candidate_id' => $this->candidate_id,
             'candidate' => new CandidateResource($this->candidate),
+            'created' => $this->created_at->diffForHumans()
         ];
     }
 }

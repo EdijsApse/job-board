@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import useUser from "../../hooks/use-user";
 import profileImage from "../assets/placeholder-image.png";
@@ -6,7 +7,7 @@ import SidebarResumeDropdowns from "./Candidate/SidebarResumeDropdowns";
 
 const Sidebar = () => {
     const { user, isEmployer, isCandidate } = useUser();
-    
+
     const profile = user && user.profile ? user.profile : null;
     let imgSrc = profile && profile.image ? profile.image : profileImage;
     const userType = user ? user.user_type_name : "";
@@ -55,6 +56,22 @@ const Sidebar = () => {
                         </SidebarLink>
                     </li>
                     {isCandidate && <SidebarResumeDropdowns />}
+                    {isEmployer && (
+                        <Fragment>
+                            <li>
+                                <SidebarLink to="/dashboard/employer-offers">
+                                    <i className="fa-solid fa-briefcase"></i>
+                                    <span>Sent Offers</span>
+                                </SidebarLink>
+                            </li>
+                            <li>
+                                <SidebarLink to="/dashboard/employer-applications">
+                                    <i className="fa-solid fa-briefcase"></i>
+                                    <span>Applications</span>
+                                </SidebarLink>
+                            </li>
+                        </Fragment>
+                    )}
                     <li>
                         <a href="">
                             <i className="fa-solid fa-bullhorn"></i>

@@ -12,6 +12,8 @@ import Educations from "../../pages/Dashboard/Candidate/Educations";
 import Languages from "../../pages/Dashboard/Candidate/Languages";
 import DashboardPage from "../../components/UI/DashboardPage";
 import PrepareApp from "../middlewares/PrepareApp";
+import ErrorPage from "../../pages/Error";
+import EmployerOffers from "../../pages/Dashboard/Employer/Offers";
 
 export default {
     path: "/dashboard",
@@ -22,7 +24,7 @@ export default {
             </AuthenticatedUserOnly>
         </PrepareApp>
     ),
-    errorElement: <p>Error page</p>,
+    errorElement: <ErrorPage />,
     children: [
         {
             index: true,
@@ -96,5 +98,15 @@ export default {
                 </CandidateOnly>
             ),
         },
+        {
+            path: "employer-offers",
+            element: (
+                <EmployerOnly>
+                    <DashboardPage pageTitle="Sent Offers">
+                        <EmployerOffers />
+                    </DashboardPage>
+                </EmployerOnly>
+            ),
+        }
     ],
 };

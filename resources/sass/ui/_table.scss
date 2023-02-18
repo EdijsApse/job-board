@@ -1,0 +1,61 @@
+.table {
+    thead {
+        tr {
+            border: none;
+            background-color: $pale-gray;
+            th {
+                border: none;
+                padding: $space-6 $space-8;
+                color: $deep-blue;
+            }
+        }
+    }
+    tbody {
+        tr {
+            border-bottom: 1px solid $bright-gray;
+            td {
+                padding: $space-6 $space-8;
+                vertical-align: middle;
+                .actions {
+                    .btn {
+                        margin-right: $space-4;
+                        &:last-of-type {
+                            margin-right: 0;
+                        }
+                    }
+                    .btn-sm {
+                        padding: $space-2 $space-2;
+                        height: 35px;
+                        min-width: 35px;
+                        font-size: 0.9rem;
+                    }
+                }
+                .link {
+                    font-size: 1.2rem;
+                    color: $dark;
+                    text-decoration: none;
+                    @include font-semibold();
+                    transition: all 0.3s;
+                    &:hover {
+                        color: $deep-blue;
+                    }
+                }
+                &.pending {
+                    color: $pending-color;
+                }
+                &.rejected {
+                    color: $red;
+                }
+                &.canceled {
+                    color: $orange;
+                }
+                &.approved {
+                    color: $deep-blue;
+                }
+                &.unknown {
+                    color: $gray;
+                }
+            }
+        }
+    }
+}
