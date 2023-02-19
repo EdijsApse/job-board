@@ -97,9 +97,7 @@ class OfferController extends Controller
     public function getEmployerOffers(Request $request)
     {
         $user = $request->user();
-        
-        return [
-            'offers' => new OfferCollection($user->offers()->get())
-        ];
+
+        return new OfferCollection($user->offers()->filter(collect($request->all())));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,19 @@ class Offer extends Model
         'job_id',
         'status',
     ];
+
+    public function scopeFilter(Builder $query, $collectionOfInputs)
+    {
+        if ($collectionOfInputs->get('keyword')) {
+            
+            $query->whereHas('job', function(Builder $query) use($collectionOfInputs){
+                $query->where('jobtitle', 'like', "%".$collectionOfInputs->get('keyword')."%");
+            });
+
+        }
+
+        return $query->orderBy('created_at', 'desc')->paginate(10);
+    }
 
     /**
      * Gets user to whom offer was created

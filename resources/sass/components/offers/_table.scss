@@ -1,4 +1,19 @@
 .offers-table-wrapper {
+    .filters {
+        display: flex;
+        margin-bottom: $space-6;
+        .form-group {
+            max-width: 350px;
+            height: 50px;
+            input {
+                height: 50px;
+            }
+        }
+        .btn {
+            margin-left: $space-4;
+            height: 50px;
+        }
+    }
     .table {
         .job-cell {
             display: flex;
@@ -24,5 +39,8 @@
                 }
             }
         }
+    }
+    .pagination {
+        margin-top: $space-6;
     }
 }

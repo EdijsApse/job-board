@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    ul {
+        padding: 0;
+        display: flex;
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 $space-2;
+            @include circle(40px);
+            cursor: pointer;
+            color: $gray;
+            transition: all 0.3s;
+            &.active {
+                background-color: $deep-blue;
+                color: #fff;
+            }
+            &:hover {
+                background-color: $deep-blue;
+                color: #fff;
+            }
+        }
+    }
+}

@@ -36,6 +36,20 @@
             border-color: $red;
         }
     }
+    &.input-with-icon {
+        position: relative;
+        i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 20px;
+            font-size: 1.2rem;
+            color: $gray;
+        }
+        input, select {
+            padding-left: 3.5rem;
+        }
+    }
 }
 
 .form-switch {
