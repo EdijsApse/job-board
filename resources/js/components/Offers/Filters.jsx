@@ -12,7 +12,9 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
     };
 
     const resetSearchHandler = () => {
-        setKeyword('');
+        if (keyword) {
+            setKeyword('');
+        }
         resetSearch();
     }
 

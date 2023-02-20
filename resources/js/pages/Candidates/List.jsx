@@ -3,60 +3,21 @@ import CandidateItem from "../../components/Candidate/ListItem";
 import Filters from "../../components/Candidate/Filters";
 import Pagination from "../../components/UI/Pagination";
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { useEffect, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getFiltersFromUrlSearchParams } from "../../helpers";
-import { useCallback } from "react";
 import { getCandidates } from "../../store/thunks/candidate";
 import Fade from "../../components/Animations/Fade";
+import useFilter from "../../hooks/use-filter";
 
 const CandidatesList = () => {
-    const isLoading = useSelector((state) => state.candidates.isLoading);
-
     const list = useSelector((state) => state.candidates.list);
     const currentPage = useSelector((state) => state.candidates.currentPage);
     const lastPage = useSelector((state) => state.candidates.lastPage);
     const itemsPerPage = useSelector((state) => state.candidates.itemsPerPage);
     const totalItems = useSelector((state) => state.candidates.totalItems);
 
-    const dispatch = useDispatch();
-
-    const [searchParams, setSeachParams] = useSearchParams();
-
-    const filters = useMemo(() => {
-        return getFiltersFromUrlSearchParams(searchParams);
-    }, [searchParams]);
-
-    useEffect(() => {
-        if (!isLoading) {
-            dispatch(getCandidates(filters));
-        }
-    }, [filters]);
-
-    const setPageHandler = (page) => {
-        setSeachParams({ ...filters, page: page });
-    };
-
-    const setFilters = useCallback(
-        (newFilters) => {
-            const paramsList = { ...filters, ...newFilters, page: 1 };
-            const validParams = {};
-            for (let key in paramsList) {
-                if (paramsList[key]) {
-                    validParams[key] = paramsList[key];
-                }
-            }
-
-            setSeachParams(validParams);
-        },
-        [setSeachParams]
-    );
-
-    const resetSearchHandler = () => {
-        setSeachParams({ page: 1 });
-    };
+    const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
+        useFilter(getCandidates, (state) => state.candidates.isLoading);
 
     const crumbs = [
         {
@@ -83,7 +44,7 @@ const CandidatesList = () => {
                                 <Filters
                                     preselectedFilters={filters}
                                     updateFilters={setFilters}
-                                    resetSearch={resetSearchHandler}
+                                    resetSearch={resetFilters}
                                 />
                             </div>
                         </div>

@@ -6,6 +6,7 @@ const SET_CITY = "SET_CITY";
 const SET_CATEGORY = "SET_CATEGORY";
 const SET_EMPLOYMENT = "SET_EMPLOYMENT";
 const SET_INITIAL_STATE = "SET_INITIAL_STATE";
+const SET_DEFAULT = "SET_DEFAULT";
 
 const defaultState = {
     city_id: "",
@@ -39,6 +40,10 @@ const filterReducer = (state = defaultState, action) => {
     if (type === SET_CITY) {
         return { ...state, city_id: value };
     }
+    if (type === SET_DEFAULT) {
+        return defaultState;
+    }
+
     return state;
 };
 
@@ -62,6 +67,11 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
     const filterJobs = (e) => {
         e.preventDefault();
         updateFilters(filterState);
+    };
+
+    const resetSearchHandler = () => {
+        dispatch({ type: SET_DEFAULT });
+        resetSearch();
     };
 
     const canResetFilter =
@@ -270,7 +280,7 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
                     <button
                         className="btn btn-danger mt-4"
                         type="button"
-                        onClick={resetSearch}
+                        onClick={resetSearchHandler}
                     >
                         Reset Search
                     </button>

@@ -1,56 +1,24 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Fade from "../../../components/Animations/Fade";
 import Filters from "../../../components/Offers/Filters";
 import SingleOfferTableRow from "../../../components/Offers/SingleOfferTableRow";
 import DashboardCard from "../../../components/UI/DashboardCard";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import Pagination from "../../../components/UI/Pagination";
-import { getFiltersFromUrlSearchParams } from "../../../helpers";
+import useFilter from "../../../hooks/use-filter";
 import { loadEmployerOffers } from "../../../store/thunks/offers/employer";
 
 const EmployerOffers = () => {
-    const isLoading = useSelector((state) => state.employerOffers.isLoading);
     const offers = useSelector((state) => state.employerOffers.list);
     const currentPage = useSelector(
         (state) => state.employerOffers.currentPage
     );
     const lastPage = useSelector((state) => state.employerOffers.lastPage);
-    const dispatch = useDispatch();
-    const [searchParams, setSeachParams] = useSearchParams();
-    const filters = useMemo(() => {
-        return getFiltersFromUrlSearchParams(searchParams);
-    }, [searchParams]);
-
-    const setFilters = useCallback(
-        (newFilters) => {
-            const paramsList = { ...filters, ...newFilters, page: 1 };
-            const validParams = {};
-            for (let key in paramsList) {
-                if (paramsList[key]) {
-                    validParams[key] = paramsList[key];
-                }
-            }
-
-            setSeachParams(validParams);
-        },
-        [setSeachParams]
-    );
-
-    const resetSearchHandler = () => {
-        setSeachParams({ page: 1 });
-    };
-
-    const setPageHandler = (page) => {
-        setSeachParams({ ...filters, page: page });
-    };
-
-    useEffect(() => {
-        if (!isLoading) {
-            dispatch(loadEmployerOffers(filters));
-        }
-    }, [filters]);
+    const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
+        useFilter(
+            loadEmployerOffers,
+            (state) => state.employerOffers.isLoading
+        );
 
     return (
         <DashboardCard className="relative">
@@ -61,7 +29,7 @@ const EmployerOffers = () => {
                 <Filters
                     preselectedFilters={filters}
                     updateFilters={setFilters}
-                    resetSearch={resetSearchHandler}
+                    resetSearch={resetFilters}
                 />
                 <table className="table">
                     <thead>

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 const SET_KEYWORD = "SET_KEYWORD";
 const SET_CATEGORY = "SET_CATEGORY";
 const SET_INITIAL_STATE = "SET_INITIAL_STATE";
+const SET_DEFAULT = "SET_DEFAULT";
 
 const defaultState = {
     category_id: "",
@@ -29,6 +30,10 @@ const filterReducer = (state = defaultState, action) => {
         return { ...state, category_id: value };
     }
 
+    if (type === SET_DEFAULT) {
+        return defaultState;
+    }
+
     return state;
 };
 
@@ -49,9 +54,12 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
         updateFilters(filterState);
     };
 
-    const canResetFilter =
-        filterState.keyword ||
-        filterState.category_id
+    const resetSearchHandler = () => {
+        dispatch({ type: SET_DEFAULT });
+        resetSearch();
+    };
+
+    const canResetFilter = filterState.keyword || filterState.category_id;
 
     return (
         <Fragment>
@@ -95,7 +103,7 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
                     <button
                         className="btn btn-danger mt-4"
                         type="button"
-                        onClick={resetSearch}
+                        onClick={resetSearchHandler}
                     >
                         Reset Search
                     </button>

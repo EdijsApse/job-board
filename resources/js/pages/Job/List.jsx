@@ -4,60 +4,21 @@ import Filters from "../../components/Job/Filters";
 import Pagination from "../../components/UI/Pagination";
 import SortInputs from "../../components/Job/SortInputs";
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { useEffect, useMemo } from "react";
 import { getJobs } from "../../store/thunks/job";
-import { useSearchParams } from "react-router-dom";
-import { getFiltersFromUrlSearchParams } from "../../helpers";
-import { useCallback } from "react";
 import Fade from "../../components/Animations/Fade";
+import useFilter from "../../hooks/use-filter";
 
 const JobList = () => {
-    const isLoading = useSelector((state) => state.job.isLoading);
-
     const list = useSelector((state) => state.job.list);
     const currentPage = useSelector((state) => state.job.currentPage);
     const lastPage = useSelector((state) => state.job.lastPage);
     const itemsPerPage = useSelector((state) => state.job.itemsPerPage);
     const totalItems = useSelector((state) => state.job.totalItems);
 
-    const dispatch = useDispatch();
-
-    const [searchParams, setSeachParams] = useSearchParams();
-
-    const filters = useMemo(() => {
-        return getFiltersFromUrlSearchParams(searchParams);
-    }, [searchParams]);
-
-    useEffect(() => {
-        if (!isLoading) {
-            dispatch(getJobs(filters));
-        }
-    }, [filters]);
-
-    const setPageHandler = (page) => {
-        setSeachParams({ ...filters, page: page });
-    };
-
-    const setFilters = useCallback(
-        (newFilters) => {
-            const paramsList = { ...filters, ...newFilters, page: 1 };
-            const validParams = {};
-            for (let key in paramsList) {
-                if (paramsList[key]) {
-                    validParams[key] = paramsList[key];
-                }
-            }
-
-            setSeachParams(validParams);
-        },
-        [setSeachParams]
-    );
-
-    const resetSearchHandler = () => {
-        setSeachParams({ page: 1 });
-    };
+    const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
+        useFilter(getJobs, (state) => state.job.isLoading);
 
     const crumbs = [
         {
@@ -84,7 +45,7 @@ const JobList = () => {
                                 <Filters
                                     preselectedFilters={filters}
                                     updateFilters={setFilters}
-                                    resetSearch={resetSearchHandler}
+                                    resetSearch={resetFilters}
                                 />
                             </div>
                         </div>
