@@ -1,20 +1,14 @@
 import axios from "../../axios";
-import { axiosErrorResponseHandler } from "../../helpers";
+import {
+    axiosErrorResponseHandler,
+    getPathWithSearchParams,
+} from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { jobActions } from "../slices/job";
 
 export const getJobs = (searchParams) => {
     return (dispatch) => {
-        const params = new URLSearchParams();
-
-        for (let key in searchParams) {
-            if (searchParams[key]) {
-                params.append(key, searchParams[key]);
-            }
-        }
-
-        const queryString = params.toString();
-        let url = queryString ? `/job?${queryString}` : "/job";
+        const url = getPathWithSearchParams("/job", searchParams);
 
         dispatch(jobActions.setLoadingState({ isLoading: true }));
 

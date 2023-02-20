@@ -1,19 +1,11 @@
 import axios from "../../axios";
+import { getPathWithSearchParams } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { candidateActions } from "../slices/candidate";
 
 export const getCandidates = (searchParams) => {
     return (dispatch) => {
-        const params = new URLSearchParams();
-
-        for (let key in searchParams) {
-            if (searchParams[key]) {
-                params.append(key, searchParams[key]);
-            }
-        }
-
-        const queryString = params.toString();
-        let url = queryString ? `/candidate?${queryString}` : "/candidate";
+        const url = getPathWithSearchParams("/candidate", searchParams);
 
         dispatch(candidateActions.setIsLoading({ isLoading: true }));
 
@@ -36,9 +28,7 @@ export const getCandidates = (searchParams) => {
                 );
             })
             .finally(() => {
-                dispatch(
-                    candidateActions.setIsLoading({ isLoading: false })
-                );
+                dispatch(candidateActions.setIsLoading({ isLoading: false }));
             });
     };
 };

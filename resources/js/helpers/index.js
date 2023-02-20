@@ -17,6 +17,12 @@ export const axiosErrorResponseHandler = (
     }
 };
 
+/**
+ * Gets object from URLSearchParams string
+ * 
+ * @param { URLSearchParams } URLSearchParams 
+ * @returns Object created fom url search params
+ */
 export const getFiltersFromUrlSearchParams = (URLSearchParams) => {
     const searchParamsEntries = URLSearchParams.entries();
     const filters = {};
@@ -28,4 +34,25 @@ export const getFiltersFromUrlSearchParams = (URLSearchParams) => {
         }
     }
     return filters;
+};
+
+/**
+ * Creates API endpoint with query string from given object
+ * 
+ * @param {*} path API Endpoint
+ * @param {*} params Object with key value pairs presenting filters
+ * @returns 
+ */
+export const getPathWithSearchParams = (path, params) => {
+    const urlSearchParams = new URLSearchParams();
+
+    for (let key in params) {
+        if (params[key]) {
+            urlSearchParams.append(key, params[key]);
+        }
+    }
+
+    const queryString = urlSearchParams.toString();
+
+    return queryString ? `${path}?${queryString}` : path;
 };

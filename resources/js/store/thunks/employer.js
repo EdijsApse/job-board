@@ -1,5 +1,8 @@
 import axios from "../../axios";
-import { axiosErrorResponseHandler } from "../../helpers";
+import {
+    axiosErrorResponseHandler,
+    getPathWithSearchParams,
+} from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { authActions } from "../slices/auth";
 import { employerActions } from "../slices/employer";
@@ -51,16 +54,7 @@ export const updateCompanyDetails = (companyDetails) => {
 
 export const getEmployers = (searchParams) => {
     return (dispatch) => {
-        const params = new URLSearchParams();
-
-        for (let key in searchParams) {
-            if (searchParams[key]) {
-                params.append(key, searchParams[key]);
-            }
-        }
-
-        const queryString = params.toString();
-        let url = queryString ? `/employer?${queryString}` : "/employer";
+        const url = getPathWithSearchParams("/employer", searchParams);
 
         dispatch(employerActions.setLoadingState({ isLoading: true }));
 

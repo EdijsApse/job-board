@@ -11,6 +11,11 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
         setKeyword(e.target.value);
     };
 
+    const resetSearchHandler = () => {
+        setKeyword('');
+        resetSearch();
+    }
+
     useEffect(() => {
         const { keyword } = preselectedFilters;
         if (keyword) {
@@ -35,7 +40,7 @@ const Filters = ({ preselectedFilters, updateFilters, resetSearch }) => {
                 <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={resetSearch}
+                    onClick={resetSearchHandler}
                 >
                     Clear filters
                 </button>

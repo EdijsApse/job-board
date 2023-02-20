@@ -1,19 +1,12 @@
 import axios from "../../../axios";
+import { getPathWithSearchParams } from "../../../helpers";
 import { alertActions } from "../../slices/alert";
 import { employerOffersActions } from "../../slices/offers/employer";
 
 export const loadEmployerOffers = (searchParams) => {
     return (dispacth) => {
-        const params = new URLSearchParams();
+        const url = getPathWithSearchParams("/employer/offers", searchParams);
 
-        for (let key in searchParams) {
-            if (searchParams[key]) {
-                params.append(key, searchParams[key]);
-            }
-        }
-
-        const queryString = params.toString();
-        let url = queryString ? `/employer/offers?${queryString}` : "/employer/offers";
         dispacth(employerOffersActions.setIsLoading({ isLoading: true }));
         axios
             .get(url)
