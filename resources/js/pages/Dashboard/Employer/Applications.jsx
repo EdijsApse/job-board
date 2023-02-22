@@ -1,23 +1,23 @@
 import { useSelector } from "react-redux";
 import Fade from "../../../components/Animations/Fade";
-import Filters from "../../../components/Offers/Filters";
-import SingleOfferTableRow from "../../../components/Offers/SingleOfferTableRow";
+import SingleApplicationTableRow from "../../../components/Application/SingleApplicationTableRow";
+import Filters from "../../../components/Application/Filters";
 import DashboardCard from "../../../components/UI/DashboardCard";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import Pagination from "../../../components/UI/Pagination";
 import useFilter from "../../../hooks/use-filter";
-import { loadEmployerOffers } from "../../../store/thunks/offers/employer";
+import { loadEmployerApplications } from "../../../store/thunks/applications/employer";
 
-const EmployerOffers = () => {
-    const offers = useSelector((state) => state.employerOffers.list);
+const EmployerApplications = () => {
+    const applications = useSelector((state) => state.employerApplications.list);
     const currentPage = useSelector(
-        (state) => state.employerOffers.currentPage
+        (state) => state.employerApplications.currentPage
     );
-    const lastPage = useSelector((state) => state.employerOffers.lastPage);
+    const lastPage = useSelector((state) => state.employerApplications.lastPage);
     const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
         useFilter(
-            loadEmployerOffers,
-            (state) => state.employerOffers.isLoading
+            loadEmployerApplications,
+            (state) => state.employerApplications.isLoading
         );
 
     return (
@@ -25,7 +25,7 @@ const EmployerOffers = () => {
             <Fade isVisible={isLoading}>
                 <LoadingSpinner />
             </Fade>
-            <div className="offers-table-wrapper">
+            <div className="applications-table-wrapper">
                 <Filters
                     preselectedFilters={filters}
                     updateFilters={setFilters}
@@ -34,19 +34,19 @@ const EmployerOffers = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Job Title</th>
-                            <th>Offer Sent</th>
+                            <th>Candidate</th>
+                            <th>Date Applied</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {offers.map((offer) => (
-                            <SingleOfferTableRow key={offer.id} offer={offer} />
+                        {applications.map((application) => (
+                            <SingleApplicationTableRow key={application.id} application={application} />
                         ))}
                     </tbody>
                 </table>
-                {offers.length > 0 && (
+                {applications.length > 0 && (
                     <Pagination
                         currentPage={currentPage}
                         lastPage={lastPage}
@@ -58,4 +58,4 @@ const EmployerOffers = () => {
     );
 };
 
-export default EmployerOffers;
+export default EmployerApplications;

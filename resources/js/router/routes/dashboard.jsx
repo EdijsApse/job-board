@@ -14,6 +14,7 @@ import DashboardPage from "../../components/UI/DashboardPage";
 import PrepareApp from "../middlewares/PrepareApp";
 import ErrorPage from "../../pages/Error";
 import EmployerOffers from "../../pages/Dashboard/Employer/Offers";
+import EmployerApplications from "../../pages/Dashboard/Employer/Applications";
 
 export default {
     path: "/dashboard",
@@ -107,6 +108,16 @@ export default {
                     </DashboardPage>
                 </EmployerOnly>
             ),
-        }
+        },
+        {
+            path: "employer-applications",
+            element: (
+                <EmployerOnly>
+                    <DashboardPage pageTitle="Received Applications">
+                        <EmployerApplications />
+                    </DashboardPage>
+                </EmployerOnly>
+            ),
+        },
     ],
 };

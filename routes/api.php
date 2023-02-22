@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/employer-dashboard', [DashboardController::class, 'employer']);
     Route::get('/employer/offers', [OfferController::class, 'getEmployerOffers']);
+    Route::get('/employer/applications', [ApplicationController::class, 'getEmployerApplications']);
 
 });
 

@@ -25,6 +25,7 @@ class ApplicationResource extends JsonResource
             'cover_letter' => $this->cover_letter,
             'status' => $this->status,
             'status_name' => ApplicationStatus::getStatusName($this->status),
+            'created' => $this->created_at->diffForHumans()
         ];
     }
 }

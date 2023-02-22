@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ApplicationStatus;
+use App\Http\Resources\Application\ApplicationCollection;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\Offer;
@@ -10,16 +11,6 @@ use Illuminate\Support\Facades\Gate;
 
 class ApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -74,25 +65,14 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getEmployerApplications(Request $request)
     {
-        //
-    }
+        $user = $request->user();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return new ApplicationCollection(Application::employer($user)->filter(collect($request->all())));
     }
 }

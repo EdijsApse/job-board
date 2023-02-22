@@ -4,7 +4,7 @@ import placeholderImage from "../assets/placeholder-image.png";
 const SingleOfferTableRow = ({ offer }) => {
     const img = offer.job.image ?? placeholderImage;
     return (
-        <tr key={offer.id}>
+        <tr>
             <td>
                 <div className="job-cell">
                     <div className="image">
