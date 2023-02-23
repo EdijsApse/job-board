@@ -1,27 +1,48 @@
 import BreadCrumbs from "../../components/UI/Breadcrumbs";
 import Wrapper from "../../components/UI/Wrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import Fade from "../../components/Animations/Fade";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import JobForm from "../../components/Job/Form";
 import axios from "../../axios";
 import { alertActions } from "../../store/slices/alert";
 import { axiosErrorResponseHandler } from "../../helpers";
 
-const CreateJob = () => {
-    const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
+const EditJob = () => {
+    const { id } = useParams();
+    const [job, setJob] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!isLoading) {
+            setIsLoading(true);
+            axios
+                .get(`/employer/jobs/${id}`)
+                .then((res) => {
+                    const { job } = res.data;
+                    setJob(job);
+                })
+                .catch((error) => {
+                    const { message } = error.response.data;
+                    dispatch(alertActions.showWarningAlert({ message }));
+                    navigate("/404");
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }
+    }, [id]);
 
     const submitJobHandler = (jobData) => {
         setIsLoading(true);
         setErrors({});
         axios
-            .post("/job", jobData)
+            .post(`/employer/jobs/${id}?_method=PUT`, jobData)
             .then((res) => {
                 const { job, success, message } = res.data;
                 if (success) {
@@ -48,21 +69,16 @@ const CreateJob = () => {
     };
 
     const crumbs = [
-        {
-            link: "/",
-            title: "Home",
-        },
+        { link: "/", title: "Home" },
         { link: "/jobs", title: "Jobs" },
-        {
-            link: "/jobs/create",
-            title: "Create",
-        },
+        { link: `/jobs/${id}`, title: job.jobtitle ?? "Job" },
+        { link: `/jobs/${id}/edit`, title: "Edit" },
     ];
 
     return (
         <div className="page create-job-page">
             <div className="page-header">
-                <h1>Create Job</h1>
+                <h1>Update Job</h1>
                 <BreadCrumbs crumbs={crumbs} />
             </div>
             <main className="page-main container-fluid">
@@ -70,11 +86,12 @@ const CreateJob = () => {
                     <Fade isVisible={isLoading}>
                         <LoadingSpinner />
                     </Fade>
-                    <h2>Post Job</h2>
+                    {job.jobtitle && <h2>Edit {job.jobtitle}</h2>}
                     <JobForm
-                        onFormSubmit={submitJobHandler}
                         errors={errors}
-                        buttonLabel="Create Job"
+                        onFormSubmit={submitJobHandler}
+                        initialJob={job}
+                        buttonLabel="Update Job"
                     />
                 </Wrapper>
             </main>
@@ -82,4 +99,4 @@ const CreateJob = () => {
     );
 };
 
-export default CreateJob;
+export default EditJob;

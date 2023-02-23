@@ -6,8 +6,7 @@ const initialState = {
     itemsPerPage: 0,
     totalItems: 0,
     lastPage: 1,
-    isLoading: false,
-    formErrors: {},
+    isLoading: false
 };
 
 const JobSlice = createSlice({
@@ -16,9 +15,6 @@ const JobSlice = createSlice({
     reducers: {
         setLoadingState(state, { payload }) {
             state.isLoading = payload.isLoading;
-        },
-        setFormErrors(state, { payload }) {
-            state.formErrors = payload.errors;
         },
         setItems(state, { payload }) {
             const { items, meta } = payload;

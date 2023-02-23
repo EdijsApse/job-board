@@ -1,7 +1,7 @@
 import placeholderImage from "../../components/assets/placeholder-image.png";
 import Badge from "../../components/UI/Badge";
 import SingleJobCard from "../../components/Job/Item";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
@@ -141,9 +141,12 @@ const JobView = () => {
                             </Fragment>
                         )}
                         {canUpdateJob && (
-                            <button className="btn btn-primary">
+                            <NavLink
+                                to={`/jobs/${job.id}/edit`}
+                                className="btn btn-primary"
+                            >
                                 Update Job
-                            </button>
+                            </NavLink>
                         )}
                         <button className="btn btn-secondary">
                             <i className="fa-regular fa-bookmark"></i>

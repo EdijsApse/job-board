@@ -1,8 +1,5 @@
 import axios from "../../axios";
-import {
-    axiosErrorResponseHandler,
-    getPathWithSearchParams,
-} from "../../helpers";
+import { getPathWithSearchParams } from "../../helpers";
 import { alertActions } from "../slices/alert";
 import { jobActions } from "../slices/job";
 
@@ -23,42 +20,6 @@ export const getJobs = (searchParams) => {
                     alertActions.showWarningAlert({
                         message: "Could't load jobs list!",
                     })
-                );
-            })
-            .finally(() => {
-                dispatch(jobActions.setLoadingState({ isLoading: false }));
-            });
-    };
-};
-
-export const createJob = (jobDetails, successCallback) => {
-    return (dispatch) => {
-        dispatch(jobActions.setLoadingState({ isLoading: true }));
-        dispatch(jobActions.setFormErrors({ errors: {} }));
-        axios
-            .post("/job", jobDetails)
-            .then((res) => {
-                const { job, success, message } = res.data;
-                if (success) {
-                    dispatch(alertActions.showSuccessAlert({ message }));
-                    successCallback(job.id);
-                }
-            })
-            .catch((error) => {
-                axiosErrorResponseHandler(
-                    error,
-                    (formErrors) => {
-                        dispatch(
-                            jobActions.setFormErrors({
-                                errors: formErrors,
-                            })
-                        );
-                    },
-                    (message) => {
-                        dispatch(
-                            alertActions.showWarningAlert({ message: message })
-                        );
-                    }
                 );
             })
             .finally(() => {

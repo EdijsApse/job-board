@@ -12,6 +12,7 @@ import CompanyOnly from "../middlewares/CompanyOnly";
 import EmployerList from "../../pages/Employer/List";
 import CandidateList from "../../pages/Candidates/List";
 import CandidateView from "../../pages/Candidates/View";
+import EditJob from "../../pages/Job/Edit";
 
 export default {
     path: "/",
@@ -43,6 +44,16 @@ export default {
         {
             path: "jobs/:id",
             element: <JobView />,
+        },
+        {
+            path: "jobs/:id/edit",
+            element: (
+                <EmployerOnly>
+                    <CompanyOnly>
+                        <EditJob />
+                    </CompanyOnly>
+                </EmployerOnly>
+            ),
         },
         {
             path: "employers",

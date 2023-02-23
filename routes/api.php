@@ -56,9 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('/job', JobController::class)
-    ->only(['update', 'store'])->missing(function () {
-        return response()->json(['message' => 'Resource was not found!'], 404);
-    });
+    ->only(['store']);
 
     Route::apiResource('/application', ApplicationController::class)->only(['store']);
 
@@ -70,7 +68,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/employer/offers', [OfferController::class, 'getEmployerOffers']);
     Route::get('/employer/applications', [ApplicationController::class, 'getEmployerApplications']);
     Route::get('/employer/jobs', [JobController::class, 'getEmployerJobs']);
-
+    Route::get('/employer/jobs/{job}', [JobController::class, 'getEmployerJob'])->missing(function () {
+        return response()->json(['message' => 'Job was not found'], 404);
+    });;;
+    Route::put('/employer/jobs/{job}', [JobController::class, 'updateEmployerJob'])->missing(function () {
+        return response()->json(['message' => 'Job was not found'], 404);
+    });;
 });
 
 Route::apiResource('/job', JobController::class)

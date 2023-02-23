@@ -87,11 +87,13 @@ class JobController extends Controller
      * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function updateEmployerJob(Request $request, Job $job)
     {
         if (Gate::denies('edit-job', $job)) {
-            return response()->json(['message' => 'you don\'t have permission to perform this action!'], 403);
+            return response()->json(['message' => 'You don\'t have permission to perform this action!'], 403);
         };
+
+        $company = $request->user()->company;
 
         $validated = $request->validate([
             'jobtitle' => 'required',
@@ -106,10 +108,15 @@ class JobController extends Controller
             'requirements' => 'nullable|array',
             'responsibilities' => 'nullable|array',
             'expiration_date' => 'required|date',
-            'years_of_experience_required' => 'required|integer',
+            'years_of_experience_required' => 'nullable|integer',
             'is_urgent' => 'boolean',
             'is_featured' => 'boolean',
+            'image' => 'nullable|image'
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store($company->getJobRelatedFilesPath(), 'public');
+        }
 
         $wasUpdated = $job->update($validated);
 
@@ -117,19 +124,6 @@ class JobController extends Controller
             'success' => $wasUpdated,
             'message' => $wasUpdated ? 'Job was updated!' : 'Couldn\'t update Job record!',
             'job' => new JobResource($job)
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return response()->json([
-            'success' => true
         ]);
     }
 
@@ -149,5 +143,29 @@ class JobController extends Controller
             ]);
         }
         return new JobCollection($company->jobs()->filter(collect($request->all())));
+    }
+
+    /**
+     * Display the specified resource.
+     * 
+     * Employer Job
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getEmployerJob(Request $request, Job $job)
+    {
+        $user = $request->user();
+        $company = $user->company;
+
+        if (!$company || $company->id !== $job->company_id) {
+            return response()->json([
+                'message' => 'No Job found!'
+            ], 404);
+        }
+
+        return response()->json([
+            'job' => new JobResource($job)
+        ]);
     }
 }

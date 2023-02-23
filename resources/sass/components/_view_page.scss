@@ -23,8 +23,8 @@
                 justify-content: flex-end;
                 .btn {
                     margin-right: $space-6;
-                    &:last-of-type {
-                        margin-right: 0
+                    &:last-child {
+                        margin-right: 0;
                     }
                 }
                 .btn-primary {

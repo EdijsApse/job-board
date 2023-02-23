@@ -6,7 +6,7 @@ const RemovableList = ({ list, onRemoveItem, onAddItem, actionText }) => {
                     {list.map((item) => (
                         <li key={item}>
                             <i
-                                class="fa-solid fa-xmark"
+                                className="fa-solid fa-xmark"
                                 onClick={onRemoveItem.bind(null, item)}
                             ></i>
                             <span>{item}</span>
