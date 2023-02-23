@@ -15,6 +15,7 @@ import PrepareApp from "../middlewares/PrepareApp";
 import ErrorPage from "../../pages/Error";
 import EmployerOffers from "../../pages/Dashboard/Employer/Offers";
 import EmployerApplications from "../../pages/Dashboard/Employer/Applications";
+import EmployerJobs from "../../pages/Dashboard/Employer/Jobs";
 
 export default {
     path: "/dashboard",
@@ -100,7 +101,7 @@ export default {
             ),
         },
         {
-            path: "employer-offers",
+            path: "employer/offers",
             element: (
                 <EmployerOnly>
                     <DashboardPage pageTitle="Sent Offers">
@@ -110,11 +111,21 @@ export default {
             ),
         },
         {
-            path: "employer-applications",
+            path: "employer/applications",
             element: (
                 <EmployerOnly>
                     <DashboardPage pageTitle="Received Applications">
                         <EmployerApplications />
+                    </DashboardPage>
+                </EmployerOnly>
+            ),
+        },
+        {
+            path: "employer/jobs",
+            element: (
+                <EmployerOnly>
+                    <DashboardPage pageTitle="My Jobs">
+                        <EmployerJobs />
                     </DashboardPage>
                 </EmployerOnly>
             ),

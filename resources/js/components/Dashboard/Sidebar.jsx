@@ -59,15 +59,21 @@ const Sidebar = () => {
                     {isEmployer && (
                         <Fragment>
                             <li>
-                                <SidebarLink to="/dashboard/employer-offers">
+                                <SidebarLink to="/dashboard/employer/offers">
                                     <i className="fa-solid fa-briefcase"></i>
                                     <span>Sent Offers</span>
                                 </SidebarLink>
                             </li>
                             <li>
-                                <SidebarLink to="/dashboard/employer-applications">
+                                <SidebarLink to="/dashboard/employer/applications">
                                     <i className="fa-solid fa-briefcase"></i>
                                     <span>Applications</span>
+                                </SidebarLink>
+                            </li>
+                            <li>
+                                <SidebarLink to="/dashboard/employer/jobs">
+                                    <i className="fa-solid fa-briefcase"></i>
+                                    <span>My Jobs</span>
                                 </SidebarLink>
                             </li>
                         </Fragment>

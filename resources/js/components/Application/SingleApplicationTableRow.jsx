@@ -12,7 +12,7 @@ const SingleApplicationTableRow = ({ application }) => {
     return (
         <tr>
             <td>
-                <div className="candidate-cell">
+                <div className="details-cell">
                     <div className="image">
                         <img src={img} alt={candidateFullName} />
                     </div>

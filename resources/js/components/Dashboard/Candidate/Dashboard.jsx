@@ -45,7 +45,7 @@ const Dashboard = () => {
                 <DashboardCard>
                     <h5>Latest applications</h5>
                     <div className="applications-list">
-                        {candidateDashboard.applications.map((application) => (
+                        {candidateDashboard.pendingApplications.map((application) => (
                             <ApplicationListItem
                                 key={application.id}
                                 application={application}

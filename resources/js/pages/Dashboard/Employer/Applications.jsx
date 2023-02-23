@@ -25,7 +25,7 @@ const EmployerApplications = () => {
             <Fade isVisible={isLoading}>
                 <LoadingSpinner />
             </Fade>
-            <div className="applications-table-wrapper">
+            <div className="table-wrapper">
                 <Filters
                     preselectedFilters={filters}
                     updateFilters={setFilters}
@@ -46,6 +46,9 @@ const EmployerApplications = () => {
                         ))}
                     </tbody>
                 </table>
+                {applications.length === 0 && !isLoading && (
+                    <h6 className="no-list-items-title">No Applications found!</h6>
+                )}
                 {applications.length > 0 && (
                     <Pagination
                         currentPage={currentPage}

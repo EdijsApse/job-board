@@ -1,24 +1,31 @@
-.applications-table-wrapper {
+.table-wrapper {
     .filters {
         display: flex;
         margin-bottom: $space-6;
+        width: 100%;
         .form-group {
-            max-width: 350px;
+            flex: 1;
+            width: 100%;
             height: 50px;
-            input {
+            margin-right: $space-4;
+            input, select {
                 height: 50px;
+                line-height: 1;
             }
         }
         .btn {
-            margin-left: $space-4;
             height: 50px;
+            margin-right: $space-4;
+            &:last-of-type {
+                margin-right: 0;
+            }
         }
     }
     .table {
-        .candidate-cell {
+        .details-cell {
             display: flex;
             .image {
-                @include circle(80px);
+                @include circle(55px);
                 margin-right: $space-4;
                 overflow: hidden;
                 border-radius: $border-radius-sm;
@@ -47,6 +54,14 @@
                     color: $dark;
                 }
             }
+        }
+    }
+    .no-list-items-title {
+        margin-bottom: 0;
+        color: $gray;
+        font-size: 1.3rem;
+        &::after {
+            display: none;
         }
     }
     .pagination {

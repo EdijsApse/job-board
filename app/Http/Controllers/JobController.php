@@ -132,4 +132,22 @@ class JobController extends Controller
             'success' => true
         ]);
     }
+
+    /**
+     * Display a listing of the company jobs.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getEmployerJobs(Request $request)
+    {
+        $user = $request->user();
+        $company = $user->company;
+
+        if (!$company) {
+            return response()->json([
+                'data' => []
+            ]);
+        }
+        return new JobCollection($company->jobs()->filter(collect($request->all())));
+    }
 }

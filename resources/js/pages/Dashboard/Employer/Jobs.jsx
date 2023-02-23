@@ -1,24 +1,19 @@
 import { useSelector } from "react-redux";
 import Fade from "../../../components/Animations/Fade";
-import Filters from "../../../components/Offers/Filters";
-import SingleOfferTableRow from "../../../components/Offers/SingleOfferTableRow";
+import Filters from "../../../components/Dashboard/Employer/JobsFilter";
+import SingleJobTableRow from "../../../components/Job/SingleJobTableRow";
 import DashboardCard from "../../../components/UI/DashboardCard";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import Pagination from "../../../components/UI/Pagination";
 import useFilter from "../../../hooks/use-filter";
-import { loadEmployerOffers } from "../../../store/thunks/offers/employer";
+import { loadEmployerJobs } from "../../../store/thunks/employerJobs";
 
-const EmployerOffers = () => {
-    const offers = useSelector((state) => state.employerOffers.list);
-    const currentPage = useSelector(
-        (state) => state.employerOffers.currentPage
-    );
-    const lastPage = useSelector((state) => state.employerOffers.lastPage);
+const EmployerJobs = () => {
+    const jobs = useSelector((state) => state.employerJobs.list);
+    const currentPage = useSelector((state) => state.employerJobs.currentPage);
+    const lastPage = useSelector((state) => state.employerJobs.lastPage);
     const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
-        useFilter(
-            loadEmployerOffers,
-            (state) => state.employerOffers.isLoading
-        );
+        useFilter(loadEmployerJobs, (state) => state.employerJobs.isLoading);
 
     return (
         <DashboardCard className="relative">
@@ -35,21 +30,20 @@ const EmployerOffers = () => {
                     <thead>
                         <tr>
                             <th>Job Title</th>
-                            <th>Offer Sent</th>
-                            <th>Status</th>
+                            <th>Created</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {offers.map((offer) => (
-                            <SingleOfferTableRow key={offer.id} offer={offer} />
+                        {jobs.map((job) => (
+                            <SingleJobTableRow key={job.id} job={job} />
                         ))}
                     </tbody>
                 </table>
-                {offers.length === 0 && !isLoading && (
-                    <h6 className="no-list-items-title">No Offers found!</h6>
+                {jobs.length === 0 && !isLoading && (
+                    <h6 className="no-list-items-title">No Jobs found!</h6>
                 )}
-                {offers.length > 0 && (
+                {jobs.length > 0 && (
                     <Pagination
                         currentPage={currentPage}
                         lastPage={lastPage}
@@ -61,4 +55,4 @@ const EmployerOffers = () => {
     );
 };
 
-export default EmployerOffers;
+export default EmployerJobs;

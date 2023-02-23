@@ -1,48 +1,51 @@
 import { NavLink } from "react-router-dom";
 import placeholderImage from "../assets/placeholder-image.png";
 
-const SingleOfferTableRow = ({ offer }) => {
-    const img = offer.job.image ?? placeholderImage;
+const SingleJobTableRow = ({ job }) => {
+    const img = job.image ?? placeholderImage;
     return (
         <tr>
             <td>
                 <div className="details-cell">
                     <div className="image">
-                        <img src={img} alt={offer.job.jobtitle} />
+                        <img src={img} alt={job.jobtitle} />
                     </div>
                     <div className="details">
-                        <NavLink className="link" to={`/jobs/${offer.job.id}`}>
-                            {offer.job.jobtitle}
+                        <NavLink className="link" to={`/jobs/${job.id}`}>
+                            {job.jobtitle}
                         </NavLink>
                         <div className="details-list">
                             <div className="single-detail">
                                 <i className="fa-solid fa-briefcase"></i>
-                                <span>{offer.job.category.name}</span>
+                                <span>{job.category.name}</span>
                             </div>
                             <div className="single-detail">
                                 <i className="fa-solid fa-location-crosshairs"></i>
-                                <span>{offer.job.city.name}</span>
+                                <span>{job.city.name}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </td>
-            <td>{offer.created}</td>
-            <td className={offer.status_name.toLowerCase()}>
-                {offer.status_name}
-            </td>
+            <td>{job.created}</td>
             <td>
                 <div className="actions">
-                    <button className="btn btn-secondary btn-sm">
-                        <i className="fa-solid fa-xmark"></i>
-                    </button>
-                    <button className="btn btn-secondary btn-sm">
+                    <NavLink
+                        className="btn btn-secondary btn-sm"
+                        to={`/jobs/${job.id}/edit`}
+                    >
+                        <i className="fa-solid fa-pencil"></i>
+                    </NavLink>
+                    <NavLink
+                        className="btn btn-secondary btn-sm"
+                        to={`/jobs/${job.id}`}
+                    >
                         <i className="fa-solid fa-eye"></i>
-                    </button>
+                    </NavLink>
                 </div>
             </td>
         </tr>
     );
 };
 
-export default SingleOfferTableRow;
+export default SingleJobTableRow;
