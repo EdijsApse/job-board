@@ -16,6 +16,7 @@ import ErrorPage from "../../pages/Error";
 import EmployerOffers from "../../pages/Dashboard/Employer/Offers";
 import EmployerApplications from "../../pages/Dashboard/Employer/Applications";
 import EmployerJobs from "../../pages/Dashboard/Employer/Jobs";
+import CandidateOffers from "../../pages/Dashboard/Candidate/Offers";
 
 export default {
     path: "/dashboard",
@@ -128,6 +129,16 @@ export default {
                         <EmployerJobs />
                     </DashboardPage>
                 </EmployerOnly>
+            ),
+        },
+        {
+            path: "candidate/offers",
+            element: (
+                <CandidateOnly>
+                    <DashboardPage pageTitle="Incoming Offers">
+                        <CandidateOffers />
+                    </DashboardPage>
+                </CandidateOnly>
             ),
         },
     ],

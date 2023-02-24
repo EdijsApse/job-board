@@ -70,10 +70,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/employer/jobs', [JobController::class, 'getEmployerJobs']);
     Route::get('/employer/jobs/{job}', [JobController::class, 'getEmployerJob'])->missing(function () {
         return response()->json(['message' => 'Job was not found'], 404);
-    });;;
+    });
     Route::put('/employer/jobs/{job}', [JobController::class, 'updateEmployerJob'])->missing(function () {
         return response()->json(['message' => 'Job was not found'], 404);
-    });;
+    });
+
+    Route::get('/candidate/offers', [OfferController::class, 'getCandidateOffers']);
 });
 
 Route::apiResource('/job', JobController::class)

@@ -216,4 +216,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Offer::class);
     }
+
+    /**
+     * Get candidate offers
+     * 
+    */
+    public function candidateOffers()
+    {
+        return $this->hasMany(Offer::class, 'candidate_id');
+    }
 }

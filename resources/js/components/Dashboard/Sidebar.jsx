@@ -55,7 +55,23 @@ const Sidebar = () => {
                             <span>Profile</span>
                         </SidebarLink>
                     </li>
-                    {isCandidate && <SidebarResumeDropdowns />}
+                    {isCandidate && (
+                        <Fragment>
+                            <SidebarResumeDropdowns />
+                            <li>
+                                <SidebarLink to="/dashboard/candidate/offers">
+                                    <i className="fa-solid fa-briefcase"></i>
+                                    <span>Received Offers</span>
+                                </SidebarLink>
+                            </li>
+                            <li>
+                                <SidebarLink to="/dashboard/candidate/applications">
+                                    <i className="fa-solid fa-bullhorn"></i>
+                                    <span>My Applications</span>
+                                </SidebarLink>
+                            </li>
+                        </Fragment>
+                    )}
                     {isEmployer && (
                         <Fragment>
                             <li>
@@ -66,7 +82,7 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <SidebarLink to="/dashboard/employer/applications">
-                                    <i className="fa-solid fa-briefcase"></i>
+                                    <i className="fa-solid fa-bullhorn"></i>
                                     <span>Applications</span>
                                 </SidebarLink>
                             </li>
@@ -78,12 +94,6 @@ const Sidebar = () => {
                             </li>
                         </Fragment>
                     )}
-                    <li>
-                        <a href="">
-                            <i className="fa-solid fa-bullhorn"></i>
-                            <span>My Applied</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="">
                             <i className="fa-regular fa-bookmark"></i>

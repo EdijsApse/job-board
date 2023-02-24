@@ -100,4 +100,16 @@ class OfferController extends Controller
 
         return new OfferCollection($user->offers()->filter(collect($request->all())));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCandidateOffers(Request $request)
+    {
+        $user = $request->user();
+        
+        return new OfferCollection($user->candidateOffers()->filter(collect($request->all())));
+    }
 }
