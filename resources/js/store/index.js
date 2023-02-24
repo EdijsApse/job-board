@@ -13,6 +13,7 @@ import employerOffersSlice from "./slices/offers/employer";
 import employerApplicationsSlice from "./slices/applications/employer";
 import employerJobsSlice from "./slices/employerJobs";
 import candidateOffersSlice from "./slices/offers/candidate";
+import candidateApplicationsSlice from "./slices/applications/candidate";
 
 const store = configureStore({
     reducer: {
@@ -29,7 +30,8 @@ const store = configureStore({
         employerOffers: employerOffersSlice,
         employerApplications: employerApplicationsSlice,
         employerJobs: employerJobsSlice,
-        candidateOffers: candidateOffersSlice
+        candidateOffers: candidateOffersSlice,
+        candidateApplications: candidateApplicationsSlice
     },
 });
 

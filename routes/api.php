@@ -76,6 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::get('/candidate/offers', [OfferController::class, 'getCandidateOffers']);
+    Route::get('/candidate/applications', [ApplicationController::class, 'getCandidateApplications']);
 });
 
 Route::apiResource('/job', JobController::class)

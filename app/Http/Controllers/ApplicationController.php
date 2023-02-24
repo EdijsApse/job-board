@@ -75,4 +75,16 @@ class ApplicationController extends Controller
 
         return new ApplicationCollection(Application::employer($user)->filter(collect($request->all())));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCandidateApplications(Request $request)
+    {
+        $user = $request->user();
+
+        return new ApplicationCollection($user->applications()->filter(collect($request->all())));
+    }
 }

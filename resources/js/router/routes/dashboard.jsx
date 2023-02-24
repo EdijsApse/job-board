@@ -17,6 +17,7 @@ import EmployerOffers from "../../pages/Dashboard/Employer/Offers";
 import EmployerApplications from "../../pages/Dashboard/Employer/Applications";
 import EmployerJobs from "../../pages/Dashboard/Employer/Jobs";
 import CandidateOffers from "../../pages/Dashboard/Candidate/Offers";
+import CandidateApplications from "../../pages/Dashboard/Candidate/Applications";
 
 export default {
     path: "/dashboard",
@@ -137,6 +138,16 @@ export default {
                 <CandidateOnly>
                     <DashboardPage pageTitle="Incoming Offers">
                         <CandidateOffers />
+                    </DashboardPage>
+                </CandidateOnly>
+            ),
+        },
+        {
+            path: "candidate/applications",
+            element: (
+                <CandidateOnly>
+                    <DashboardPage pageTitle="Sent Applications">
+                        <CandidateApplications />
                     </DashboardPage>
                 </CandidateOnly>
             ),

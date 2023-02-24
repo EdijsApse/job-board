@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import placeholderImage from "../assets/placeholder-image.png";
 
-const SingleApplicationTableRow = ({ application }) => {
+const SingleApplicationTableRowForEmployer = ({ application }) => {
     const { candidate, job } = application;
     const img = candidate.profile.image ?? placeholderImage;
     const candidateFullName = `${candidate.profile.name} ${candidate.profile.surname}`;
@@ -66,4 +66,4 @@ const SingleApplicationTableRow = ({ application }) => {
     );
 };
 
-export default SingleApplicationTableRow;
+export default SingleApplicationTableRowForEmployer;

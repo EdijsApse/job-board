@@ -1,27 +1,27 @@
 import { useSelector } from "react-redux";
 import Fade from "../../../components/Animations/Fade";
-import SingleApplicationTableRowForEmployer from "../../../components/Application/SingleApplicationTableRowForEmployer";
+import SingleApplicationTableRowForCandidate from "../../../components/Application/SingleApplicationTableRowForCandidate";
 import Filters from "../../../components/Application/Filters";
 import DashboardCard from "../../../components/UI/DashboardCard";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import Pagination from "../../../components/UI/Pagination";
 import useFilter from "../../../hooks/use-filter";
-import { loadEmployerApplications } from "../../../store/thunks/applications/employer";
+import { loadCandidateApplications } from "../../../store/thunks/applications/candidate";
 
-const EmployerApplications = () => {
+const CandidateApplications = () => {
     const applications = useSelector(
-        (state) => state.employerApplications.list
+        (state) => state.candidateApplications.list
     );
     const currentPage = useSelector(
-        (state) => state.employerApplications.currentPage
+        (state) => state.candidateApplications.currentPage
     );
     const lastPage = useSelector(
-        (state) => state.employerApplications.lastPage
+        (state) => state.candidateApplications.lastPage
     );
     const { filters, isLoading, setFilters, resetFilters, setPageHandler } =
         useFilter(
-            loadEmployerApplications,
-            (state) => state.employerApplications.isLoading
+            loadCandidateApplications,
+            (state) => state.candidateApplications.isLoading
         );
 
     return (
@@ -38,7 +38,7 @@ const EmployerApplications = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Candidate</th>
+                            <th>Job</th>
                             <th>Date Applied</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -46,7 +46,7 @@ const EmployerApplications = () => {
                     </thead>
                     <tbody>
                         {applications.map((application) => (
-                            <SingleApplicationTableRowForEmployer
+                            <SingleApplicationTableRowForCandidate
                                 key={application.id}
                                 application={application}
                             />
@@ -70,4 +70,4 @@ const EmployerApplications = () => {
     );
 };
 
-export default EmployerApplications;
+export default CandidateApplications;
