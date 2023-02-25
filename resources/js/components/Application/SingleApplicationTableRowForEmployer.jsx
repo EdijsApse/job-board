@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import placeholderImage from "../assets/placeholder-image.png";
+import ConfirmationModal from "../UI/ConfirmationModal";
+import Fade from "../Animations/Fade";
 
 const SingleApplicationTableRowForEmployer = ({ application }) => {
     const { candidate, job } = application;
     const img = candidate.profile.image ?? placeholderImage;
     const candidateFullName = `${candidate.profile.name} ${candidate.profile.surname}`;
     let jobtitle = job.jobtitle;
+    const [isConfirmationModalVisible, setIsConfirmationModalVisible] =
+        useState();
     if (candidate && candidate.basic_resume_details) {
         jobtitle = candidate.basic_resume_details.jobtitle;
     }
@@ -54,6 +59,26 @@ const SingleApplicationTableRowForEmployer = ({ application }) => {
             </td>
             <td>
                 <div className="actions">
+                    <Fade isVisible={isConfirmationModalVisible}>
+                        <ConfirmationModal
+                            message="Are you sure you want to approve this
+                                application?"
+                            onCancel={() => {
+                                setIsConfirmationModalVisible(false);
+                            }}
+                            onApprove={() => {
+                                alert('Approved')
+                            }}
+                        />
+                    </Fade>
+                    <button
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => {
+                            setIsConfirmationModalVisible(true);
+                        }}
+                    >
+                        <i className="fa-solid fa-check"></i>
+                    </button>
                     <button className="btn btn-secondary btn-sm">
                         <i className="fa-solid fa-xmark"></i>
                     </button>
