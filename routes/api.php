@@ -14,6 +14,7 @@ use App\Http\Controllers\Resume\SalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FeaturedItemsController;
 use App\Http\Controllers\OfferController;
 
 /*
@@ -77,6 +78,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/candidate/offers', [OfferController::class, 'getCandidateOffers']);
     Route::get('/candidate/applications', [ApplicationController::class, 'getCandidateApplications']);
+
+    Route::post('featured/jobs', [FeaturedItemsController::class, 'storeFeaturedJob']);
+    Route::get('featured/jobs', [FeaturedItemsController::class, 'getFeaturedJobs']);
 });
 
 Route::apiResource('/job', JobController::class)

@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\FeaturedTypes;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -224,5 +226,20 @@ class User extends Authenticatable
     public function candidateOffers()
     {
         return $this->hasMany(Offer::class, 'candidate_id');
+    }
+
+    /**
+     * Creates Job Query Builder where Job Ids match from FeaturedItems table created by user
+     * 
+     * @return QueryBuilder
+     */
+    public function featuredJobs()
+    {
+        $ids = FeaturedItem::where([
+            'user_id' => $this->id,
+            'type_id' => FeaturedTypes::Job
+        ])->get()->pluck('item_id');
+
+        return Job::whereIn('id', $ids);
     }
 }
