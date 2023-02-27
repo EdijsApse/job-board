@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import Badge from "../UI/Badge";
 import Card from "../UI/Card";
 import tempLogo from "../assets/placeholder-image.png";
+import Fade from "../Animations/Fade";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import useAddToFeatured from "../../hooks/use-add-to-featured";
 
 const Item = ({
     job,
@@ -10,8 +13,13 @@ const Item = ({
     showFeaturedBadge = false,
 }) => {
     let image = job.image ?? tempLogo;
+    const { addToFeaturedList, isFeaturedButtonVisible, isLoading } =
+        useAddToFeatured("featured/jobs", { item_id: job.id });
     return (
-        <Card className="single-job-card" listTag={true}>
+        <Card className="single-job-card relative" listTag={true}>
+            <Fade isVisible={isLoading}>
+                <LoadingSpinner />
+            </Fade>
             <div className="job-header">
                 <div
                     className={`job-image ${squareImage ? "square-image" : ""}`}
@@ -47,9 +55,11 @@ const Item = ({
                     <Badge className="green">Featured</Badge>
                 )}
             </div>
-            <span className="btn-icon">
-                <i className="fa-regular fa-bookmark"></i>
-            </span>
+            {isFeaturedButtonVisible && (
+                <button className="btn-icon" onClick={addToFeaturedList}>
+                    <i className="fa-regular fa-bookmark"></i>
+                </button>
+            )}
         </Card>
     );
 };

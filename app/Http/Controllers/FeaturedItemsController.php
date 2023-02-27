@@ -23,8 +23,7 @@ class FeaturedItemsController extends Controller
         $validated = $request->validate([
             'item_id' => [
                 'required',
-                'exists:jobs,id',
-                Rule::unique('featured_items')->where('user_id', $user->id)->where('type_id', FeaturedTypes::Job->value)
+                'exists:jobs,id'
             ],
         ]);
 
@@ -34,7 +33,10 @@ class FeaturedItemsController extends Controller
             'type_id' => FeaturedTypes::Job
         ];
 
-        FeaturedItem::create($featuredItemData);
+        if (!FeaturedItem::where($featuredItemData)->count()) {
+            FeaturedItem::updateOrCreate($featuredItemData);
+        }
+
 
         return response()->json([
             'success' => true,
