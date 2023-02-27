@@ -4,6 +4,7 @@ import useUser from "../../hooks/use-user";
 import profileImage from "../assets/placeholder-image.png";
 import SidebarLink from "../UI/DashboardSidebarLink";
 import SidebarResumeDropdowns from "./Candidate/SidebarResumeDropdowns";
+import FeaturedSidebarNavItems from "./FeaturedSidebarNavItems";
 
 const Sidebar = () => {
     const { user, isEmployer, isCandidate } = useUser();
@@ -94,6 +95,7 @@ const Sidebar = () => {
                             </li>
                         </Fragment>
                     )}
+                    <FeaturedSidebarNavItems />
                     <li>
                         <a href="">
                             <i className="fa-regular fa-bookmark"></i>

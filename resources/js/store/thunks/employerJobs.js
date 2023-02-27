@@ -16,12 +16,6 @@ export const loadEmployerJobs = (searchParams) => {
                     dispacth(
                         employerJobsActions.setList({ items: data, meta })
                     );
-                } else {
-                    dispacth(
-                        alertActions.showWarningAlert({
-                            message: "No Jobs published for this company!",
-                        })
-                    );
                 }
             })
             .catch(() => {

@@ -18,6 +18,7 @@ import EmployerApplications from "../../pages/Dashboard/Employer/Applications";
 import EmployerJobs from "../../pages/Dashboard/Employer/Jobs";
 import CandidateOffers from "../../pages/Dashboard/Candidate/Offers";
 import CandidateApplications from "../../pages/Dashboard/Candidate/Applications";
+import FeaturedJobs from "../../pages/Dashboard/FeaturedJobs";
 
 export default {
     path: "/dashboard",
@@ -150,6 +151,14 @@ export default {
                         <CandidateApplications />
                     </DashboardPage>
                 </CandidateOnly>
+            ),
+        },
+        {
+            path: "featured/jobs",
+            element: (
+                <DashboardPage pageTitle="Featured Jobs">
+                    <FeaturedJobs />
+                </DashboardPage>
             ),
         },
     ],
