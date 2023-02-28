@@ -1,7 +1,8 @@
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/slices/auth";
-import { register } from "../../store/thunks/auth";
+import { register, redirectOnSuccessCallback } from "../../store/thunks/auth";
 import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -13,7 +14,7 @@ const RegisterModalBody = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-
+    const navigate = useNavigate();
     const isLoading = useSelector((state) => state.auth.isLoading);
     const errors = useSelector((state) => state.auth.registerFormErrors);
 
@@ -43,12 +44,15 @@ const RegisterModalBody = () => {
         }
 
         authDispatch(
-            register({
-                user_type: selectedType,
-                email: email,
-                password: password,
-                password_confirmation: passwordConfirm,
-            })
+            register(
+                {
+                    user_type: selectedType,
+                    email: email,
+                    password: password,
+                    password_confirmation: passwordConfirm,
+                },
+                redirectOnSuccessCallback.bind(null, navigate)
+            )
         );
     };
 

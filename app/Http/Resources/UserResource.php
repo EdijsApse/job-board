@@ -22,7 +22,9 @@ class UserResource extends JsonResource
             'is_employer' => $this->isEmployer(),
             'is_candidate' => $this->isCandidate(),
             'company' => new CompanyWithOfferableJobsResource($this->company),
-            'profile' => new ProfileResource($this->profile)
+            'profile' => new ProfileResource($this->profile),
+            'basic_resume_details' => new BasicResumeDetailsResource($this->basicResumeDetails),
+            'is_candidate_visible' => $this->isCandidateVisible()
         ];
     }
 }

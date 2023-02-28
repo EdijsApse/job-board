@@ -22,7 +22,6 @@ class ProfileResource extends JsonResource
             'date_of_birth' => $this->date_of_birth,
             'age' => $this->getAge(),
             'gender' => $this->gender,
-            'is_public' => $this->is_public,
             'phone' => $this->phone,
             'gender_name' => $this->getGenderName(),
             'image' => $this->image ? Storage::disk('public')->url($this->image) : null,

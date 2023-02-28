@@ -16,7 +16,7 @@ class CandidateController extends Controller
      */
     public function index(Request $request)
     {
-        return new CandidateCollection(User::filterPublicCandidates(collect($request->all())));
+        return new CandidateCollection(User::candidate()->filterCandidates(collect($request->all())));
     }
 
     /**

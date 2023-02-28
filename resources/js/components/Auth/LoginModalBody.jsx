@@ -1,14 +1,15 @@
 import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/slices/auth";
-import { login } from "../../store/thunks/auth";
+import { login, redirectOnSuccessCallback } from "../../store/thunks/auth";
 import Fade from "../Animations/Fade";
 import BaseFormInput from "../UI/BaseFormInput";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const LoginModalBody = () => {
     const authDispatch = useDispatch();
-
+    const navigate = useNavigate();
     const isLoading = useSelector((state) => state.auth.isLoading);
     const errors = useSelector((state) => state.auth.loginFormErrors);
 
@@ -26,10 +27,13 @@ const LoginModalBody = () => {
     const loginFormHandler = (e) => {
         e.preventDefault();
         authDispatch(
-            login({
-                email: email,
-                password: password,
-            })
+            login(
+                {
+                    email: email,
+                    password: password,
+                },
+                redirectOnSuccessCallback.bind(null, navigate)
+            )
         );
     };
 

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -53,13 +54,19 @@ class User extends Authenticatable
         'user_type' => 'integer'
     ];
 
-    public function scopeFilterPublicCandidates(Builder $builder, $searchParams)
+    /**
+     * Checks if candidate is completed profile and therefore is visible to other users
+     * 
+     * @return boolean
+     */
+    public function isCandidateVisible()
     {
-        $builder
-        ->where('user_type', self::TYPE_CANDIDATE)
-        ->whereHas('profile', function(Builder $builder)  {
-            $builder->where('is_public', true);
-        });
+        return $this->profile && $this->basicResumeDetails;
+    }
+
+    public function scopeFilterCandidates(Builder $builder, Collection $searchParams)
+    {
+        $builder->where('user_type', self::TYPE_CANDIDATE);
 
         if ($searchParams->get('keyword') || $searchParams->get('category_id')) {
             $builder->whereHas('basicResumeDetails', function (Builder $builder) use ($searchParams) {
@@ -78,7 +85,9 @@ class User extends Authenticatable
 
     public function scopeCandidate(Builder $builder)
     {
-        $builder->where('user_type', self::TYPE_CANDIDATE);
+        $builder->where('user_type', self::TYPE_CANDIDATE)
+        ->has('profile')
+        ->has('basicResumeDetails');
 
         return $builder;
     }

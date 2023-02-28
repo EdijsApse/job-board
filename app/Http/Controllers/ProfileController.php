@@ -28,8 +28,7 @@ class ProfileController extends Controller
             ],
             'image' => 'nullable|image',
             'date_of_birth' => 'required|date',
-            'phone' => 'required',
-            'is_public' => 'nullable|boolean'
+            'phone' => 'required'
         ]);
 
         $data = [
@@ -37,8 +36,7 @@ class ProfileController extends Controller
             'surname' => $validatedData['surname'],
             'gender' => $validatedData['gender'],
             'date_of_birth' => $validatedData['date_of_birth'],
-            'phone' => $validatedData['phone'],
-            'is_public' => $validatedData['is_public'] ?? false
+            'phone' => $validatedData['phone']
         ];
 
         if ($request->hasFile('image')) {
