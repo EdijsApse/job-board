@@ -4,12 +4,15 @@
 
 The Job Board application is a CRUD (Create, Read, Update, Delete) project that allows users to sign up either as an employer to post their active job vacancies or as a job seeker to apply for these vacancies. It provides a platform to create comprehensive job listings for candidates to apply to, and for job seekers to create detailed resumes to increase their chances of being hired. This application is designed as a single-page application with user-friendly interfaces.
 
-
+<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_1.png" />
 
 ## 📖 Preview
 
 Few examples of UI and features.
 
+<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_2.png" width="334" />&nbsp;&nbsp;<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_3.png" width="334" />
+<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_4.png" width="334" />&nbsp;&nbsp;<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_5.png" width="334" />
+<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_6.png" width="334" />&nbsp;&nbsp;<img src="https://github.com/EdijsApse/job-board/blob/master/public/examples/Screen_7.png" width="334" />
 
 ## 🛠 Built With
 
